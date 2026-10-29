@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styling Crisp Icons for Themed UI Modes - ui</title>
+    <meta name="description" content="Maintaining visual clarity and legibility for icons across light, dark, and high-contrast modes requires a combination of scalable vector formats, dynamic color tokens, pixel-grid alignment, and theme-specific optical adjustments. By treating icons as res">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/styling-crisp-icons-for-themed-ui-modes">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Styling Crisp Icons for Themed UI Modes - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/styling-crisp-icons-for-themed-ui-modes" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Maintaining visual clarity and legibility for icons across light, dark, and high-contrast modes requires a combination of scalable vector formats, dynamic color tokens, pixel-grid alignment, and theme-specific optical adjustments. By treating icons as res" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="styling-crisp-icons-for-themed-ui-modes">Styling Crisp Icons for
+Themed UI Modes</h1>
+<p>Maintaining visual clarity and legibility for icons across light,
+dark, and high-contrast modes requires a combination of scalable vector
+formats, dynamic color tokens, pixel-grid alignment, and theme-specific
+optical adjustments. By treating icons as responsive graphic components
+rather than static image assets, developers and designers can ensure
+that iconography renders sharply on all display densities while
+automatically adapting to user-selected color palettes.</p>
+<h3 id="prioritize-scalable-vector-graphics-svg">Prioritize Scalable
+Vector Graphics (SVG)</h3>
+<p>Always use SVGs rather than raster formats (PNG, JPG) for user
+interface iconography. Vector paths scale infinitely without pixelation
+or compression artifacts across varying screen resolutions and zoom
+levels. Ensure SVG markup is clean by removing redundant metadata,
+hardcoded width and height attributes, and static inline color
+definitions.</p>
+<h3 id="implement-dynamic-color-tokens-with-currentcolor">Implement
+Dynamic Color Tokens with <code>currentColor</code></h3>
+<p>Hardcoding color hex codes directly into icon markup creates
+maintenance bottlenecks and breaks theming. Instead, set the SVG
+<code>fill</code> or <code>stroke</code> properties to
+<code>currentColor</code>. This allows the icon to automatically inherit
+the text color of its parent HTML element.</p>
+<p>When more granular control is required—such as multi-tone
+icons—utilize CSS custom properties (variables):</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">--icon-primary</span><span class="ch">:</span> <span class="cn">#1a1a1a</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">--icon-secondary</span><span class="ch">:</span> <span class="cn">#707070</span><span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">[</span><span class="ss">data-theme</span><span class="op">=</span><span class="st">&quot;dark&quot;</span><span class="ex">]</span> {</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="va">--icon-primary</span><span class="ch">:</span> <span class="cn">#f0f0f0</span><span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="va">--icon-secondary</span><span class="ch">:</span> <span class="cn">#a3a3a3</span><span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">.icon-path-primary</span> {</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">fill</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--icon-primary</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">.icon-path-secondary</span> {</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">fill</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--icon-secondary</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="align-to-the-pixel-grid">Align to the Pixel Grid</h3>
+<p>Icons look blurry when their vector paths fall on fractional
+coordinates, causing sub-pixel rendering. Design icons on a standardized
+base grid (such as 16x16, 20x20, or 24x24 pixels) with whole-pixel
+coordinates for lines and edges. When scaling icons in the UI, keep them
+at integer multiples of their base design grid to prevent fractional
+rasterization.</p>
+<h3 id="compensate-for-optical-weight-in-dark-mode">Compensate for
+Optical Weight in Dark Mode</h3>
+<p>Due to the optical phenomenon known as irradiation, light-colored
+shapes against dark backgrounds visually expand and appear thicker than
+dark shapes against light backgrounds. To maintain balanced visual
+weight across themes:</p>
+<ul>
+<li>Reduce stroke width slightly in dark mode (e.g., from
+<code>2px</code> in light mode to <code>1.75px</code> in dark
+mode).</li>
+<li>Avoid pure white (<code>#FFFFFF</code>) on pure black
+(<code>#000000</code>). Use off-white or soft gray tones to reduce harsh
+glare and eye strain.</li>
+</ul>
+<h3 id="support-high-contrast-and-forced-colors-modes">Support
+High-Contrast and Forced-Colors Modes</h3>
+<p>Operating systems include high-contrast accessibility modes that
+override custom web styling. Support these modes by targeting the
+<code>forced-colors</code> media feature in CSS:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">@media</span> <span class="fu">(</span><span class="kw">forced-colors</span><span class="ch">:</span> <span class="dv">active</span><span class="fu">)</span> {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.ui-icon</span> {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">stroke</span><span class="ch">:</span> <span class="cn">CanvasText</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">fill</span><span class="ch">:</span> <span class="cn">CanvasText</span><span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Using system keywords like <code>CanvasText</code> guarantees that
+icons remain visible when a user enables high-contrast accessibility
+profiles.</p>
+<h3 id="maintain-minimum-contrast-ratios">Maintain Minimum Contrast
+Ratios</h3>
+<p>Ensure icons meet accessibility standards by evaluating their color
+contrast against the surrounding background in every theme. Non-text UI
+components—including essential functional icons—must maintain a minimum
+contrast ratio of 3:1 against adjacent background colors under Web
+Content Accessibility Guidelines (WCAG) 2.1 AA requirements.</p></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/styling-crisp-icons-for-themed-ui-modes';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

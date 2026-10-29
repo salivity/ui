@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hover Tooltips on Touch UI: Best Practices - ui</title>
+    <meta name="description" content="Hover-dependent tooltips create significant usability barriers on touch screens because touch devices lack a continuous cursor state. This guide outlines the essential UX patterns and technical solutions for adapting hover-triggered tooltips for touch use">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/hover-tooltips-on-touch-ui-best-practices">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Hover Tooltips on Touch UI: Best Practices - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/hover-tooltips-on-touch-ui-best-practices" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Hover-dependent tooltips create significant usability barriers on touch screens because touch devices lack a continuous cursor state. This guide outlines the essential UX patterns and technical solutions for adapting hover-triggered tooltips for touch use" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="hover-tooltips-on-touch-ui-best-practices">Hover Tooltips on
+Touch UI: Best Practices</h1>
+<p>Hover-dependent tooltips create significant usability barriers on
+touch screens because touch devices lack a continuous cursor state. This
+guide outlines the essential UX patterns and technical solutions for
+adapting hover-triggered tooltips for touch user interfaces, ensuring
+critical contextual information remains accessible across all
+devices.</p>
+<h2 id="1-dont-hide-essential-information">1. Don't Hide Essential
+Information</h2>
+<p>The most effective way to solve the hover problem on mobile is to
+avoid relying on tooltips for vital information. Form requirements,
+pricing terms, and critical instructions should be visible directly on
+the screen or integrated as persistent helper text. Tooltips should only
+contain secondary, non-essential context.</p>
+<h2 id="2-implement-tap-to-toggle-with-clear-dismissal">2. Implement
+Tap-to-Toggle with Clear Dismissal</h2>
+<p>When tooltips are necessary, replace the hover trigger with a tap
+event:</p>
+<ul>
+<li><strong>First Tap:</strong> Opens the tooltip.</li>
+<li><strong>Second Tap (or Tap Outside):</strong> Closes the
+tooltip.</li>
+<li><strong>Close Button:</strong> Include an explicit "X" icon within
+the tooltip container so users know exactly how to dismiss it without
+guessing.</li>
+</ul>
+<p>Ensure the target area meets minimum touch target guidelines (at
+least 48x48 CSS pixels) to prevent accidental mis-taps.</p>
+<h2 id="3-use-dedicated-trigger-icons">3. Use Dedicated Trigger
+Icons</h2>
+<p>On desktop, users often hover over underlined words, table rows, or
+truncated labels. On touch devices, tapping underlined text usually
+implies navigating to a link.</p>
+<p>To prevent confusion, place a dedicated, recognizable trigger
+icon—such as a subtle question mark (<code>?</code>) or information
+symbol (<code>i</code>)—next to the label. This signals to touch users
+that tapping will display contextual help rather than trigger a page
+navigation.</p>
+<h2 id="4-use-bottom-sheets-or-modals-for-longer-content">4. Use Bottom
+Sheets or Modals for Longer Content</h2>
+<p>Tooltips designed for desktop viewports can easily overflow small
+mobile screens or become obscured by the user's hand.</p>
+<p>For touch devices, replace floating speech bubbles with a bottom
+sheet or a lightweight modal overlay. Bottom sheets:</p>
+<ul>
+<li>Sit within the natural thumb zone.</li>
+<li>Do not conflict with viewport boundaries.</li>
+<li>Allow for readable typography without horizontal clipping.</li>
+</ul>
+<h2 id="5-avoid-long-press-gestures">5. Avoid Long-Press Gestures</h2>
+<p>Relying on a long-press (press-and-hold) to reveal tooltips is
+generally discouraged:</p>
+<ul>
+<li><strong>Discoverability:</strong> Users rarely discover long-press
+actions organically without instructions.</li>
+<li><strong>System Conflicts:</strong> Long-presses frequently trigger
+native operating system actions, such as text selection, context menus,
+or image saving.</li>
+</ul>
+<h2 id="6-detect-capabilities-with-modern-css">6. Detect Capabilities
+with Modern CSS</h2>
+<p>Rather than relying on screen width to detect mobile devices, use CSS
+interaction media queries to adapt UI behavior based on input
+capability:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* Styles for devices with a primary hover mechanism (mouse) */</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">@media</span> <span class="fu">(</span><span class="kw">hover</span><span class="ch">:</span> <span class="kw">hover</span><span class="fu">)</span> <span class="kw">and</span> <span class="fu">(</span><span class="kw">pointer</span><span class="ch">:</span> <span class="dv">fine</span><span class="fu">)</span> {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.tooltip-trigger</span><span class="in">:hover</span> <span class="fu">.tooltip-content</span> {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">display</span><span class="ch">:</span> <span class="dv">block</span><span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">/* Fallback/Touch styles */</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">@media</span> <span class="fu">(</span><span class="kw">hover</span><span class="ch">:</span> <span class="dv">none</span><span class="fu">)</span> <span class="kw">and</span> <span class="fu">(</span><span class="kw">pointer</span><span class="ch">:</span> <span class="dv">coarse</span><span class="fu">)</span> {</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.tooltip-content</span> {</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">/* Rely on click/tap state classes toggled via JavaScript */</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>This ensures hybrid devices, such as touch-enabled laptops, receive
+the appropriate interaction pattern based on their current active input
+method.</p></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/hover-tooltips-on-touch-ui-best-practices';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

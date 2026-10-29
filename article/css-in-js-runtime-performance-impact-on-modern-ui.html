@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS-in-JS Runtime Performance Impact on Modern UI - ui</title>
+    <meta name="description" content="Heavy runtime CSS-in-JS libraries offer developer ergonomics and dynamic styling capabilities, but they often introduce significant client-side performance penalties. By shifting style resolution, hashing, and injection from compile time to runtime JavaSc">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/css-in-js-runtime-performance-impact-on-modern-ui">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="CSS-in-JS Runtime Performance Impact on Modern UI - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/css-in-js-runtime-performance-impact-on-modern-ui" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Heavy runtime CSS-in-JS libraries offer developer ergonomics and dynamic styling capabilities, but they often introduce significant client-side performance penalties. By shifting style resolution, hashing, and injection from compile time to runtime JavaSc" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="css-in-js-runtime-performance-impact-on-modern-ui">CSS-in-JS
+Runtime Performance Impact on Modern UI</h1>
+<p>Heavy runtime CSS-in-JS libraries offer developer ergonomics and
+dynamic styling capabilities, but they often introduce significant
+client-side performance penalties. By shifting style resolution,
+hashing, and injection from compile time to runtime JavaScript
+execution, these libraries increase CPU overhead, degrade frame rates,
+and slow down critical rendering paths. This article outlines the
+specific mechanisms through which runtime CSS-in-JS harms user interface
+performance and explores how these bottlenecks manifest in modern web
+applications.</p>
+<h3 id="increased-javascript-execution-time">Increased JavaScript
+Execution Time</h3>
+<p>Traditional CSS is parsed natively by the browser's C++ rendering
+engine, which is heavily optimized for speed. In contrast, runtime
+CSS-in-JS libraries (such as older versions of Styled Components or
+Emotion) must execute JavaScript to generate styles. When a component
+renders, the library parses template literals, resolves dynamic props,
+generates unique class names via hashing functions, and formats the
+rules into valid CSS strings. This additional JavaScript execution
+blocks the main thread, directly increasing Total Blocking Time (TBT)
+and delaying the Time to Interactive (TTI).</p>
+<h3 id="style-serialization-and-injection-overhead">Style Serialization
+and Injection Overhead</h3>
+<p>Once styles are generated in JavaScript, they must be committed to
+the document. Runtime libraries typically accomplish this by either
+creating new <code>&lt;style&gt;</code> tags or inserting rules
+dynamically via the <code>CSSStyleSheet.insertRule()</code> API.
+Frequent DOM mutations in the document <code>&lt;head&gt;</code> force
+the browser to invalidate existing style calculations. Consequently, the
+browser must trigger repeated "Recalculate Style" and "Layout" passes,
+leading to visible UI stutter (jank) and reduced frame rates, especially
+during high-frequency events like scrolling, resizing, or dragging.</p>
+<h3 id="component-re-rendering-amplification">Component Re-rendering
+Amplification</h3>
+<p>The cost of runtime styling scales non-linearly with component
+re-renders. Every time a component’s state or props change:</p>
+<ul>
+<li>The style functions must execute again to check for dynamic style
+changes.</li>
+<li>Hashes are recalculated to determine if the style already exists in
+the cache.</li>
+<li>If dynamic props generate unique style variations frequently (e.g.,
+coordinates tied to mouse movements), the cache rapidly expands, causing
+cache misses and frequent rule insertions.</li>
+</ul>
+<p>This turns standard React, Vue, or Svelte component tree updates into
+expensive operations that quickly exhaust the CPU budget on low-end or
+mobile devices.</p>
+<h3 id="memory-leaks-and-cache-bloat">Memory Leaks and Cache Bloat</h3>
+<p>To avoid regenerating identical styles, runtime libraries maintain an
+in-memory cache of hashed class names and rules. When components
+generate near-infinite style permutations—such as inline values for
+dynamic colors, positions, or sizes—the style cache continuously grows.
+This accumulation consumes significant heap memory over prolonged
+sessions, increasing the frequency and duration of garbage collection
+cycles, which further freezes the user interface.</p>
+<h3 id="the-shift-toward-zero-runtime-solutions">The Shift Toward
+Zero-Runtime Solutions</h3>
+<p>Because of these runtime bottlenecks, the web development ecosystem
+is increasingly transitioning away from heavy runtime injection. Modern
+alternatives achieve similar developer ergonomics without runtime
+overhead:</p>
+<ul>
+<li><strong>Zero-Runtime CSS-in-JS:</strong> Tools like Vanilla Extract
+and Linaria extract static CSS files at build time.</li>
+<li><strong>Utility-First Frameworks:</strong> Solutions like Tailwind
+CSS generate atomic utility classes ahead of time.</li>
+<li><strong>Modern CSS Modules:</strong> Scoped, native CSS compiled
+without client-side abstraction layers.</li>
+</ul>
+<p>By eliminating JavaScript evaluation from the styling pipeline,
+modern applications preserve the main thread for core business logic,
+user input handling, and smooth animations.</p></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/css-in-js-runtime-performance-impact-on-modern-ui';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

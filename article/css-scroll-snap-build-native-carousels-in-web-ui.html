@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Scroll Snap: Build Native Carousels in Web UI - ui</title>
+    <meta name="description" content="CSS scroll-snap provides a native, performant mechanism to create smooth, app-like carousels without relying on heavy third-party JavaScript libraries. By shifting the physics, momentum, and position calculations directly to the browser&#39;s rendering engine">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/css-scroll-snap-build-native-carousels-in-web-ui">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="CSS Scroll Snap: Build Native Carousels in Web UI - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/css-scroll-snap-build-native-carousels-in-web-ui" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="CSS scroll-snap provides a native, performant mechanism to create smooth, app-like carousels without relying on heavy third-party JavaScript libraries. By shifting the physics, momentum, and position calculations directly to the browser&#39;s rendering engine" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="css-scroll-snap-build-native-carousels-in-web-ui">CSS Scroll
+Snap: Build Native Carousels in Web UI</h1>
+<p>CSS scroll-snap provides a native, performant mechanism to create
+smooth, app-like carousels without relying on heavy third-party
+JavaScript libraries. By shifting the physics, momentum, and position
+calculations directly to the browser's rendering engine, developers can
+build touch-friendly sliders, galleries, and multi-step interfaces that
+feel fluid across mobile and desktop devices. This article explains how
+the core CSS scroll-snap properties operate, how to implement a fully
+functional carousel, and the techniques needed to refine touch behavior
+and visual polish.</p>
+<h3 id="the-foundation-container-and-item-mechanics">The Foundation:
+Container and Item Mechanics</h3>
+<p>CSS scroll-snap relies on a parent-child relationship: the scroll
+container enforces snap boundaries, while child elements declare where
+they should align when scrolling stops.</p>
+<p>On the parent container, two fundamental properties establish the
+carousel behavior:</p>
+<ul>
+<li><code>overflow-x: auto;</code> enables horizontal scrolling.</li>
+<li><code>scroll-snap-type: x mandatory;</code> forces the viewport to
+snap to a child element once the user finishes scrolling along the
+horizontal axis.</li>
+</ul>
+<p>On each child item, the alignment rule is defined using:</p>
+<ul>
+<li><code>scroll-snap-align: start;</code>, <code>center;</code>, or
+<code>end;</code>, which designates the anchor point where the item
+attaches relative to the scroll container's viewport.</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode html"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;carousel&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;carousel-item&quot;</span><span class="dt">&gt;</span>Slide 1<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;carousel-item&quot;</span><span class="dt">&gt;</span>Slide 2<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;carousel-item&quot;</span><span class="dt">&gt;</span>Slide 3<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.carousel</span> {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">display</span><span class="ch">:</span> <span class="dv">flex</span><span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">overflow-x</span><span class="ch">:</span> <span class="bu">auto</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">scroll-snap-type</span><span class="ch">:</span> <span class="dv">x mandatory</span><span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">scroll-behavior</span><span class="ch">:</span> <span class="dv">smooth</span><span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">-webkit-overflow-scrolling</span><span class="ch">:</span> <span class="dv">touch</span><span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">.carousel-item</span> {</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">flex</span><span class="ch">:</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">100</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">scroll-snap-align</span><span class="ch">:</span> <span class="dv">center</span><span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="tuning-the-app-like-feel">Tuning the App-Like Feel</h3>
+<p>While basic snapping aligns slides, native mobile applications
+exhibit specific movement characteristics that require additional CSS
+properties:</p>
+<h4 id="1-controlling-flick-velocity-with-scroll-snap-stop">1.
+Controlling Flick Velocity with <code>scroll-snap-stop</code></h4>
+<p>By default, a fast swipe allows the viewport to skip over multiple
+items before settling. Setting <code>scroll-snap-stop: always;</code> on
+child items prevents this, forcing the carousel to stop on the immediate
+next item regardless of how aggressively the user flicks the screen.
+This is crucial for full-screen story formats or sequential onboarding
+flows.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.carousel-item</span> {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">scroll-snap-stop</span><span class="ch">:</span> <span class="dv">always</span><span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h4 id="2-managing-offsets-with-scroll-padding">2. Managing Offsets with
+<code>scroll-padding</code></h4>
+<p>When designing a carousel where cards peek in from the edges—a common
+mobile pattern—<code>scroll-padding</code> on the parent container
+ensures snapped items align cleanly without clipping off-screen.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.carousel</span> {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">scroll-padding</span><span class="ch">:</span> <span class="dv">0</span> <span class="dv">24</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h4 id="3-streamlining-the-interface">3. Streamlining the Interface</h4>
+<p>Native carousels rarely display default desktop scrollbars. The
+scrollbar can be visually hidden while preserving keyboard and touch
+scrolling functionality:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.carousel</span> {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">scrollbar-width</span><span class="ch">:</span> <span class="dv">none</span><span class="op">;</span> <span class="co">/* Firefox */</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">.carousel</span><span class="in">::-webkit-scrollbar</span> {</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">display</span><span class="ch">:</span> <span class="dv">none</span><span class="op">;</span> <span class="co">/* Chrome, Safari, Edge */</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="advantages-over-javascript-driven-sliders">Advantages Over
+JavaScript-Driven Sliders</h3>
+<ul>
+<li><strong>Performance</strong>: Native scrolling runs on the browser's
+compositor thread, eliminating layout thrashing, dropped frames, and
+jank associated with <code>requestAnimationFrame</code> or
+<code>touchmove</code> listeners.</li>
+<li><strong>Hardware Acceleration</strong>: Built-in platform
+physics—such as rubber-banding on iOS and natural deceleration on
+Android—are inherited automatically.</li>
+<li><strong>Accessibility</strong>: Because native HTML overflow is
+used, keyboard navigation (left/right arrow keys, <code>Tab</code>, and
+<code>Home</code>/<code>End</code>) functions out of the box without
+complex ARIA emulation scripts. Minimal JavaScript is only necessary
+when pairing the component with pagination dots or programmatic
+previous/next buttons.</li>
+</ul></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/css-scroll-snap-build-native-carousels-in-web-ui';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

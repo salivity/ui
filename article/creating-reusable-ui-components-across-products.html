@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creating Reusable UI Components Across Products - ui</title>
+    <meta name="description" content="Building UI components that work seamlessly across multiple product lines requires shifting from single-application problem solving to enterprise-scale system architecture. A genuinely reusable component must transcend brand-specific visuals, decouple fro">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/creating-reusable-ui-components-across-products">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Creating Reusable UI Components Across Products - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/creating-reusable-ui-components-across-products" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Building UI components that work seamlessly across multiple product lines requires shifting from single-application problem solving to enterprise-scale system architecture. A genuinely reusable component must transcend brand-specific visuals, decouple fro" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="creating-reusable-ui-components-across-products">Creating
+Reusable UI Components Across Products</h1>
+<p>Building UI components that work seamlessly across multiple product
+lines requires shifting from single-application problem solving to
+enterprise-scale system architecture. A genuinely reusable component
+must transcend brand-specific visuals, decouple from product-specific
+business logic, and maintain high standards for accessibility and
+performance. This article outlines the essential technical and
+architectural practices necessary to create resilient, flexible UI
+components that engineering teams can adopt across diverse software
+suites without friction.</p>
+<h3 id="decouple-business-logic-from-presentation">Decouple Business
+Logic from Presentation</h3>
+<p>A UI component loses its reusability the moment it assumes anything
+about domain-specific data structures or backend workflows. For example,
+a generic <code>Table</code> component should not expect an array of
+specific <code>User</code> or <code>Invoice</code> objects; instead, it
+should consume normalized, presentation-ready data via generic props or
+slot structures.</p>
+<p>Adopting headless architecture or presentational patterns allows
+product teams to map their own state management and network calls to the
+component without altering the underlying code. The component’s only
+responsibility is rendering the visual interface, managing internal
+transient states (like dropdown open/closed states), and emitting
+standard events.</p>
+<h3 id="tokenize-design-to-support-multi-theming">Tokenize Design to
+Support Multi-Theming</h3>
+<p>Different product lines often feature unique branding, color
+palettes, spacing metrics, and typography scales. Genuinely reusable
+components avoid hardcoded values entirely, relying instead on design
+tokens implemented via CSS custom properties or design system build
+tools.</p>
+<p>By abstracting styling into tokens—such as
+<code>--color-primary-base</code> or <code>--spacing-md</code>—the core
+markup and layout logic remain identical across repositories, while each
+product injects its own brand-specific token stylesheet. This separation
+allows a single design system repository to power distinct
+consumer-facing apps, enterprise portals, and internal tools
+concurrently.</p>
+<h3 id="prioritize-composability-over-configuration">Prioritize
+Composability Over Configuration</h3>
+<p>A common anti-pattern in cross-product development is adding numerous
+boolean props to accommodate edge cases (e.g., <code>showIcon</code>,
+<code>isCompact</code>, <code>hasCustomFooter</code>). This creates
+brittle, bloated components that are difficult to maintain.</p>
+<p>Genuinely reusable components favor composability. By leveraging
+patterns like compound components, render props, or content slots,
+components break down into smaller atomic pieces that can be assembled
+according to product needs:</p>
+<ul>
+<li>Provide structural primitives (e.g., <code>Modal</code>,
+<code>ModalHeader</code>, <code>ModalBody</code>).</li>
+<li>Allow consumer applications to inject custom content and control the
+layout hierarchy.</li>
+<li>Keep default behaviors sensible while maintaining extension points
+for non-standard use cases.</li>
+</ul>
+<h3 id="build-accessibility-into-the-core">Build Accessibility into the
+Core</h3>
+<p>Accessibility (a11y) cannot be an afterthought left to downstream
+product developers. A truly reusable component comes pre-configured with
+complete, valid semantic HTML, appropriate WAI-ARIA attributes, focus
+management, and keyboard navigation.</p>
+<p>When screen reader compatibility and keyboard shortcuts are handled
+inside the shared component, every downstream product inherits
+compliance automatically. This standardization reduces legal risk,
+lowers engineering overhead, and ensures a uniform experience for all
+users regardless of which product they navigate.</p>
+<h3 id="maintain-strict-api-contracts-and-versioning">Maintain Strict
+API Contracts and Versioning</h3>
+<p>For multi-product adoption to succeed, product teams must trust that
+updates will not break their builds. Reusable components require:</p>
+<ul>
+<li><strong>Predictable Prop Naming:</strong> Follow established
+ecosystem conventions (e.g., standardizing on <code>onChange</code>
+instead of mixing <code>onSelect</code>, <code>handleChange</code>, or
+<code>updateValue</code>).</li>
+<li><strong>Semantic Versioning:</strong> Strictly document deprecations
+and reserve breaking changes for major version releases.</li>
+<li><strong>Granular Packaging:</strong> Allow products to consume
+individual components or the entire library via tree-shaking, ensuring
+products with strict performance budgets only bundle the code they
+actively use.</li>
+</ul></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/creating-reusable-ui-components-across-products';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

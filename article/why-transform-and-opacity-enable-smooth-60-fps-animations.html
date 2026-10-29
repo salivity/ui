@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Transform and Opacity Enable Smooth 60fps Animations - ui</title>
+    <meta name="description" content="Achieving a consistent 60 frames per second (fps) in web interfaces requires rendering each frame within a strict 16.67-millisecond window. The CSS properties transform and opacity are uniquely suited for this standard because they allow browsers to skip">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/why-transform-and-opacity-enable-smooth-60-fps-animations">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Why Transform and Opacity Enable Smooth 60fps Animations - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/why-transform-and-opacity-enable-smooth-60-fps-animations" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Achieving a consistent 60 frames per second (fps) in web interfaces requires rendering each frame within a strict 16.67-millisecond window. The CSS properties transform and opacity are uniquely suited for this standard because they allow browsers to skip" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="why-transform-and-opacity-enable-smooth-60fps-animations">Why
+Transform and Opacity Enable Smooth 60fps Animations</h1>
+<p>Achieving a consistent 60 frames per second (fps) in web interfaces
+requires rendering each frame within a strict 16.67-millisecond window.
+The CSS properties <code>transform</code> and <code>opacity</code> are
+uniquely suited for this standard because they allow browsers to skip
+the computationally expensive layout and paint stages of the rendering
+pipeline. By executing almost entirely on the dedicated compositor
+thread and leveraging GPU acceleration, these properties decouple
+animation performance from the JavaScript main thread, preventing
+dropped frames and delivering fluid visual motion.</p>
+<h2 id="the-browser-rendering-pipeline">The Browser Rendering
+Pipeline</h2>
+<p>To understand why <code>transform</code> and <code>opacity</code> are
+fast, you must look at how browsers render changes to the screen. The
+rendering pipeline consists of four major steps:</p>
+<ol type="1">
+<li><strong>Recalculate Style:</strong> Matches selectors and computes
+the final CSS values.</li>
+<li><strong>Layout (Reflow):</strong> Calculates the geometry, position,
+and dimensions of each element on the page.</li>
+<li><strong>Paint (Repaint):</strong> Fills in visible pixels, including
+text, colors, images, borders, and shadows.</li>
+<li><strong>Composite:</strong> Draws the painted layers to the screen
+in the correct order.</li>
+</ol>
+<p>When an animated property triggers layout or paint, the browser must
+re-evaluate large portions of the document object model (DOM). Animating
+geometric properties like <code>top</code>, <code>left</code>,
+<code>width</code>, or <code>margin</code> forces the browser to
+recalculate the positions of neighboring elements (layout) and redraw
+their pixels (paint) on every single frame, easily exceeding the 16.67ms
+frame budget.</p>
+<h2 id="bypassing-layout-and-paint">Bypassing Layout and Paint</h2>
+<p><code>transform</code> and <code>opacity</code> are exceptions to
+this costly process.</p>
+<ul>
+<li><strong><code>transform</code></strong> (such as
+<code>translate</code>, <code>scale</code>, and <code>rotate</code>)
+alters the visual presentation of an element without changing its actual
+geometric boundaries within the document flow. Neighboring elements do
+not need to move or recalculate their positions.</li>
+<li><strong><code>opacity</code></strong> adjusts only the transparency
+(alpha channel) of an element without modifying its geometry or
+affecting the layout of adjacent nodes.</li>
+</ul>
+<p>Because neither property alters the geometric flow of the document,
+the browser completely bypasses both the <strong>Layout</strong> and
+<strong>Paint</strong> stages. The browser only needs to run the
+<strong>Composite</strong> stage to update the frame.</p>
+<h2 id="the-compositor-thread-and-the-gpu">The Compositor Thread and the
+GPU</h2>
+<p>Browsers split their workloads across multiple threads:</p>
+<ul>
+<li><strong>The Main Thread:</strong> Executes JavaScript, handles user
+input, parses HTML/CSS, and runs the layout and paint operations.</li>
+<li><strong>The Compositor Thread:</strong> Handles scrolling and
+coordinates the visual assembly of layers before sending them to the
+GPU.</li>
+</ul>
+<p>When an element is animated using <code>transform</code> or
+<code>opacity</code>, the browser can isolate that element into its own
+independent layer (often referred to as a compositor layer). This layer
+is uploaded to the GPU as a texture.</p>
+<p>From that point onward, the compositor thread handles the animation
+independently:</p>
+<ul>
+<li>For <code>transform</code>, the GPU applies simple mathematical
+matrix transformations to the cached texture (changing coordinates,
+rotation, or scale).</li>
+<li>For <code>opacity</code>, the GPU modifies the alpha value of the
+texture during blending.</li>
+</ul>
+<h2 id="resistance-to-main-thread-janks">Resistance to Main-Thread
+Janks</h2>
+<p>Because the compositor thread works independently of the main thread,
+animations using <code>transform</code> and <code>opacity</code> will
+not stutter even if the main thread is tied up with heavy JavaScript
+execution. A script could be crunching large datasets or handling
+complex state updates on the main thread, yet a CSS-driven
+<code>transform</code> transition will continue to render smoothly at
+60fps.</p>
+<p>By eliminating layout calculations, skipping pixel repainting, and
+running on isolated GPU-accelerated compositor threads,
+<code>transform</code> and <code>opacity</code> maximize hardware
+efficiency and ensure UI animations consistently hit the 60fps
+performance target.</p></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/why-transform-and-opacity-enable-smooth-60-fps-animations';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

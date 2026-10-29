@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screen Reader Accessibility in Conversational UI - ui</title>
+    <meta name="description" content="Conversational User Interfaces (CUIs), such as chatbots and virtual assistants, present unique challenges for users relying on screen readers. Because these interfaces rely heavily on real-time visual updates, dynamic message bubbles, and rapid back-and-f">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/screen-reader-accessibility-in-conversational-ui">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Screen Reader Accessibility in Conversational UI - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/screen-reader-accessibility-in-conversational-ui" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Conversational User Interfaces (CUIs), such as chatbots and virtual assistants, present unique challenges for users relying on screen readers. Because these interfaces rely heavily on real-time visual updates, dynamic message bubbles, and rapid back-and-f" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="screen-reader-accessibility-in-conversational-ui">Screen Reader
+Accessibility in Conversational UI</h1>
+<p>Conversational User Interfaces (CUIs), such as chatbots and virtual
+assistants, present unique challenges for users relying on screen
+readers. Because these interfaces rely heavily on real-time visual
+updates, dynamic message bubbles, and rapid back-and-forth interactions,
+developers must implement specific structural and semantic design
+patterns. This guide outlines the essential accessibility considerations
+required to make conversational interfaces fully perceivable and
+operable for screen reader users.</p>
+<h2 id="1-announcing-dynamic-content-with-aria-live-regions">1.
+Announcing Dynamic Content with ARIA Live Regions</h2>
+<p>Conversational interfaces frequently push new content into the view
+without a full page reload. Screen readers must be alerted to these
+changes without disrupting the user's current task.</p>
+<ul>
+<li><strong>Use <code>aria-live="polite"</code>:</strong> Set the
+message container as an ARIA live region using
+<code>aria-live="polite"</code> or <code>role="log"</code>. This ensures
+the screen reader finishes reading the current item before announcing
+incoming bot responses.</li>
+<li><strong>Avoid <code>assertive</code> settings:</strong> Avoid using
+<code>aria-live="assertive"</code> for routine messages, as it
+immediately cuts off the user’s screen reader mid-speech. Reserve
+assertive announcements strictly for critical system errors or expiring
+session warnings.</li>
+<li><strong>Manage update frequency:</strong> Prevent notification
+fatigue by only announcing complete responses rather than streaming text
+word by word.</li>
+</ul>
+<h2 id="2-managing-focus-intelligently">2. Managing Focus
+Intelligently</h2>
+<p>Improper focus management can disorient screen reader users, causing
+them to lose their place or repeatedly cycle through the entire
+conversation.</p>
+<ul>
+<li><strong>Retain focus on input:</strong> After a user submits a
+message, focus should generally remain in the text input area so they
+can easily type a follow-up.</li>
+<li><strong>Focus interactive elements intentionally:</strong> If the
+bot responds with an actionable choice—such as a list of interactive
+quick-reply buttons—programmatically move focus only when requested by
+the user, or provide a keyboard shortcut to jump between the input and
+the latest response.</li>
+<li><strong>Preserve scroll and navigation context:</strong> Ensure that
+incoming messages do not forcefully pull the screen reader's virtual
+cursor away from where the user is currently reading in the chat
+history.</li>
+</ul>
+<h2 id="3-defining-message-structure-and-roles">3. Defining Message
+Structure and Roles</h2>
+<p>A visual chat bubble communicates who sent a message purely through
+positioning and color. Screen readers require explicit semantic markers
+to convey this information.</p>
+<ul>
+<li><strong>Identify the speaker:</strong> Prefix messages with clear,
+accessible labels indicating the sender (e.g., using visually hidden
+text like "Bot said:" or "You said:").</li>
+<li><strong>Use semantic containers:</strong> Structure the message list
+using unordered lists (<code>&lt;ul&gt;</code> and
+<code>&lt;li&gt;</code>) or structured landmarks. This allows screen
+reader users to jump quickly between individual messages using native
+list-navigation commands.</li>
+<li><strong>Include timestamps meaningfully:</strong> If timestamps are
+included, format them semantically or associate them with the message
+using <code>aria-describedby</code> so they do not clutter primary
+message reading.</li>
+</ul>
+<h2 id="4-designing-accessible-interactive-elements">4. Designing
+Accessible Interactive Elements</h2>
+<p>Many modern conversational interfaces use "chips," quick-reply
+buttons, cards, and carousel menus alongside plain text.</p>
+<ul>
+<li><strong>Button semantics:</strong> Ensure all clickable choices use
+standard <code>&lt;button&gt;</code> elements rather than generic
+<code>&lt;div&gt;</code> or <code>&lt;span&gt;</code> elements with
+click handlers.</li>
+<li><strong>Carousels and cards:</strong> Multi-item carousels must be
+operable via keyboard arrow keys, announce total item count (e.g., "Item
+2 of 5"), and provide clear accessible names for each card action.</li>
+<li><strong>Disabled states:</strong> Clearly communicate when an
+interactive option is no longer valid (e.g., if a user cannot click a
+past button after making a selection) using
+<code>aria-disabled="true"</code>.</li>
+</ul>
+<h2 id="5-communicating-system-and-typing-states">5. Communicating
+System and Typing States</h2>
+<p>Visual interfaces often rely on animated dots to show that the system
+is processing an answer. Screen readers must convey this state without
+cluttering the audio stream.</p>
+<ul>
+<li><strong>Non-intrusive status messages:</strong> Use an off-screen
+status region (<code>role="status"</code>) to announce that the bot is
+preparing an answer, but ensure the status message is cleared or
+replaced once the actual response arrives.</li>
+<li><strong>Error and timeout announcements:</strong> Clearly
+communicate when a connection is lost, an API times out, or the system
+fails to parse an input, pairing the notification with clear recovery
+instructions.</li>
+</ul></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/screen-reader-accessibility-in-conversational-ui';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

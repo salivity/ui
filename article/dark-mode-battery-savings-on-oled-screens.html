@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Mode Battery Savings on OLED Screens - ui</title>
+    <meta name="description" content="Switching to dark mode on mobile devices with OLED displays directly reduces battery consumption by taking advantage of how the underlying panel emits light. Because OLED screens illuminate each pixel individually rather than using a continuous backlight,">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/dark-mode-battery-savings-on-oled-screens">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Dark Mode Battery Savings on OLED Screens - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/dark-mode-battery-savings-on-oled-screens" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Switching to dark mode on mobile devices with OLED displays directly reduces battery consumption by taking advantage of how the underlying panel emits light. Because OLED screens illuminate each pixel individually rather than using a continuous backlight," />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="dark-mode-battery-savings-on-oled-screens">Dark Mode Battery
+Savings on OLED Screens</h1>
+<p>Switching to dark mode on mobile devices with OLED displays directly
+reduces battery consumption by taking advantage of how the underlying
+panel emits light. Because OLED screens illuminate each pixel
+individually rather than using a continuous backlight, displaying black
+allows pixels to turn off entirely and consume virtually zero power.
+Depending on screen brightness levels and whether an interface uses true
+black or dark gray, dark mode can extend battery life anywhere from a
+modest 5% to over 40% compared to standard light mode.</p>
+<h3 id="how-oled-technology-handles-light-and-dark">How OLED Technology
+Handles Light and Dark</h3>
+<p>Traditional LCD (Liquid Crystal Display) screens utilize a persistent
+LED backlight positioned behind the liquid crystal layer. On an LCD,
+displaying a black screen requires the liquid crystals to block the
+light, but the backlight remains fully powered, meaning dark mode
+provides no battery savings.</p>
+<p>Organic Light Emitting Diode (OLED) displays, including AMOLED and
+Super AMOLED, work fundamentally differently. Each pixel consists of
+organic compounds that emit their own light when an electrical current
+is applied. When a pixel renders true black (hexadecimal code
+<code>#000000</code>), it receives no power and switches off completely.
+This per-pixel illumination means energy draw is directly proportional
+to the brightness and color values displayed across the user
+interface.</p>
+<h3 id="the-impact-of-screen-brightness">The Impact of Screen
+Brightness</h3>
+<p>The amount of battery saved by dark mode depends heavily on display
+brightness:</p>
+<ul>
+<li><strong>High Brightness (100% / Outdoor Use):</strong> At maximum
+brightness, light mode draws a massive amount of power to illuminate
+thousands of white pixels. Enabling dark mode in direct sunlight or at
+peak brightness can reduce display power draw by 30% to 50%, resulting
+in hours of additional screen-on time.</li>
+<li><strong>Moderate to Low Brightness (30%–50% / Indoor Use):</strong>
+When indoor lighting allows for lower manual or automatic brightness,
+the base power draw of white pixels is already low. Switching to dark
+mode in these environments typically yields a battery saving of 3% to
+9%.</li>
+</ul>
+<h3 id="true-black-vs-dark-gray-ui">True Black vs. Dark Gray UI</h3>
+<p>Not all dark modes save the same amount of power:</p>
+<ul>
+<li><strong>True Black (Pure AMOLED Black):</strong> By using
+<code>#000000</code>, pixels turn off completely, maximizing battery
+conservation. However, it can sometimes cause a visual artifact known as
+"OLED smearing" or "purple fringing" when scrolling rapidly, as pixels
+take a millisecond to switch back on.</li>
+<li><strong>Dark Gray (Material Design Standard):</strong> Most modern
+operating systems, including Android and iOS, implement very dark grays
+(e.g., <code>#121212</code>) rather than pure black. Dark gray pixels
+require a tiny amount of electrical current, meaning they do not achieve
+the absolute zero-power state of pure black. However, dark gray still
+achieves roughly 80% to 90% of the maximum potential power savings while
+reducing eye strain and eliminating motion smearing.</li>
+</ul>
+<h3 id="summary">Summary</h3>
+<p>Dark mode significantly curbs mobile battery drain on OLED screens,
+with the greatest advantages realized during high-brightness usage.
+While replacing light backgrounds with dark gray or true black will not
+double overall device endurance—since processors, cellular modems, and
+radios still consume standard power—it provides a noticeable and
+measurable extension of daily battery life.</p></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/dark-mode-battery-savings-on-oled-screens';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

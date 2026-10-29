@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button UI States: Hover, Focus, and Active - ui</title>
+    <meta name="description" content="Interactive button states are essential components of user interface design that communicate feedback, state changes, and affordance to users. This article explores the specific roles of hover, focus, and active states in button UI, detailing how each sta">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/button-ui-states-hover-focus-and-active">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Button UI States: Hover, Focus, and Active - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/button-ui-states-hover-focus-and-active" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Interactive button states are essential components of user interface design that communicate feedback, state changes, and affordance to users. This article explores the specific roles of hover, focus, and active states in button UI, detailing how each sta" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="button-ui-states-hover-focus-and-active">Button UI States:
+Hover, Focus, and Active</h1>
+<p>Interactive button states are essential components of user interface
+design that communicate feedback, state changes, and affordance to
+users. This article explores the specific roles of hover, focus, and
+active states in button UI, detailing how each state functions to
+improve usability, accessibility, and visual feedback across different
+devices and input methods.</p>
+<h2 id="the-importance-of-button-states">The Importance of Button
+States</h2>
+<p>Buttons must do more than simply exist on a screen; they need to
+acknowledge user interaction in real time. Without visual feedback,
+users are left uncertain whether an element is interactive, whether
+their input was recognized, or which element currently holds their place
+during navigation. Implementing dedicated styles for hover, focus, and
+active states solves these issues by establishing a responsive dialogue
+between the interface and the user.</p>
+<h2 id="the-hover-state-hover">The Hover State
+(<code>:hover</code>)</h2>
+<p>The hover state triggers when a user positions a pointing device,
+such as a mouse cursor, over an interactive button without activating
+it.</p>
+<ul>
+<li><strong>Primary Role:</strong> Affordance and discoverability. It
+signals to the user that the element is clickable and ready to receive
+input.</li>
+<li><strong>Common Visual Cues:</strong> Subtle background color shifts,
+drop-shadow elevations, border highlights, or slight scaling.</li>
+<li><strong>Design Considerations:</strong> Hover states are
+non-existent on touch-based devices like smartphones and tablets.
+Therefore, critical information or state changes should never rely
+exclusively on hover interactions.</li>
+</ul>
+<h2 id="the-focus-state-focus-and-focus-visible">The Focus State
+(<code>:focus</code> and <code>:focus-visible</code>)</h2>
+<p>The focus state activates when a button is selected via keyboard
+navigation (such as pressing the <code>Tab</code> key), assistive
+technology, or sometimes upon a mouse click.</p>
+<ul>
+<li><strong>Primary Role:</strong> Accessibility and orientation. It
+indicates where the user currently is within the interactive flow of the
+page, which is indispensable for users with visual or motor impairments
+who navigate without a mouse.</li>
+<li><strong>Common Visual Cues:</strong> High-contrast outline rings,
+distinct border adjustments, or inverted colors that stand out against
+surrounding content.</li>
+<li><strong>Design Considerations:</strong> Never remove default focus
+outlines using <code>outline: none</code> without providing an equally
+accessible, visible alternative. Utilizing the CSS
+<code>:focus-visible</code> pseudo-class allows designers to show focus
+indicators primarily for keyboard navigation while suppressing them for
+pure mouse clicks, preserving aesthetics without sacrificing
+accessibility.</li>
+</ul>
+<h2 id="the-active-state-active">The Active State
+(<code>:active</code>)</h2>
+<p>The active state represents the brief moment an action is being
+committed—typically between the user pressing down on a mouse button or
+the <code>Space</code>/<code>Enter</code> key, and releasing it.</p>
+<ul>
+<li><strong>Primary Role:</strong> Immediate tactile feedback. It
+confirms that the system has registered the click or press, preventing
+repetitive, frustrated clicking during network latency or processing
+delays.</li>
+<li><strong>Common Visual Cues:</strong> Depressed or inset appearances,
+darker background shades, subtle downward translations (e.g.,
+<code>transform: translateY(1px)</code>), or inverted colors.</li>
+<li><strong>Design Considerations:</strong> The active state should feel
+instantaneous. Any lag in rendering the active state breaks the
+perceived physical metaphor of pressing a real-world button.</li>
+</ul>
+<h2 id="managing-state-overlap">Managing State Overlap</h2>
+<p>A button can occupy multiple states simultaneously, such as when an
+element is focused via the keyboard and subsequently hovered over with a
+cursor or clicked into an active state.</p>
+<p>In CSS, order matters. To ensure all states display correctly when
+combined, define them in the logical interaction sequence: default
+state, followed by <code>:hover</code>, <code>:focus</code> (or
+<code>:focus-visible</code>), and finally <code>:active</code>. This
+hierarchy ensures that the active state takes visual precedence at the
+moment of interaction, providing clear and predictable behavior across
+all user inputs.</p></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/button-ui-states-hover-focus-and-active';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

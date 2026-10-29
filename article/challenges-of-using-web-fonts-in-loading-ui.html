@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenges of Using Web Fonts in Loading UI - ui</title>
+    <meta name="description" content="Using custom web fonts within a loading user interface introduces significant design and performance hurdles, often defeating the purpose of the loading screen itself. While loading states are intended to provide immediate visual feedback and reassure use">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/challenges-of-using-web-fonts-in-loading-ui">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Challenges of Using Web Fonts in Loading UI - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/challenges-of-using-web-fonts-in-loading-ui" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Using custom web fonts within a loading user interface introduces significant design and performance hurdles, often defeating the purpose of the loading screen itself. While loading states are intended to provide immediate visual feedback and reassure use" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="challenges-of-using-web-fonts-in-loading-ui">Challenges of Using
+Web Fonts in Loading UI</h1>
+<p>Using custom web fonts within a loading user interface introduces
+significant design and performance hurdles, often defeating the purpose
+of the loading screen itself. While loading states are intended to
+provide immediate visual feedback and reassure users that content is on
+its way, web fonts introduce latency, layout instability, and rendering
+artifacts. This article examines the primary challenges of integrating
+custom typography into loading screens, skeletons, and initial launch
+views, highlighting the conflicts between typographic branding and
+optimal perceived performance.</p>
+<h2 id="flash-of-invisible-text-foit">Flash of Invisible Text
+(FOIT)</h2>
+<p>When a browser encounters a custom web font declaration, it often
+hides the text until the font asset has completely downloaded. This
+behavior, known as Flash of Invisible Text (FOIT), is particularly
+damaging in a loading UI. If the loading screen includes informative
+text—such as "Fetching your data" or a progress percentage—users may see
+blank space, a detached spinner, or no interface at all during the
+critical first few hundred milliseconds. A loading state that cannot
+render immediately fails to deliver its core function.</p>
+<h2 id="flash-of-unstyled-text-fout-and-layout-shifts">Flash of Unstyled
+Text (FOUT) and Layout Shifts</h2>
+<p>If developers configure the font display strategy to show a system
+fallback immediately (using CSS properties like
+<code>font-display: swap</code>), they encounter the Flash of Unstyled
+Text (FOUT). Because system fallback fonts rarely share the exact
+dimensions, x-height, or kerning of custom web fonts, swapping the font
+once it loads causes an abrupt visual jump. This triggers Cumulative
+Layout Shift (CLS), making the loading UI appear unstable, unpolished,
+and jittery right as the user enters the application.</p>
+<h2 id="bandwidth-contention-on-the-critical-path">Bandwidth Contention
+on the Critical Path</h2>
+<p>A loading UI is displayed precisely when network activity is highest.
+At this stage, the browser is actively competing for bandwidth to
+download critical CSS, JavaScript bundles, API data, and primary media
+assets. Injecting an external font request into this initial waterfall
+adds unnecessary weight to the critical rendering path. The network
+resources spent fetching font files—often ranging from 20KB to over
+100KB per weight—delay the retrieval of data needed to finish loading
+the actual page.</p>
+<h2 id="cross-platform-fallback-discrepancies">Cross-Platform Fallback
+Discrepancies</h2>
+<p>Because different operating systems rely on different default system
+fonts (such as San Francisco on macOS/iOS, Segoe UI on Windows, and
+Roboto on Android), the appearance of the loading UI will vary
+drastically before the custom font renders. A carefully balanced loading
+layout designed around a specific custom font may break or misalign when
+rendered with an unaligned fallback on specific devices, leading to
+truncated labels, unintended line breaks, or misaligned loading
+bars.</p>
+<h2 id="high-cost-for-low-information-density">High Cost for Low
+Information Density</h2>
+<p>Loading screens typically contain minimal text—frequently just a
+single word, a short status message, or a numerical counter. Downloading
+an entire font file containing hundreds of unused glyphs solely to style
+a few characters is an inefficient use of resources. While font
+subsetting can mitigate the payload size, it adds maintenance overhead
+to the build pipeline for an interface that users ideally see for only a
+fraction of a second.</p>
+<h2 id="preloading-trade-offs">Preloading Trade-offs</h2>
+<p>Using <code>&lt;link rel="preload"&gt;</code> allows developers to
+fetch fonts earlier in the page lifecycle, ensuring they are available
+by the time the loader displays. However, preloading is a zero-sum
+mechanism. Prioritizing a custom web font over essential JavaScript
+execution or primary API calls prioritizes aesthetic styling over
+functional interactivity, ultimately prolonging the total time the user
+spends looking at the loading UI.</p></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/challenges-of-using-web-fonts-in-loading-ui';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

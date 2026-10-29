@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI Contrast Rules: Pure Black vs Dark Gray Backgrounds - ui</title>
+    <meta name="description" content="Choosing between pure black (#000000) and dark gray backgrounds is a foundational decision in dark mode UI design that directly impacts visual accessibility, user fatigue, and interface hierarchy. While both approaches fall under dark theme design, they r">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/ui-contrast-rules-pure-black-vs-dark-gray-backgrounds">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="UI Contrast Rules: Pure Black vs Dark Gray Backgrounds - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/ui-contrast-rules-pure-black-vs-dark-gray-backgrounds" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Choosing between pure black (#000000) and dark gray backgrounds is a foundational decision in dark mode UI design that directly impacts visual accessibility, user fatigue, and interface hierarchy. While both approaches fall under dark theme design, they r" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="ui-contrast-rules-pure-black-vs-dark-gray-backgrounds">UI
+Contrast Rules: Pure Black vs Dark Gray Backgrounds</h1>
+<p>Choosing between pure black (<code>#000000</code>) and dark gray
+backgrounds is a foundational decision in dark mode UI design that
+directly impacts visual accessibility, user fatigue, and interface
+hierarchy. While both approaches fall under dark theme design, they
+require distinctly different contrast treatments to meet accessibility
+standards and provide comfortable readability. This guide covers the Web
+Content Accessibility Guidelines (WCAG) contrast requirements, visual
+ergonomics, elevation mechanics, and concrete implementation rules for
+both background types.</p>
+<h3 id="the-wcag-baseline-contrast-math">The WCAG Baseline: Contrast
+Math</h3>
+<p>The Web Content Accessibility Guidelines (WCAG 2.1) require a minimum
+contrast ratio of 4.5:1 for normal text (AA level) and 7:1 for enhanced
+accessibility (AAA level). For large text and interface components, the
+minimum ratio is 3:1.</p>
+<ul>
+<li><strong>Pure Black (<code>#000000</code>) with Pure White
+(<code>#FFFFFF</code>):</strong> Produces a maximum contrast ratio of
+<strong>21:1</strong>.</li>
+<li><strong>Dark Gray (<code>#121212</code>) with Pure White
+(<code>#FFFFFF</code>):</strong> Produces a contrast ratio of
+approximately <strong>16:1</strong>.</li>
+<li><strong>Dark Gray (<code>#1E1E1E</code>) with Pure White
+(<code>#FFFFFF</code>):</strong> Produces a contrast ratio of
+approximately <strong>13.5:1</strong>.</li>
+</ul>
+<p>Both pure black and dark gray backgrounds easily surpass the WCAG AAA
+threshold when paired with white or light gray text. Consequently, the
+primary design challenge is not meeting minimum thresholds, but managing
+excessive contrast.</p>
+<h3 id="the-halation-effect-and-visual-fatigue">The Halation Effect and
+Visual Fatigue</h3>
+<p>A 21:1 contrast ratio (pure white on pure black) often induces
+"halation"—a phenomenon where light text bleeds into the dark
+background, causing the text to appear blurry, glowing, or vibrating.
+This issue is particularly pronounced for users with astigmatism.</p>
+<h4 id="contrast-rules-for-pure-black-000000">Contrast Rules for Pure
+Black (<code>#000000</code>)</h4>
+<ol type="1">
+<li><strong>Never use <code>#FFFFFF</code> for body text:</strong>
+Reduce white text opacity to 87%
+(<code>rgba(255, 255, 255, 0.87)</code>) or use an off-white tint like
+<code>#E0E0E0</code>. This softens the extreme contrast from 21:1 down
+to a comfortable 15:1–17:1 range while comfortably passing AAA
+standards.</li>
+<li><strong>Dim secondary text strategically:</strong> Secondary and
+disabled text must remain above the 4.5:1 threshold. Use a 60% opacity
+white (<code>rgba(255, 255, 255, 0.60)</code>), which yields a contrast
+ratio of roughly 7:1 against pure black.</li>
+<li><strong>Thicken typography weight:</strong> Thin font weights can
+erode against a pitch-black canvas. Step font weights up slightly (e.g.,
+from <code>Regular</code> 400 to <code>Medium</code> 500) to preserve
+stroke clarity.</li>
+</ol>
+<h4 id="contrast-rules-for-dark-gray-eg-121212-to-242424">Contrast Rules
+for Dark Gray (e.g., <code>#121212</code> to <code>#242424</code>)</h4>
+<ol type="1">
+<li><strong>Primary text flexibility:</strong> Pure white
+(<code>#FFFFFF</code>) can be safely used on dark gray backgrounds
+without triggering severe halation, as the background's reflected
+luminance naturally softens the transition.</li>
+<li><strong>Preserve secondary text ratios:</strong> Because gray
+reduces the absolute contrast baseline, secondary text opacity must
+remain higher than on pitch-black surfaces. Ensure muted gray text does
+not drop below <code>#8A8A8A</code> against <code>#121212</code> to
+maintain the 4.5:1 AA requirement.</li>
+</ol>
+<h3 id="depth-elevation-and-shadows">Depth, Elevation, and Shadows</h3>
+<p>The choice between black and dark gray fundamentally alters how
+visual depth is communicated in a UI:</p>
+<ul>
+<li><strong>Dark Gray Surfaces:</strong> Allow designers to use
+traditional drop shadows (e.g., <code>#000000</code> shadows with 30–50%
+opacity) to denote elevation. Because the background has luminance,
+darker values can exist beneath raised elements.</li>
+<li><strong>Pure Black Surfaces:</strong> Eliminate the possibility of
+using shadows, because nothing can be darker than <code>#000000</code>.
+To denote elevation, designers must use lighter surface overlays (e.g.,
+placing a 5% white translucent layer over elevated modals or cards) or
+colored borders (typically 1px solid borders at 10–15% white
+opacity).</li>
+</ul>
+<h3 id="display-technology-oled-power-vs-black-smear">Display
+Technology: OLED Power vs. Black Smear</h3>
+<p>Pure black backgrounds turn off pixels entirely on OLED and AMOLED
+screens, maximizing energy efficiency. However, transitioning pixels
+from pure off (<code>#000000</code>) to on creates "black smear"—a
+noticeable motion blur or trailing effect during scrolling. Dark gray
+backgrounds (such as <code>#121212</code>, the standard recommended by
+Material Design) keep pixels primed at low power, completely eliminating
+black smear while maintaining over 90% of the energy-saving benefits of
+OLED displays.</p>
+<h3 id="summary-of-contrast-guidelines">Summary of Contrast
+Guidelines</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Element</th>
+<th style="text-align: left;">Rule on Pure Black
+(<code>#000000</code>)</th>
+<th style="text-align: left;">Rule on Dark Gray
+(<code>#121212</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Primary Text</strong></td>
+<td style="text-align: left;">Use off-white (<code>#E0E0E0</code> or 87%
+opacity)</td>
+<td style="text-align: left;">Pure white (<code>#FFFFFF</code>) or
+off-white</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Secondary Text</strong></td>
+<td style="text-align: left;">60% white opacity (approx. 7:1 ratio)</td>
+<td style="text-align: left;">Minimum <code>#8A8A8A</code> (4.5:1
+ratio)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Interactive Accents</strong></td>
+<td style="text-align: left;">De-saturate colors to prevent vibrating
+edges</td>
+<td style="text-align: left;">Higher saturation permitted</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Elevation Cue</strong></td>
+<td style="text-align: left;">Surface tint overlays or light
+borders</td>
+<td style="text-align: left;">Traditional drop shadows or lighter
+surface fills</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Minimum Component
+Contrast</strong></td>
+<td style="text-align: left;">3:1 against background for
+borders/inputs</td>
+<td style="text-align: left;">3:1 against background for
+borders/inputs</td>
+</tr>
+</tbody>
+</table></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/ui-contrast-rules-pure-black-vs-dark-gray-backgrounds';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

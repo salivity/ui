@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tokenization: Synchronizing Design Tokens in UI Code - ui</title>
+    <meta name="description" content="Design tokenization is the process of converting foundational visual attributes—such as colors, spacing, typography, and elevation—into structured, platform-agnostic data. This article explains what design tokens are, how the tokenization process works, a">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/tokenization-synchronizing-design-tokens-in-ui-code">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Tokenization: Synchronizing Design Tokens in UI Code - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/tokenization-synchronizing-design-tokens-in-ui-code" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Design tokenization is the process of converting foundational visual attributes—such as colors, spacing, typography, and elevation—into structured, platform-agnostic data. This article explains what design tokens are, how the tokenization process works, a" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1
+id="tokenization-synchronizing-design-tokens-in-ui-code">Tokenization:
+Synchronizing Design Tokens in UI Code</h1>
+<p>Design tokenization is the process of converting foundational visual
+attributes—such as colors, spacing, typography, and elevation—into
+structured, platform-agnostic data. This article explains what design
+tokens are, how the tokenization process works, and how modern
+engineering workflows synchronize these values directly from design
+tools to production UI code across web and mobile platforms.</p>
+<h2 id="what-are-design-tokens">What Are Design Tokens?</h2>
+<p>Design tokens are the atomic building blocks of a design system.
+Instead of hardcoding values like <code>#0055FF</code> or
+<code>16px</code> across various codebases and design files, these
+values are assigned semantic, platform-agnostic names such as
+<code>color.brand.primary</code> or <code>spacing.medium</code>.</p>
+<p>Tokens are typically categorized into three tiers:</p>
+<ul>
+<li><strong>Global Tokens (Primitive):</strong> Direct values without
+context (e.g., <code>blue-500: #0055FF</code>).</li>
+<li><strong>Semantic Tokens (System):</strong> Values with intended
+purpose (e.g.,
+<code>background-interactive-primary: {blue-500}</code>).</li>
+<li><strong>Component Tokens:</strong> Values scoped to specific UI
+components (e.g.,
+<code>button-primary-background: {background-interactive-primary}</code>).</li>
+</ul>
+<h2 id="what-is-ui-tokenization">What is UI Tokenization?</h2>
+<p>Tokenization is the formal process of identifying visual constants,
+abstracting them into a shared schema, and storing them in a
+standardized, machine-readable format—usually JSON or YAML. By defining
+visual properties as data, design decisions become decoupled from
+specific platforms and frameworks.</p>
+<h2 id="how-tokenization-synchronizes-with-ui-code">How Tokenization
+Synchronizes with UI Code</h2>
+<p>Synchronizing design tokens into UI code requires an automated
+pipeline that serves as the bridge between design tools and codebases.
+This workflow ensures that whenever a design decision changes, it
+automatically cascades to all target platforms.</p>
+<h3 id="1-establishing-the-single-source-of-truth">1. Establishing the
+Single Source of Truth</h3>
+<p>The process begins by maintaining tokens in a centralized repository
+or a connected design tool. Designers often configure tokens using
+plugins like Tokens Studio for Figma or native Figma Variables. These
+tools export the token definitions as structured JSON files directly to
+a Git repository, ensuring version control for all visual decisions.</p>
+<h3 id="2-transformation-and-compilation">2. Transformation and
+Compilation</h3>
+<p>Because raw JSON cannot be consumed directly by every framework, a
+build tool is required to transform these tokens into native formats.
+Tools like Amazon’s Style Dictionary parse the JSON dictionary and
+compile it into target-specific assets:</p>
+<ul>
+<li><strong>Web:</strong> CSS custom properties
+(<code>var(--color-brand-primary)</code>), SCSS variables, or TypeScript
+constants.</li>
+<li><strong>iOS:</strong> Swift structures, UIKit UIColors, or SwiftUI
+Color extensions.</li>
+<li><strong>Android:</strong> Jetpack Compose themes or XML resource
+values.</li>
+</ul>
+<p>During transformation, values are formatted to match the conventions
+and unit systems of each platform (e.g., converting pixels to
+<code>rem</code> for web or <code>dp</code>/<code>sp</code> for
+Android).</p>
+<h3 id="3-automated-distribution">3. Automated Distribution</h3>
+<p>To keep code synchronized with design changes, teams integrate token
+transformation into Continuous Integration and Continuous Deployment
+(CI/CD) pipelines:</p>
+<ol type="1">
+<li>A designer updates a token value (e.g., changing a brand color) and
+pushes the change from the design tool.</li>
+<li>A pull request is automatically opened in the design token
+repository.</li>
+<li>Upon merging, a CI/CD action runs the compilation engine (e.g.,
+Style Dictionary).</li>
+<li>The generated platform files are published as versioned packages
+(such as an npm package or CocoaPod) or pushed directly into application
+repositories.</li>
+<li>Engineers update the dependency, and the UI updates globally without
+manual code refactoring.</li>
+</ol>
+<h2 id="benefits-of-synchronized-tokens">Benefits of Synchronized
+Tokens</h2>
+<ul>
+<li><strong>Elimination of Drift:</strong> Discrepancies between Figma
+mockups and production apps are systematically prevented.</li>
+<li><strong>Cross-Platform Consistency:</strong> Web, iOS, and Android
+applications share the exact same visual foundation.</li>
+<li><strong>Instant Theming:</strong> Switching between light mode, dark
+mode, or multi-brand themes is handled dynamically by swapping token
+value mappings at runtime.</li>
+<li><strong>Accelerated Development:</strong> Developers spend less time
+searching for hex codes or spacing guidelines and more time building
+functional components.</li>
+</ul></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/tokenization-synchronizing-design-tokens-in-ui-code';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

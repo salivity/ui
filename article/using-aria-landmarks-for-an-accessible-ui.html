@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Using ARIA Landmarks for an Accessible UI - ui</title>
+    <meta name="description" content="ARIA landmarks provide assistive technologies with a structural map of a web page, allowing users with visual or motor impairments to navigate digital content efficiently. This article explores how ARIA landmarks function, why they are essential for assis">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/using-aria-landmarks-for-an-accessible-ui">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Using ARIA Landmarks for an Accessible UI - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/using-aria-landmarks-for-an-accessible-ui" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="ARIA landmarks provide assistive technologies with a structural map of a web page, allowing users with visual or motor impairments to navigate digital content efficiently. This article explores how ARIA landmarks function, why they are essential for assis" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="using-aria-landmarks-for-an-accessible-ui">Using ARIA Landmarks
+for an Accessible UI</h1>
+<p>ARIA landmarks provide assistive technologies with a structural map
+of a web page, allowing users with visual or motor impairments to
+navigate digital content efficiently. This article explores how ARIA
+landmarks function, why they are essential for assistive navigation, the
+core landmark roles available, and best practices for implementing them
+alongside semantic HTML.</p>
+<h3 id="understanding-aria-landmarks">Understanding ARIA Landmarks</h3>
+<p>ARIA (Accessible Rich Internet Applications) landmarks are designated
+attributes applied to HTML elements to identify specific functional
+sections of a web page. Assistive technologies, particularly screen
+readers, interpret these landmarks to create a virtual table of
+contents. Instead of forcing a user to tab through every single
+interactive element linearly, landmarks enable users to jump directly to
+regions like primary navigation, the main content, or the search bar
+using keyboard shortcuts.</p>
+<h3 id="core-aria-landmarks-and-their-html5-equivalents">Core ARIA
+Landmarks and Their HTML5 Equivalents</h3>
+<p>Modern web standards prioritize semantic HTML5 elements, which
+inherently convey ARIA landmark roles without requiring extra
+attributes. Where older browsers or custom web components are used,
+explicit ARIA roles bridge the accessibility gap.</p>
+<ul>
+<li><strong><code>banner</code> (HTML5:
+<code>&lt;header&gt;</code>):</strong> Identifies global site-oriented
+content, typically including the logo, site title, and overarching
+branding. It usually resides at the top of the page.</li>
+<li><strong><code>navigation</code> (HTML5:
+<code>&lt;nav&gt;</code>):</strong> Defines a collection of navigational
+links. Multiple navigation blocks (such as main menus, breadcrumbs, or
+footers) can exist on a single page.</li>
+<li><strong><code>main</code> (HTML5:
+<code>&lt;main&gt;</code>):</strong> Encloses the central, unique
+content of the document. Each page must contain only one visible
+<code>main</code> landmark to prevent navigational ambiguity.</li>
+<li><strong><code>complementary</code> (HTML5:
+<code>&lt;aside&gt;</code>):</strong> Designates content that
+supplements the main topic, such as sidebars, related article links, or
+pull quotes.</li>
+<li><strong><code>contentinfo</code> (HTML5:
+<code>&lt;footer&gt;</code>):</strong> Marks metadata about the
+document, such as copyrights, privacy policies, terms of service, and
+general footer links.</li>
+<li><strong><code>search</code> (HTML5: <code>&lt;search&gt;</code> or
+<code>&lt;form role="search"&gt;</code>):</strong> Identifies the search
+tool, letting users immediately locate and utilize internal site search
+functionality.</li>
+</ul>
+<h3 id="key-roles-in-structuring-accessible-interfaces">Key Roles in
+Structuring Accessible Interfaces</h3>
+<h4 id="1-accelerated-keyboard-navigation">1. Accelerated Keyboard
+Navigation</h4>
+<p>Without landmarks, screen reader users must navigate sequentially
+through headers, links, and text blocks to reach desired information.
+Landmarks allow users to trigger a list of major landmarks via hotkeys
+(such as the <code>D</code> key in NVDA and JAWS) and skip repetitive
+headers or menus instantly.</p>
+<h4 id="2-cognitive-context-and-layout-clarity">2. Cognitive Context and
+Layout Clarity</h4>
+<p>Landmarks supply structural meaning to otherwise generic page
+sections. When a screen reader announces entering the "main" or
+"complementary" region, users gain an immediate mental model of the page
+layout, clarifying where secondary information sits relative to core
+content.</p>
+<h4 id="3-reducing-skip-link-redundancy">3. Reducing "Skip Link"
+Redundancy</h4>
+<p>While traditional "Skip to Main Content" links remain a best practice
+for sighted keyboard-only navigators, ARIA landmarks inherently provide
+this capability for screen reader users across all labeled sections,
+reducing navigational friction.</p>
+<h3 id="best-practices-for-implementation">Best Practices for
+Implementation</h3>
+<ul>
+<li><strong>Prefer Native Semantic HTML:</strong> Follow the first rule
+of ARIA: use native elements like <code>&lt;main&gt;</code>,
+<code>&lt;nav&gt;</code>, and <code>&lt;header&gt;</code> instead of
+<code>role="main"</code> or <code>role="navigation"</code> on generic
+<code>&lt;div&gt;</code> elements. Native elements have built-in
+landmark roles and broader support.</li>
+<li><strong>Label Duplicate Landmarks:</strong> When using multiple
+landmarks of the same type (such as two <code>&lt;nav&gt;</code>
+elements for primary site links and footer links), distinguish them
+using <code>aria-label</code> or <code>aria-labelledby</code> (e.g.,
+<code>&lt;nav aria-label="Primary Navigation"&gt;</code>).</li>
+<li><strong>Keep Landmark Structure Lean:</strong> Do not wrap every
+layout container in a landmark role. Overusing landmarks clutters the
+navigation list, defeating their purpose as quick navigational reference
+points.</li>
+<li><strong>Ensure All Content is Contained:</strong> Ideally, every
+piece of visible content on a page should reside inside at least one
+top-level landmark to prevent orphan content from being bypassed during
+landmark-based navigation.</li>
+</ul></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/using-aria-landmarks-for-an-accessible-ui';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

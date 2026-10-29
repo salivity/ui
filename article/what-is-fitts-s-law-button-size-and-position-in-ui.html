@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Is Fitts&#39;s Law? Button Size and Position in UI - ui</title>
+    <meta name="description" content="This article explains Fitts’s Law, a foundational principle of human-computer interaction, and demonstrates how it directly influences user interface (UI) design. You will learn the core mathematical concept behind the law, why target size and distance di">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/what-is-fitts-s-law-button-size-and-position-in-ui">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="What Is Fitts&#39;s Law? Button Size and Position in UI - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/what-is-fitts-s-law-button-size-and-position-in-ui" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="This article explains Fitts’s Law, a foundational principle of human-computer interaction, and demonstrates how it directly influences user interface (UI) design. You will learn the core mathematical concept behind the law, why target size and distance di" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="what-is-fittss-law-button-size-and-position-in-ui">What Is
+Fitts's Law? Button Size and Position in UI</h1>
+<p>This article explains Fitts’s Law, a foundational principle of
+human-computer interaction, and demonstrates how it directly influences
+user interface (UI) design. You will learn the core mathematical concept
+behind the law, why target size and distance dictate user efficiency,
+and practical design strategies for sizing and positioning buttons on
+both desktop and mobile interfaces to optimize usability and reduce
+interaction errors.</p>
+<hr />
+<h3 id="what-is-fittss-law">What Is Fitts’s Law?</h3>
+<p>Fitts’s Law is an empirical model of human movement formulated by
+psychologist Paul Fitts in 1954. In the context of user experience and
+interface design, the law states that the time required to rapidly move
+to a target area depends on two variables: the distance to the target
+and the width of the target.</p>
+<p>Mathematically, it is expressed as:</p>
+<p><span class="math display">\[MT = a + b
+\log_2\left(\frac{2D}{W}\right)\]</span></p>
+<ul>
+<li><strong>MT</strong> is the movement time required to complete the
+action.</li>
+<li><strong>a</strong> and <strong>b</strong> are empirical constants
+based on the input device.</li>
+<li><strong>D</strong> is the distance from the starting point to the
+target center.</li>
+<li><strong>W</strong> is the width of the target along the axis of
+motion.</li>
+</ul>
+<p>In simple terms: larger targets closer to the user's starting point
+are faster and easier to click or tap, while smaller, distant targets
+take longer and result in more errors.</p>
+<hr />
+<h3 id="how-fittss-law-dictates-button-size">How Fitts’s Law Dictates
+Button Size</h3>
+<p>Target dimensions determine how easily a user can acquire and
+activate a button. Fitts’s Law provides several clear guidelines for
+button sizing:</p>
+<h4 id="1-minimum-target-sizing">1. Minimum Target Sizing</h4>
+<p>Small buttons demand high motor precision, which slows the user down
+and increases misclicks. Touch interfaces especially require generous
+dimensions to accommodate the variation in human finger sizes (commonly
+referred to as the "fat finger" problem).</p>
+<ul>
+<li><strong>Mobile Guidelines:</strong> Apple’s Human Interface
+Guidelines recommend a minimum hit target of 44×44 points, while
+Google’s Material Design specifies at least 48×48 density-independent
+pixels (dp).</li>
+</ul>
+<h4 id="2-the-law-of-diminishing-returns">2. The Law of Diminishing
+Returns</h4>
+<p>The logarithmic nature of Fitts’s Law means that increasing the size
+of a tiny button yields massive usability improvements, but continually
+expanding an already large button produces negligible performance gains.
+UI designers must scale buttons until they are easily targetable, rather
+than making primary actions arbitrarily massive at the expense of screen
+real estate.</p>
+<h4 id="3-expanding-the-clickable-area-hitbox">3. Expanding the
+Clickable Area (Hitbox)</h4>
+<p>A button's visual boundary does not have to match its functional
+boundary. Designers leverage Fitts’s Law by padding the clickable hitbox
+around text links, icons, and small buttons, effectively increasing
+<span class="math inline">\(W\)</span> without altering the visual
+balance of the layout.</p>
+<hr />
+<h3 id="how-fittss-law-dictates-button-position">How Fitts’s Law
+Dictates Button Position</h3>
+<p>The physical placement of an element determines <span
+class="math inline">\(D\)</span> (distance), heavily influencing
+interaction speed and task flow.</p>
+<h4 id="1-proximity-to-current-cursor-or-finger-location">1. Proximity
+to Current Cursor or Finger Location</h4>
+<p>Buttons should be placed near the content or elements they affect to
+minimize travel distance:</p>
+<ul>
+<li>Form submission buttons should sit directly beneath the final input
+field.</li>
+<li>Context menus should appear immediately at the location of a
+right-click or tap.</li>
+<li>Inline actions (such as edit or delete icons) should remain close to
+their respective data rows.</li>
+</ul>
+<h4 id="2-the-infinite-edges-of-desktop-screens">2. The "Infinite" Edges
+of Desktop Screens</h4>
+<p>On desktop platforms, the borders and corners of the display act as
+physical barriers that stop the cursor from moving further. This
+effectively makes the width (<span class="math inline">\(W\)</span>) of
+an edge or corner target infinite because a user can flick the mouse
+aggressively without overshooting the target.</p>
+<ul>
+<li><strong>Application:</strong> This is why operating systems place
+critical global functions at screen boundaries, such as the Windows
+Start menu (bottom corner) or the macOS menu bar and Apple icon (top
+edge and corner).</li>
+</ul>
+<h4 id="3-mobile-thumb-zones">3. Mobile "Thumb Zones"</h4>
+<p>On mobile devices, screen edges do not act as barriers because
+fingers move through three-dimensional space rather than being pinned to
+a 2D plane. Distance on mobile is governed by the natural reach of the
+user's thumb.</p>
+<ul>
+<li><strong>Application:</strong> Frequently used buttons, primary calls
+to action (CTAs), and navigation bars are placed at the bottom of the
+screen, where travel distance from the resting thumb position is
+minimal. Infrequently used or destructive actions are placed at the top
+corners, maximizing distance to prevent accidental activation.</li>
+</ul>
+<hr />
+<h3 id="applying-fittss-law-to-ui-hierarchy">Applying Fitts's Law to UI
+Hierarchy</h3>
+<p>Fitts's Law allows designers to guide user behavior by manipulating
+speed and difficulty:</p>
+<ul>
+<li><strong>Primary Actions:</strong> Designed with larger widths and
+placed along the natural interaction path to make them fast and
+effortless to execute.</li>
+<li><strong>Secondary Actions:</strong> Designed with smaller hit
+targets or placed slightly further away to establish visual and physical
+hierarchy.</li>
+<li><strong>Destructive Actions:</strong> Actions like "Delete Account"
+or "Discard Changes" are intentionally made smaller or placed far from
+the primary flow, using the friction inherent in Fitts's Law as a
+safeguard against costly mistakes.</li>
+</ul></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/what-is-fitts-s-law-button-size-and-position-in-ui';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

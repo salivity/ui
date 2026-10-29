@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Using CSS Pointer-Events for UI Overlays - ui</title>
+    <meta name="description" content="The CSS pointer-events property provides precise control over how HTML elements respond to mouse, touch, and stylus interactions. In modern overlay UI design—such as modal systems, floating action bars, tooltips, and decorative layer masks—managing clicka">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/using-css-pointer-events-for-ui-overlays">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Using CSS Pointer-Events for UI Overlays - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/using-css-pointer-events-for-ui-overlays" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="The CSS pointer-events property provides precise control over how HTML elements respond to mouse, touch, and stylus interactions. In modern overlay UI design—such as modal systems, floating action bars, tooltips, and decorative layer masks—managing clicka" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="using-css-pointer-events-for-ui-overlays">Using CSS
+Pointer-Events for UI Overlays</h1>
+<p>The CSS <code>pointer-events</code> property provides precise control
+over how HTML elements respond to mouse, touch, and stylus interactions.
+In modern overlay UI design—such as modal systems, floating action bars,
+tooltips, and decorative layer masks—managing clickability across
+overlapping elements is essential. By strategically applying values like
+<code>none</code> and <code>auto</code>, developers can allow user
+inputs to pass through transparent containers to underlying content
+while maintaining full interactivity on specific nested UI
+components.</p>
+<h2 id="the-stacking-problem-in-overlay-layouts">The Stacking Problem in
+Overlay Layouts</h2>
+<p>Modern interfaces frequently rely on full-viewport overlays. A common
+example is a floating notification tray or a modal wrapper placed via
+absolute or fixed positioning:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.overlay-wrapper</span> {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">position</span><span class="ch">:</span> <span class="dv">fixed</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">top</span><span class="ch">:</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">left</span><span class="ch">:</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">width</span><span class="ch">:</span> <span class="dv">100</span><span class="dt">vw</span><span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">height</span><span class="ch">:</span> <span class="dv">100</span><span class="dt">vh</span><span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">z-index</span><span class="ch">:</span> <span class="dv">1000</span><span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Even if the background of <code>.overlay-wrapper</code> is completely
+transparent, its presence in the DOM stacking context creates an
+invisible barrier. Clicks, scrolls, and hover states meant for the page
+beneath the wrapper are intercepted and blocked.</p>
+<h2 id="passing-clicks-through-with-pointer-events-none">Passing Clicks
+Through with <code>pointer-events: none</code></h2>
+<p>Setting <code>pointer-events: none</code> instructs the browser to
+ignore the targeted element during hit-testing. The element becomes
+invisible to pointer interactions:</p>
+<ul>
+<li>Click, double-click, and drag events bypass the layer entirely.</li>
+<li>Hover states (<code>:hover</code>) on the element will not
+trigger.</li>
+<li>Cursor styling (such as <code>cursor: pointer</code>) is
+ignored.</li>
+</ul>
+<p>When applied to an overlay container, user interactions penetrate
+directly to whatever interactive element resides underneath it in the
+z-index stack:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.overlay-wrapper</span> {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">position</span><span class="ch">:</span> <span class="dv">fixed</span><span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">inset</span><span class="ch">:</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">pointer-events</span><span class="ch">:</span> <span class="dv">none</span><span class="op">;</span> <span class="co">/* Passes all clicks to elements below */</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h2 id="restoring-interactivity-with-pointer-events-auto">Restoring
+Interactivity with <code>pointer-events: auto</code></h2>
+<p>Completely disabling pointer events on a parent container is rarely
+the final goal, as overlays usually contain interactive children like
+close buttons, input fields, or dialog cards.</p>
+<p>Child elements inherit the <code>pointer-events</code> value of their
+parent by default, but this can be explicitly overridden by setting
+<code>pointer-events: auto</code> on specific children:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.overlay-wrapper</span> {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">position</span><span class="ch">:</span> <span class="dv">fixed</span><span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">inset</span><span class="ch">:</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">pointer-events</span><span class="ch">:</span> <span class="dv">none</span><span class="op">;</span> <span class="co">/* Layer does not block underlying page */</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">.modal-dialog</span> {</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">pointer-events</span><span class="ch">:</span> <span class="bu">auto</span><span class="op">;</span> <span class="co">/* Clicks on the modal card are captured */</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">.toast-notification</span> {</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">pointer-events</span><span class="ch">:</span> <span class="bu">auto</span><span class="op">;</span> <span class="co">/* Buttons inside the toast remain interactive */</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>This pattern creates a "click-through canvas" where the container
+consumes zero interactive real estate, but the UI elements floating
+inside it remain fully functional.</p>
+<h2 id="common-ui-use-cases">Common UI Use Cases</h2>
+<h3 id="1-heads-up-displays-huds-and-tooltip-layers">1. Heads-Up
+Displays (HUDs) and Tooltip Layers</h3>
+<p>When designing dashboards or canvas-based applications (like maps or
+drawing tools), UI controls often float on top of the main workspace. A
+persistent, full-screen SVG or HTML overlay can house floating controls
+at opposite corners without interfering with pan-and-zoom actions on the
+main canvas in the center.</p>
+<h3 id="2-decorative-gradients-and-vignettes">2. Decorative Gradients
+and Vignettes</h3>
+<p>Designers often place subtle gradient masks, glassmorphism layers, or
+decorative textures over cards or page sections. Applying
+<code>pointer-events: none</code> ensures these visual enhancements
+never prevent users from highlighting text or clicking links positioned
+beneath them.</p>
+<h3 id="3-non-blocking-notification-systems">3. Non-Blocking
+Notification Systems</h3>
+<p>Toast systems placed at the edge of a screen can span wide areas to
+accommodate responsive alignments. By assigning <code>none</code> to the
+toaster container and <code>auto</code> to the individual toast alerts,
+the empty space around notifications remains transparent to clicks.</p>
+<h2
+id="accessibility-and-keyboard-navigation-considerations">Accessibility
+and Keyboard Navigation Considerations</h2>
+<p>While <code>pointer-events: none</code> disables mouse and touch
+input, it does not remove an element from the accessibility tree or
+eliminate keyboard focus:</p>
+<ul>
+<li>Tabbable elements (<code>&lt;button&gt;</code>,
+<code>&lt;a&gt;</code>, <code>&lt;input&gt;</code>) with
+<code>pointer-events: none</code> can still receive focus via the
+<code>Tab</code> key.</li>
+<li>Screen readers will still announce elements with disabled pointer
+events.</li>
+</ul>
+<p>To fully disable an element for both pointer and keyboard users,
+combine <code>pointer-events: none</code> with standard accessibility
+attributes, such as setting <code>tabindex="-1"</code>, adding the
+<code>inert</code> attribute, or applying the <code>disabled</code>
+property on form controls.</p></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/using-css-pointer-events-for-ui-overlays';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

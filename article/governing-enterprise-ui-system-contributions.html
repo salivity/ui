@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Governing Enterprise UI System Contributions - ui</title>
+    <meta name="description" content="Scaling an enterprise UI system requires a structured governance model that balances open community contribution with rigorous quality control. Without clear processes, design systems either become bottlenecks controlled by a siloed core team or fragmente">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/governing-enterprise-ui-system-contributions">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Governing Enterprise UI System Contributions - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/governing-enterprise-ui-system-contributions" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Scaling an enterprise UI system requires a structured governance model that balances open community contribution with rigorous quality control. Without clear processes, design systems either become bottlenecks controlled by a siloed core team or fragmente" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="governing-enterprise-ui-system-contributions">Governing
+Enterprise UI System Contributions</h1>
+<p>Scaling an enterprise UI system requires a structured governance
+model that balances open community contribution with rigorous quality
+control. Without clear processes, design systems either become
+bottlenecks controlled by a siloed core team or fragmented repositories
+cluttered with redundant, low-quality components. Governing community
+contributions effectively involves establishing transparent contribution
+tiers, implementing structured intake workflows, automating quality
+gates, and defining long-term component ownership.</p>
+<h3 id="establish-multi-tiered-component-classifications">Establish
+Multi-Tiered Component Classifications</h3>
+<p>Not every UI element created across an enterprise needs to reside in
+the global system. Implement a tiered architecture to manage scope:</p>
+<ul>
+<li><strong>Local Components:</strong> Built and maintained by specific
+product teams for niche use cases, stored within individual product
+codebases.</li>
+<li><strong>Candidate/Incubator Components:</strong> Solutions shared
+across multiple teams that show potential for wide adoption, housed in a
+shared sandbox or experimental package.</li>
+<li><strong>Core Components:</strong> Fully vetted, universally adopted
+components maintained and supported by the central design system
+team.</li>
+</ul>
+<p>By requiring community contributions to first prove utility within
+the incubator tier, the core system avoids code bloat and premature
+abstraction.</p>
+<h3 id="standardize-the-proposal-and-rfc-process">Standardize the
+Proposal and RFC Process</h3>
+<p>Create a lightweight, transparent intake mechanism using a Request
+for Comments (RFC) process. Before writing code, contributors should
+submit an issue outlining:</p>
+<ul>
+<li>The business use case and target audience.</li>
+<li>Proof that existing components cannot fulfill the requirement.</li>
+<li>Design specs, accessibility considerations, and API proposals.</li>
+</ul>
+<p>Reviewing RFCs in public channels allows other product teams to weigh
+in, identify duplicate efforts early, and ensure the proposal aligns
+with broader enterprise goals.</p>
+<h3 id="define-an-uncompromising-definition-of-done">Define an
+Uncompromising "Definition of Done"</h3>
+<p>Contributions often stall during code review if standards are
+ambiguous. Publish an explicit contribution checklist that every
+submission must meet:</p>
+<ul>
+<li><strong>Accessibility (a11y):</strong> Full compliance with WCAG 2.1
+AA standards, including keyboard navigation, screen reader support, and
+color contrast.</li>
+<li><strong>Design Token Adherence:</strong> Strict usage of enterprise
+design tokens for spacing, typography, colors, and motion, avoiding
+hardcoded values.</li>
+<li><strong>Test Coverage:</strong> Comprehensive unit, integration, and
+visual regression tests that meet or exceed repo thresholds.</li>
+<li><strong>Documentation:</strong> Clear usage guidelines, live code
+examples, and design/engineering handoff specifications.</li>
+</ul>
+<h3 id="automate-governance-through-cicd">Automate Governance Through
+CI/CD</h3>
+<p>Rely on automation rather than manual human review to enforce
+technical standards wherever possible. Integrate the following gates
+into the pull request pipeline:</p>
+<ul>
+<li><strong>Linters and Formatters:</strong> Automatically enforce
+styling and code quality conventions.</li>
+<li><strong>Static Accessibility Checks:</strong> Catch structural
+accessibility violations before manual audit.</li>
+<li><strong>Visual Regression Testing:</strong> Identify unintended side
+effects on existing UI elements.</li>
+<li><strong>Automated Changelogs:</strong> Enforce semantic versioning
+through commit message validation.</li>
+</ul>
+<p>Automating these checks reduces the review burden on core maintainers
+and gives contributors instant, actionable feedback.</p>
+<h3 id="form-a-federated-review-committee">Form a Federated Review
+Committee</h3>
+<p>Distribute governance authority across the organization by
+establishing a federated review model. Rather than relying solely on a
+centralized core team, identify design system champions across different
+business units. These champions act as domain stewards who can review
+proposals, triage pull requests, and ensure their team's domain needs
+are represented. Holding regular, open review sessions demystifies
+decision-making and fosters collective ownership.</p>
+<h3 id="plan-for-long-term-maintenance-and-slas">Plan for Long-Term
+Maintenance and SLAs</h3>
+<p>A major risk of community-contributed code is
+"abandonware"—components contributed to solve an immediate problem, then
+abandoned by their authors. Require contributing teams to commit to a
+support agreement or explicitly transfer ownership to the core team upon
+meeting agreed-upon adoption milestones. Enterprise UI governance must
+clearly stipulate who is responsible for ongoing bug fixes, security
+patches, and version upgrades for every published asset.</p></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/governing-enterprise-ui-system-contributions';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reducing Motion Sickness in Animated UI Components - ui</title>
+    <meta name="description" content="Digital motion sickness, or cybersickness, occurs when visual movement on a screen conflicts with the physical body&#39;s sensory system, often triggered by intense, unexpected, or disorienting user interface animations. This article outlines key strategies t">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/reducing-motion-sickness-in-animated-ui-components">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Reducing Motion Sickness in Animated UI Components - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/reducing-motion-sickness-in-animated-ui-components" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Digital motion sickness, or cybersickness, occurs when visual movement on a screen conflicts with the physical body&#39;s sensory system, often triggered by intense, unexpected, or disorienting user interface animations. This article outlines key strategies t" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="reducing-motion-sickness-in-animated-ui-components">Reducing
+Motion Sickness in Animated UI Components</h1>
+<p>Digital motion sickness, or cybersickness, occurs when visual
+movement on a screen conflicts with the physical body's sensory system,
+often triggered by intense, unexpected, or disorienting user interface
+animations. This article outlines key strategies to eliminate vestibular
+triggers in web and mobile applications, covering core CSS media
+queries, safe animation design principles, spatial constraints, and
+methods to grant users full agency over visual movement.</p>
+<h3 id="respect-the-prefers-reduced-motion-media-query">Respect the
+<code>prefers-reduced-motion</code> Media Query</h3>
+<p>The most effective way to protect users is supporting the
+operating-system-level motion preference. Both CSS and JavaScript allow
+you to detect when a user has requested reduced motion.</p>
+<ul>
+<li><strong>In CSS:</strong> Use the
+<code>@media (prefers-reduced-motion: reduce)</code> rule to disable or
+replace large movements with subtle opacity fades.</li>
+<li><strong>In JavaScript:</strong> Check
+<code>window.matchMedia('(prefers-reduced-motion: reduce)').matches</code>
+before executing complex animation scripts or triggering canvas and
+WebGL loops.</li>
+</ul>
+<h3 id="eliminate-large-scale-and-full-screen-motion">Eliminate
+Large-Scale and Full-Screen Motion</h3>
+<p>Motion sickness is frequently provoked by the percentage of the
+visual field being stimulated (known as "vection").</p>
+<ul>
+<li><strong>Restrict movement to localized elements:</strong> Keep
+animations confined to small UI components like buttons, toggles, or
+drop-down menus rather than moving the entire viewport.</li>
+<li><strong>Avoid aggressive zooming:</strong> Transitioning between
+screens via deep zoom-ins or zoom-outs creates an artificial sense of
+physical velocity. Opt for simple cross-fades instead.</li>
+</ul>
+<h3 id="avoid-parallax-scrolling-and-layered-speed-discrepancies">Avoid
+Parallax Scrolling and Layered Speed Discrepancies</h3>
+<p>Parallax effects force the brain to track multiple background and
+foreground elements traveling at conflicting speeds. This
+visual-vestibular mismatch is one of the leading causes of digital
+dizziness.</p>
+<ul>
+<li>Keep scrolling speeds uniform across all page elements.</li>
+<li>Never hijack the native scroll behavior (avoid "scroll-jacking"), as
+taking control away from the user's manual input severely increases
+disorientation.</li>
+</ul>
+<h3 id="keep-durations-short-and-use-predictable-easing">Keep Durations
+Short and Use Predictable Easing</h3>
+<p>Drawn-out animations force the eyes to track motion over an extended
+period, amplifying discomfort.</p>
+<ul>
+<li><strong>Shorten duration:</strong> Micro-interactions should ideally
+complete within 150 to 300 milliseconds.</li>
+<li><strong>Use natural deceleration:</strong> Sudden stops or rapid,
+unnatural bounces can startle the visual tracking system. Use standard
+easing curves, such as <code>ease-out</code>, to ensure components
+gently settle into place.</li>
+</ul>
+<h3 id="limit-3d-transforms-and-perspective-distortions">Limit 3D
+Transforms and Perspective Distortions</h3>
+<p>Simulating three-dimensional space via rotation along the X or Y axes
+(such as card flips or rotating carousels) tricks the brain into
+perceiving physical depth and rotation where none exists.</p>
+<ul>
+<li>Flatten transitions to 2D space wherever possible.</li>
+<li>If a 3D effect is necessary, avoid rapid rotations or camera-panning
+simulations.</li>
+</ul>
+<h3 id="provide-in-app-controls">Provide In-App Controls</h3>
+<p>Operating-system preferences are a crucial baseline, but applications
+with heavy graphical or animated elements should include dedicated
+in-app toggle switches. This allows users to disable background
+animations, video loops, and dynamic visual transitions directly from
+the interface settings without needing to alter their global device
+configurations.</p></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/reducing-motion-sickness-in-animated-ui-components';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

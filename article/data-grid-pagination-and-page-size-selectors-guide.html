@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Grid Pagination and Page Size Selectors Guide - ui</title>
+    <meta name="description" content="Pagination controls and item-per-page selectors work together in data grid interfaces to manage the display of large datasets by dividing data into discrete, digestible segments. These interface components optimize system performance and enhance usability">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/data-grid-pagination-and-page-size-selectors-guide">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Data Grid Pagination and Page Size Selectors Guide - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/data-grid-pagination-and-page-size-selectors-guide" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Pagination controls and item-per-page selectors work together in data grid interfaces to manage the display of large datasets by dividing data into discrete, digestible segments. These interface components optimize system performance and enhance usability" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="data-grid-pagination-and-page-size-selectors-guide">Data Grid
+Pagination and Page Size Selectors Guide</h1>
+<p>Pagination controls and item-per-page selectors work together in data
+grid interfaces to manage the display of large datasets by dividing data
+into discrete, digestible segments. These interface components optimize
+system performance and enhance usability by preventing browser overload,
+reducing network payload sizes, and giving users precise control over
+how much information they view at a single time.</p>
+<h3 id="the-mechanics-of-data-segmentation">The Mechanics of Data
+Segmentation</h3>
+<p>At the core of data grid pagination is a mathematical relationship
+between the total number of records, the page size (items per page), and
+the current active page. The system calculates the total page count
+using the formula:</p>
+<p><code>Total Pages = Math.ceil(Total Records / Items Per Page)</code></p>
+<p>When a user navigates between pages or alters the visible item count,
+the interface triggers an update to the viewport. This happens through
+either client-side or server-side execution:</p>
+<ul>
+<li><strong>Client-Side Pagination:</strong> The browser fetches the
+entire dataset up front. The UI slices the in-memory array based on the
+active page index and selected page size. This results in instant page
+switching but causes high initial load times and high memory usage for
+large datasets.</li>
+<li><strong>Server-Side Pagination:</strong> The browser requests only
+the current slice of data from an API using parameters like
+<code>page</code> and <code>limit</code> (offset-based) or a
+<code>cursor</code> token. The server performs the database query,
+calculates metadata (total count, current page), and returns only the
+requested records. This keeps network payloads small and optimizes
+rendering performance.</li>
+</ul>
+<h3 id="how-pagination-controls-function">How Pagination Controls
+Function</h3>
+<p>Pagination controls provide navigation pathways across the segmented
+dataset. Standard data grid implementations typically feature:</p>
+<ul>
+<li><strong>Sequential Buttons (Next / Previous):</strong> Increments or
+decrements the current page value by one. These buttons disable
+automatically when reaching the boundary conditions (first or last
+page).</li>
+<li><strong>Boundary Buttons (First / Last):</strong> Instantly shifts
+the view to page <code>1</code> or the calculated maximum page, allowing
+users to skip long navigation sequences.</li>
+<li><strong>Direct Page Selectors:</strong> Displays numerical buttons
+representing individual pages. When the total page count is high, grids
+use truncation (ellipses) to display a sliding window around the active
+page (e.g., <code>1 ... 4, [5], 6 ... 40</code>).</li>
+<li><strong>Jump-to-Page Input:</strong> An optional numeric input field
+allowing users to type a specific page number directly, useful for
+datasets with hundreds of pages.</li>
+<li><strong>Status Indicators:</strong> Textual metadata—such as
+"Showing 21–40 of 1,250 items"—providing immediate spatial context
+within the entire dataset.</li>
+</ul>
+<h3 id="how-item-per-page-selectors-function">How Item-Per-Page
+Selectors Function</h3>
+<p>The item-per-page selector is typically a dropdown menu offering
+standard intervals (e.g., 10, 25, 50, 100). When a user selects a new
+value, the data grid recalculates the display parameters:</p>
+<ol type="1">
+<li><strong>Recalculating Total Pages:</strong> Doubling the page size
+halves the total number of pages.</li>
+<li><strong>Preventing Out-of-Bounds Errors:</strong> If a user is on
+page 10 showing 10 items per page (totaling 100 items), and changes the
+selector to 50 items per page, the new total page count drops to 2. If
+the grid remained on page 10, it would display an empty state or
+crash.</li>
+<li><strong>State Reset:</strong> To avoid out-of-bounds states, grids
+typically reset the view to page <code>1</code> upon changing the
+item-per-page selector, or calculate the first visible record’s index
+and navigate to the new page containing that specific record.</li>
+</ol>
+<h3 id="state-persistence-and-performance">State Persistence and
+Performance</h3>
+<p>Properly functioning data grids maintain state synchronization across
+multiple user actions. If filtering or sorting is applied, the grid
+resets to the first page because the total record count and data
+sequence change. Additionally, modern data grids persist pagination
+settings via URL query parameters (e.g.,
+<code>?page=2&amp;limit=50</code>), ensuring that refreshing the page,
+using browser history buttons, or sharing links preserves the user's
+exact view.</p></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/data-grid-pagination-and-page-size-selectors-guide';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

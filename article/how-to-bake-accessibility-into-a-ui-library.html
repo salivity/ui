@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Bake Accessibility Into a UI Library - ui</title>
+    <meta name="description" content="Baking accessibility directly into a UI component library ensures that every application consuming your components inherits robust accessibility features by default. This guide outlines how to build an accessible design system from the foundation up by co">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/how-to-bake-accessibility-into-a-ui-library">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How to Bake Accessibility Into a UI Library - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/how-to-bake-accessibility-into-a-ui-library" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Baking accessibility directly into a UI component library ensures that every application consuming your components inherits robust accessibility features by default. This guide outlines how to build an accessible design system from the foundation up by co" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="how-to-bake-accessibility-into-a-ui-library">How to Bake
+Accessibility Into a UI Library</h1>
+<p>Baking accessibility directly into a UI component library ensures
+that every application consuming your components inherits robust
+accessibility features by default. This guide outlines how to build an
+accessible design system from the foundation up by combining semantic
+markup, robust keyboard interactions, strict API contracts, automated
+testing, and comprehensive token design.</p>
+<h2 id="1-prioritize-native-semantic-html">1. Prioritize Native Semantic
+HTML</h2>
+<p>The most effective accessibility strategy is relying on native HTML
+elements. Native elements such as <code>&lt;button&gt;</code>,
+<code>&lt;input&gt;</code>, <code>&lt;dialog&gt;</code>, and
+<code>&lt;select&gt;</code> come with built-in accessibility semantics,
+focus handling, and keyboard events that browsers have optimized for
+decades.</p>
+<ul>
+<li>Avoid replacing interactive elements with generic
+<code>&lt;div&gt;</code> or <code>&lt;span&gt;</code> tags.</li>
+<li>When wrapping native inputs, expose all standard HTML attributes
+through component props to prevent stripping default behavior.</li>
+<li>Use appropriate landmark elements (<code>&lt;nav&gt;</code>,
+<code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>,
+<code>&lt;aside&gt;</code>, <code>&lt;footer&gt;</code>) to establish
+clear page regions.</li>
+</ul>
+<h2 id="2-leverage-headless-component-primitives">2. Leverage Headless
+Component Primitives</h2>
+<p>For complex components like accordions, comboboxes, and modal
+dialogs, implementing WAI-ARIA authoring practices from scratch is prone
+to errors. Building base components on top of unstyled, headless
+primitives guarantees compliant keyboard navigation, ARIA attributes,
+and state management out of the box.</p>
+<ul>
+<li>Utilize libraries such as Radix UI, React Aria, or Ark UI as the
+functional core of your components.</li>
+<li>Headless primitives handle state transitions, roving tab indices,
+dynamic <code>aria-expanded</code> attributes, and focus traps
+automatically.</li>
+<li>Your design system team can then focus entirely on styling,
+branding, and team-specific API ergonomics.</li>
+</ul>
+<h2 id="3-enforce-strict-api-contracts-with-typescript">3. Enforce
+Strict API Contracts with TypeScript</h2>
+<p>Design component APIs that guide developers toward accessible
+patterns while preventing inaccessible patterns at compile time.</p>
+<ul>
+<li><strong>Mandatory Accessible Names:</strong> If an icon button
+component has no visible text, make an <code>aria-label</code> or
+<code>aria-labelledby</code> prop required via TypeScript types.</li>
+<li><strong>Paired Attributes:</strong> If a component requires an
+identifier for accessibility—such as pairing an
+<code>&lt;input&gt;</code> with an error message using
+<code>aria-describedby</code>—structure the component so these
+connections happen automatically behind the scenes.</li>
+<li><strong>Component Composition:</strong> Group related sub-components
+(such as <code>Select</code>, <code>SelectTrigger</code>, and
+<code>SelectList</code>) in ways that inherently manage parent-child
+ARIA associations.</li>
+</ul>
+<h2 id="4-build-accessible-design-tokens">4. Build Accessible Design
+Tokens</h2>
+<p>Accessibility begins at the token level before code is ever written.
+Ensure your global styles enforce accessibility standards uniformly.</p>
+<ul>
+<li><strong>Contrast Tokens:</strong> Set text and background color
+pairs that satisfy WCAG 2.1 AA contrast requirements (minimum 4.5:1 for
+standard text, 3:1 for large text and UI controls).</li>
+<li><strong>Focus Indicators:</strong> Define standard focus ring tokens
+that use visible contrast against all background variations, avoiding
+<code>outline: none</code> without providing an immediate
+<code>:focus-visible</code> alternative.</li>
+<li><strong>Motion Tokens:</strong> Respect system-level user
+preferences by tying animation tokens to the
+<code>prefers-reduced-motion</code> media query.</li>
+</ul>
+<h2 id="5-standardize-focus-management-and-keyboard-navigation">5.
+Standardize Focus Management and Keyboard Navigation</h2>
+<p>Keyboard usability is essential for users of screen readers, switch
+devices, and keyboard navigation.</p>
+<ul>
+<li><strong>Sequential Navigation:</strong> Ensure all interactive
+elements receive focus in a logical reading order.</li>
+<li><strong>Focus Trapping:</strong> Modal dialogs, drawers, and
+full-screen overlays must trap keyboard focus within their boundaries
+until dismissed, restoring focus to the triggering element upon
+closure.</li>
+<li><strong>Shortcuts and Keys:</strong> Implement expected standard key
+behaviors (e.g., <code>Escape</code> closes overlays, arrow keys
+navigate menus and tab lists, <code>Enter</code> or <code>Space</code>
+activates controls).</li>
+</ul>
+<h2 id="6-automate-accessibility-testing-in-cicd">6. Automate
+Accessibility Testing in CI/CD</h2>
+<p>Prevent accessibility regressions by integrating automated audits
+directly into development and deployment pipelines.</p>
+<ul>
+<li><strong>Linting:</strong> Use <code>eslint-plugin-jsx-a11y</code> or
+framework equivalents to catch syntax-level accessibility errors during
+development.</li>
+<li><strong>Unit Testing:</strong> Incorporate automated engine tests
+using <code>jest-axe</code> or <code>@axe-core/playwright</code> to test
+component outputs for missing attributes and contrast issues.</li>
+<li><strong>Storybook Audits:</strong> Run the
+<code>@storybook/addon-a11y</code> addon on every component story to
+provide real-time compliance feedback to UI developers.</li>
+<li><strong>Screen Reader Verification:</strong> Regularly test core
+base components manually using real assistive technologies such as NVDA,
+JAWS, and VoiceOver.</li>
+</ul></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/how-to-bake-accessibility-into-a-ui-library';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

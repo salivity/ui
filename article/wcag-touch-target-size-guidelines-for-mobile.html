@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WCAG Touch Target Size Guidelines for Mobile - ui</title>
+    <meta name="description" content="Designing accessible mobile interfaces requires interactive elements to be large enough for users to activate reliably, especially those with motor impairments, tremors, or large fingers. This guide breaks down the official Web Content Accessibility Guide">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/wcag-touch-target-size-guidelines-for-mobile">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="WCAG Touch Target Size Guidelines for Mobile - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/wcag-touch-target-size-guidelines-for-mobile" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Designing accessible mobile interfaces requires interactive elements to be large enough for users to activate reliably, especially those with motor impairments, tremors, or large fingers. This guide breaks down the official Web Content Accessibility Guide" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="wcag-touch-target-size-guidelines-for-mobile">WCAG Touch Target
+Size Guidelines for Mobile</h1>
+<p>Designing accessible mobile interfaces requires interactive elements
+to be large enough for users to activate reliably, especially those with
+motor impairments, tremors, or large fingers. This guide breaks down the
+official Web Content Accessibility Guidelines (WCAG) requirements for
+touch target sizes, focusing on the differences between Level AA and
+Level AAA criteria, their exceptions, and practical implementation
+standards for mobile UI.</p>
+<h2 id="wcag-22-criterion-258-target-size-minimum-level-aa">WCAG 2.2
+Criterion 2.5.8: Target Size (Minimum) (Level AA)</h2>
+<p>Introduced in WCAG 2.2, Success Criterion 2.5.8 requires that
+interactive targets have a minimum size of <strong>24 by 24 CSS
+pixels</strong>, or provide sufficient spacing around them.</p>
+<p>This requirement is satisfied if:</p>
+<ul>
+<li><strong>Size:</strong> The target itself is at least 24 by 24 CSS
+pixels.</li>
+<li><strong>Spacing:</strong> If a target is smaller than 24 by 24 CSS
+pixels, an undersized target is acceptable if the perimeter of its touch
+area, combined with the distance to adjacent interactive targets,
+creates an unobstructed circle with a diameter of at least 24 CSS pixels
+centered on the target.</li>
+</ul>
+<h3 id="exceptions-to-sc-258">Exceptions to SC 2.5.8:</h3>
+<ul>
+<li><strong>Inline Elements:</strong> The target is within a sentence or
+text block (such as an inline hyperlink).</li>
+<li><strong>User Agent Control:</strong> The target's size is determined
+strictly by the browser without author modification (such as default
+HTML form controls).</li>
+<li><strong>Essential:</strong> A particular presentation of the target
+is essential to the information being conveyed (such as pins on a
+digital map).</li>
+<li><strong>Equivalent:</strong> An alternative control on the same page
+achieves the exact same action and meets the target size
+requirement.</li>
+</ul>
+<hr />
+<h2 id="wcag-21-criterion-255-target-size-level-aaa">WCAG 2.1 Criterion
+2.5.5: Target Size (Level AAA)</h2>
+<p>Success Criterion 2.5.5 is a stricter, Level AAA standard requiring
+targets to be at least <strong>44 by 44 CSS pixels</strong>. Unlike
+Level AA, Level AAA does not permit spacing offsets to compensate for a
+target smaller than 44 by 44 pixels.</p>
+<h3 id="exceptions-to-sc-255">Exceptions to SC 2.5.5:</h3>
+<ul>
+<li><strong>Equivalent:</strong> An alternative control on the same
+screen performs the same function and meets the 44 by 44 CSS pixel
+requirement.</li>
+<li><strong>Inline:</strong> The target is contained within a body of
+text.</li>
+<li><strong>User Agent Control:</strong> The target's visual appearance
+and size are controlled entirely by the platform or browser.</li>
+<li><strong>Essential:</strong> The specific size is legally required or
+critical to the function (e.g., standard piano keys on a mobile
+screen).</li>
+</ul>
+<hr />
+<h2 id="platform-conventions-vs-wcag-standards">Platform Conventions vs.
+WCAG Standards</h2>
+<p>While WCAG defines baseline legal accessibility standards, major
+mobile operating system guidelines set higher design baselines:</p>
+<ul>
+<li><strong>Apple Human Interface Guidelines (iOS):</strong> Recommends
+minimum touch targets of <strong>44 by 44 points</strong>.</li>
+<li><strong>Google Material Design (Android):</strong> Recommends touch
+targets of at least <strong>48 by 48 density-independent pixels
+(dp)</strong>.</li>
+</ul>
+<p>Adhering to platform standards ensures automatic compliance with WCAG
+Level AA (24x24 px) and effectively meets or exceeds WCAG Level AAA
+(44x44 px).</p>
+<hr />
+<h2 id="best-practices-for-mobile-implementation">Best Practices for
+Mobile Implementation</h2>
+<ul>
+<li><strong>Expand Hit Areas with Padding:</strong> Visual icons can
+remain small (e.g., a 16px close icon) while using CSS padding or
+transparent tap areas to extend the clickable hit target to 44px or
+48px.</li>
+<li><strong>Maintain Target Separation:</strong> Ensure adjacent
+interactive components (like list items, icons in toolbars, or
+pagination dots) have sufficient margins to prevent accidental
+activation.</li>
+<li><strong>Account for Viewport Scaling:</strong> Because CSS pixels
+are relative to the viewport, test touch targets across multiple
+physical screen densities to verify physical accessibility.</li>
+</ul></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/wcag-touch-target-size-guidelines-for-mobile';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

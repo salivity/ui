@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Required Field Accessibility Requirements in UI - ui</title>
+    <meta name="description" content="Making required form fields accessible ensures that all users, including people who rely on screen readers, screen magnifiers, or have cognitive disabilities, can easily identify mandatory inputs before submitting a form. Meeting accessibility standards f">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/required-field-accessibility-requirements-in-ui">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Required Field Accessibility Requirements in UI - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/required-field-accessibility-requirements-in-ui" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Making required form fields accessible ensures that all users, including people who rely on screen readers, screen magnifiers, or have cognitive disabilities, can easily identify mandatory inputs before submitting a form. Meeting accessibility standards f" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="required-field-accessibility-requirements-in-ui">Required Field
+Accessibility Requirements in UI</h1>
+<p>Making required form fields accessible ensures that all users,
+including people who rely on screen readers, screen magnifiers, or have
+cognitive disabilities, can easily identify mandatory inputs before
+submitting a form. Meeting accessibility standards for required fields
+involves combining clear visual indicators, semantic HTML, proper ARIA
+attributes, sufficient color contrast, and effective error handling in
+accordance with the Web Content Accessibility Guidelines (WCAG).</p>
+<h2 id="1-clear-visual-indicators">1. Clear Visual Indicators</h2>
+<p>Every mandatory field must visually communicate that it is required
+before the user attempts to interact with or submit the form.</p>
+<ul>
+<li><strong>Use Text or Recognizable Symbols:</strong> Provide the word
+"(required)" or a universally recognized symbol like an asterisk
+(<code>*</code>) adjacent to the field's label.</li>
+<li><strong>Provide an Explanatory Legend:</strong> If using an asterisk
+or other icon, place an explanatory note at the beginning of the form
+(e.g., "* indicates a required field") so users know what the symbol
+means before filling out inputs.</li>
+<li><strong>Proximity:</strong> Position the indicator directly next to
+or inside the text of the <code>&lt;label&gt;</code> element so it
+remains visible when a user zooms in or uses a screen magnifier.</li>
+</ul>
+<h2 id="2-do-not-rely-on-color-alone-wcag-141">2. Do Not Rely on Color
+Alone (WCAG 1.4.1)</h2>
+<p>Color cannot be the sole method used to distinguish required fields
+from optional ones. Highlighting a field boundary in red or displaying
+the label text in a different color without an accompanying text
+indicator or icon fails accessibility standards for users with color
+vision deficiencies or low vision. Always pair color changes with text,
+icons, or geometric shapes.</p>
+<h2 id="3-contrast-ratios-wcag-143--1411">3. Contrast Ratios (WCAG 1.4.3
+&amp; 1.4.11)</h2>
+<p>Visual indicators must meet minimum contrast requirements against
+their background:</p>
+<ul>
+<li><strong>Text and Symbols:</strong> An asterisk or text indicator
+must have a contrast ratio of at least 4.5:1 against its background (or
+3:1 for large text).</li>
+<li><strong>UI Components:</strong> Any custom borders, icons, or
+graphical elements used to indicate required status must maintain at
+least a 3:1 contrast ratio against adjacent colors.</li>
+</ul>
+<h2 id="4-programmatic-identification">4. Programmatic
+Identification</h2>
+<p>Assistive technologies, such as screen readers, need programmatic
+indicators to announce that a field is mandatory.</p>
+<ul>
+<li><strong>Native HTML Attribute:</strong> Use the native HTML
+<code>required</code> attribute on <code>&lt;input&gt;</code>,
+<code>&lt;select&gt;</code>, and <code>&lt;textarea&gt;</code> elements.
+Modern screen readers will automatically announce the field as
+required.</li>
+<li><strong>ARIA Equivalent:</strong> For custom controls that do not
+support native HTML attributes, use
+<code>aria-required="true"</code>.</li>
+<li><strong>Managing Redundant Announcements:</strong> When using an
+asterisk alongside the <code>required</code> attribute, screen readers
+might announce both "asterisk" and "required." To prevent repetitive
+speech, wrap visual-only asterisks in a <code>&lt;span&gt;</code> with
+<code>aria-hidden="true"</code>, ensuring the screen reader relies
+exclusively on the programmatic <code>required</code> property.</li>
+</ul>
+<h2 id="5-label-association">5. Label Association</h2>
+<p>Visual and programmatic indicators must be associated directly with
+the form control:</p>
+<ul>
+<li>Nest the indicator inside the <code>&lt;label&gt;</code> element, or
+ensure it is referenced correctly using the <code>for</code> and
+<code>id</code> attributes.</li>
+<li>Avoid placing required field indicators outside the label structure,
+which can cause screen readers in virtual cursor mode to skip the
+indicator when navigating form controls.</li>
+</ul>
+<h2 id="6-accessible-error-validation-wcag-331--332">6. Accessible Error
+Validation (WCAG 3.3.1 &amp; 3.3.2)</h2>
+<p>If a user submits a form without completing a required field, the
+system must provide accessible feedback:</p>
+<ul>
+<li><strong>Identify Missing Fields in Text:</strong> Clearly describe
+which required field was missed using text (e.g., "Error: Email address
+is required").</li>
+<li><strong>Connect Errors Programmatically:</strong> Associate the
+error message with the input using <code>aria-describedby</code> so the
+screen reader reads the error upon focus.</li>
+<li><strong>Focus Management:</strong> Move focus to the first invalid
+field or provide an error summary at the top of the form with anchor
+links directly navigating to each incomplete required field.</li>
+</ul></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/required-field-accessibility-requirements-in-ui';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

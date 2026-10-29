@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Font Loading for Non-Latin UI Fonts - ui</title>
+    <meta name="description" content="This article explores how dynamic font loading techniques enable web and mobile applications to efficiently render non-Latin scripts—such as Chinese, Japanese, Korean, Arabic, and Devanagari—without degrading interface performance. By shifting away from m">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/dynamic-font-loading-for-non-latin-ui-fonts">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Dynamic Font Loading for Non-Latin UI Fonts - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/dynamic-font-loading-for-non-latin-ui-fonts" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="This article explores how dynamic font loading techniques enable web and mobile applications to efficiently render non-Latin scripts—such as Chinese, Japanese, Korean, Arabic, and Devanagari—without degrading interface performance. By shifting away from m" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="dynamic-font-loading-for-non-latin-ui-fonts">Dynamic Font
+Loading for Non-Latin UI Fonts</h1>
+<p>This article explores how dynamic font loading techniques enable web
+and mobile applications to efficiently render non-Latin scripts—such as
+Chinese, Japanese, Korean, Arabic, and Devanagari—without degrading
+interface performance. By shifting away from monolithic font downloads
+toward intelligent subsetting, browser-level APIs, and on-demand glyph
+streaming, international user interfaces can achieve rapid render times,
+preserve bandwidth, and maintain visual consistency across diverse
+languages.</p>
+<h2 id="the-challenge-of-non-latin-character-sets">The Challenge of
+Non-Latin Character Sets</h2>
+<p>Western Latin fonts typically contain a few hundred glyphs, resulting
+in file sizes between 20 KB and 100 KB. In contrast, East Asian (CJK)
+scripts require thousands of ideographs to display basic UI copy,
+pushing font files to anywhere from 5 MB to 30 MB. Other scripts, such
+as Arabic, require complex contextual shaping and ligatures, while Indic
+scripts feature intricate conjunct consonants.</p>
+<p>Downloading multi-megabyte files over mobile networks causes severe
+UI issues:</p>
+<ul>
+<li><strong>Flash of Invisible Text (FOIT):</strong> The browser delays
+text rendering while waiting for the font asset to load, leaving users
+with blank screens.</li>
+<li><strong>Flash of Unstyled Text (FOUT):</strong> The UI falls back to
+mismatched system fonts, often causing severe layout shifts (Cumulative
+Layout Shift) due to varying glyph metrics.</li>
+<li><strong>Bandwidth Waste:</strong> Users download thousands of glyphs
+that may never appear in their active session.</li>
+</ul>
+<h2 id="unicode-range-subsetting">Unicode-Range Subsetting</h2>
+<p>Dynamic loading primarily relies on the CSS <code>@font-face</code>
+descriptor <code>unicode-range</code>. This property splits a massive
+font family into dozens or hundreds of micro-subsets categorized by
+specific character codes.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">@font-face</span> {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">font-family</span><span class="ch">:</span> <span class="st">&#39;GlobalUI&#39;</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">src</span><span class="ch">:</span> <span class="fu">url(</span><span class="st">&#39;/fonts/cjk-core-chunk1.woff2&#39;</span><span class="fu">)</span> <span class="fu">format(</span><span class="st">&#39;woff2&#39;</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">unicode-range</span><span class="ch">:</span> <span class="dv">U+4E00-4FFF</span><span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">font-display</span><span class="ch">:</span> <span class="dv">swap</span><span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">@font-face</span> {</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">font-family</span><span class="ch">:</span> <span class="st">&#39;GlobalUI&#39;</span><span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">src</span><span class="ch">:</span> <span class="fu">url(</span><span class="st">&#39;/fonts/cjk-core-chunk2.woff2&#39;</span><span class="fu">)</span> <span class="fu">format(</span><span class="st">&#39;woff2&#39;</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">unicode-range</span><span class="ch">:</span> <span class="dv">U+5000-51FF</span><span class="op">;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">font-display</span><span class="ch">:</span> <span class="dv">swap</span><span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>When an international user views a page, the browser parses the text
+nodes on screen, matches the characters against the declared
+<code>unicode-range</code> definitions, and initiates network requests
+only for the subsets containing those specific characters. Unused
+subsets are never downloaded.</p>
+<h2 id="using-the-css-font-loading-api">Using the CSS Font Loading
+API</h2>
+<p>For interfaces where content dynamically changes—such as chat
+platforms, localization toggles, or multilingual user feeds—programmatic
+loading through the CSS Font Loading API provides granular control.</p>
+<p>Instead of declaring static CSS rules for every locale, JavaScript
+checks the current interface language or scans incoming text strings,
+loading target scripts on demand:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> <span class="kw">function</span> <span class="fu">loadLocalizedFont</span>(fontName<span class="op">,</span> fontUrl<span class="op">,</span> testString) {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Check if the font or characters are already available</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="op">!</span><span class="bu">document</span><span class="op">.</span><span class="at">fonts</span><span class="op">.</span><span class="fu">check</span>(<span class="vs">`16px </span><span class="sc">${</span>fontName<span class="sc">}</span><span class="vs">`</span><span class="op">,</span> testString)) {</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> customFont <span class="op">=</span> <span class="kw">new</span> <span class="bu">FontFace</span>(fontName<span class="op">,</span> <span class="vs">`url(</span><span class="sc">${</span>fontUrl<span class="sc">}</span><span class="vs">)`</span>)<span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> customFont<span class="op">.</span><span class="fu">load</span>()<span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">document</span><span class="op">.</span><span class="at">fonts</span><span class="op">.</span><span class="fu">add</span>(customFont)<span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">document</span><span class="op">.</span><span class="at">documentElement</span><span class="op">.</span><span class="at">classList</span><span class="op">.</span><span class="fu">add</span>(<span class="vs">`</span><span class="sc">${</span>fontName<span class="sc">}</span><span class="vs">-loaded`</span>)<span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>This prevents the browser from fetching Arabic or Thai fonts until a
+user explicitly switches languages or loads content containing those
+scripts.</p>
+<h2 id="progressive-font-enrichment-pfe">Progressive Font Enrichment
+(PFE)</h2>
+<p>The W3C is standardizing Progressive Font Enrichment to address the
+limitations of static unicode-range partitioning. PFE allows the client
+and server to negotiate font requirements interactively.</p>
+<ol type="1">
+<li>The browser requests an initial base font containing basic metrics
+and high-frequency characters.</li>
+<li>As new non-Latin glyphs appear in the UI, the browser sends a
+compact request containing the exact missing character IDs.</li>
+<li>The server patches the client's existing in-memory font file with
+only the requested glyph outlines, eliminating the need to download
+pre-split chunks.</li>
+</ol>
+<p>This method delivers non-Latin typography with payload sizes
+comparable to standard Latin fonts.</p>
+<h2 id="best-practices-for-multilingual-ui-rendering">Best Practices for
+Multilingual UI Rendering</h2>
+<ul>
+<li><strong>Define System Font Fallbacks:</strong> Match x-heights and
+fallback metrics with <code>size-adjust</code>,
+<code>ascent-override</code>, and <code>descent-override</code> to
+minimize layout shifts when dynamic non-Latin fonts load.</li>
+<li><strong>Configure <code>font-display: swap</code>:</strong> Ensure
+critical non-Latin content is readable immediately using fallback system
+fonts, upgrading to the custom typeface once downloaded.</li>
+<li><strong>Leverage the <code>lang</code> Attribute:</strong> Tag HTML
+elements with accurate language tags (<code>lang="ja"</code>,
+<code>lang="ar"</code>). Browsers use these tags to choose appropriate
+system fallbacks and apply correct script-specific shaping rules before
+dynamic web fonts complete loading.</li>
+<li><strong>Cache Aggressively:</strong> Implement long cache lifespans
+(<code>Cache-Control: immutable</code>) alongside Service Workers to
+persist dynamically loaded font chunks locally across user
+sessions.</li>
+</ul></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/dynamic-font-loading-for-non-latin-ui-fonts';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

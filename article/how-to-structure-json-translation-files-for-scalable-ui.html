@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Structure JSON Translation Files for Scalable UI - ui</title>
+    <meta name="description" content="Structuring JSON translation files properly is essential for building internationalized (i18n) applications that scale without degrading performance or developer experience. Poorly organized localization files lead to duplicated strings, bloated bundles,">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/how-to-structure-json-translation-files-for-scalable-ui">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How to Structure JSON Translation Files for Scalable UI - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/how-to-structure-json-translation-files-for-scalable-ui" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Structuring JSON translation files properly is essential for building internationalized (i18n) applications that scale without degrading performance or developer experience. Poorly organized localization files lead to duplicated strings, bloated bundles," />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="how-to-structure-json-translation-files-for-scalable-ui">How to
+Structure JSON Translation Files for Scalable UI</h1>
+<p>Structuring JSON translation files properly is essential for building
+internationalized (i18n) applications that scale without degrading
+performance or developer experience. Poorly organized localization files
+lead to duplicated strings, bloated bundles, merge conflicts, and
+translation errors. This guide outlines the best practices for
+structuring, naming, and managing JSON translation files to support
+clean codebases, seamless localization workflows, and fast UI rendering
+as your application grows.</p>
+<h3 id="1-organize-by-feature-or-page-not-by-ui-element">1. Organize by
+Feature or Page, Not by UI Element</h3>
+<p>Organizing keys around components like <code>buttons.json</code> or
+<code>headers.json</code> quickly causes confusion and duplication.
+Instead, group your translations by domain, feature, or page, with a
+dedicated namespace for shared UI elements:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;common&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;save&quot;</span><span class="fu">:</span> <span class="st">&quot;Save&quot;</span><span class="fu">,</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;cancel&quot;</span><span class="fu">:</span> <span class="st">&quot;Cancel&quot;</span><span class="fu">,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;loading&quot;</span><span class="fu">:</span> <span class="st">&quot;Loading...&quot;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;auth&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;login&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;title&quot;</span><span class="fu">:</span> <span class="st">&quot;Log in to your account&quot;</span><span class="fu">,</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;submit_button&quot;</span><span class="fu">:</span> <span class="st">&quot;Sign In&quot;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;dashboard&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;welcome_message&quot;</span><span class="fu">:</span> <span class="st">&quot;Welcome back, {userName}!&quot;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p>This structure makes it immediately obvious where a string belongs
+and limits the blast radius of changes to specific application
+views.</p>
+<h3 id="2-limit-nesting-to-two-or-three-levels">2. Limit Nesting to Two
+or Three Levels</h3>
+<p>While nesting provides organizational hierarchy, deeply nested JSON
+objects create brittle access paths (e.g.,
+<code>t('pages.settings.security.two_factor.modal.buttons.confirm')</code>)
+and increase the risk of missing-key bugs.</p>
+<p>Keep depth shallow:</p>
+<ul>
+<li><strong>Level 1:</strong> Feature or Namespace
+(<code>settings</code>)</li>
+<li><strong>Level 2:</strong> Sub-feature or Component
+(<code>two_factor</code>)</li>
+<li><strong>Level 3:</strong> Specific Element or State
+(<code>confirm_button</code>)</li>
+</ul>
+<p>Flat keys with dot notation (e.g.,
+<code>"settings.two_factor.confirm_button": "Confirm"</code>) are also
+widely supported by modern i18n libraries and reduce payload parsing
+overhead.</p>
+<h3 id="3-establish-strict-key-naming-conventions">3. Establish Strict
+Key Naming Conventions</h3>
+<p>Define a clear naming syntax across all development teams. Keys
+should describe their semantic function and context, not their current
+English text value.</p>
+<ul>
+<li><strong>Pattern:</strong>
+<code>[context]_[element_type]_[action/state]</code></li>
+<li><strong>Examples:</strong>
+<ul>
+<li><code>checkout_button_pay_now</code> (Clear)</li>
+<li><code>pay_now</code> (Too vague)</li>
+<li><code>button1</code> (Non-descriptive)</li>
+</ul></li>
+</ul>
+<p>Choose one casing style—such as <code>snake_case</code> or
+<code>camelCase</code>—and enforce it consistently across all
+translation files.</p>
+<h3 id="4-split-monolithic-files-into-namespaces">4. Split Monolithic
+Files into Namespaces</h3>
+<p>Shipping a single, massive <code>en.json</code> file forces the
+client to download unused translations for the entire application on the
+initial page load. Split your translations into modular namespace
+files:</p>
+<pre class="text"><code>locales/
+├── en/
+│   ├── common.json
+│   ├── auth.json
+│   └── dashboard.json
+└── es/
+    ├── common.json
+    ├── auth.json
+    └── dashboard.json</code></pre>
+<p>Modern frameworks (such as Next.js, React, or Vue) can lazy-load
+these chunks on demand based on the active route, reducing initial
+bundle sizes significantly.</p>
+<h3 id="5-use-icu-messageformat-for-plurals-and-variables">5. Use ICU
+MessageFormat for Plurals and Variables</h3>
+<p>Avoid string concatenation or custom logic to handle dynamic data and
+pluralization. Different languages have complex pluralization rules that
+do not match English. Use industry standards like ICU MessageFormat:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;cart&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;item_count&quot;</span><span class="fu">:</span> <span class="st">&quot;{count, plural, =0 {Your cart is empty} one {# item in your cart} other {# items in your cart}}&quot;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p>This delegates pluralization, gender agreements, and number
+formatting to your i18n library, preventing translation bugs in
+non-English locales.</p>
+<h3 id="6-automate-linting-and-key-synchronization">6. Automate Linting
+and Key Synchronization</h3>
+<p>As your codebase scales, manual maintenance of translation files
+becomes unsustainable. Integrate automated tools into your CI/CD
+pipeline:</p>
+<ul>
+<li><strong>Key Parity Checkers:</strong> Verify that all locale files
+(<code>fr.json</code>, <code>de.json</code>) contain the exact same keys
+present in your source locale (<code>en.json</code>).</li>
+<li><strong>Unused Key Detectors:</strong> Scan the codebase to identify
+and purge obsolete translation keys.</li>
+<li><strong>JSON Schema Validation:</strong> Enforce proper syntax and
+structure before changes merge to production.</li>
+</ul></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/how-to-structure-json-translation-files-for-scalable-ui';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

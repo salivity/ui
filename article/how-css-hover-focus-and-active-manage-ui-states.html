@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How CSS Hover, Focus, and Active Manage UI States - ui</title>
+    <meta name="description" content="CSS pseudo-classes like :hover, :focus, and :active provide a declarative way to update the appearance of interface elements based on user interaction. By hooking directly into browser events without JavaScript, these dynamic pseudo-classes inform users o">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/how-css-hover-focus-and-active-manage-ui-states">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How CSS Hover, Focus, and Active Manage UI States - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/how-css-hover-focus-and-active-manage-ui-states" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="CSS pseudo-classes like :hover, :focus, and :active provide a declarative way to update the appearance of interface elements based on user interaction. By hooking directly into browser events without JavaScript, these dynamic pseudo-classes inform users o" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="how-css-hover-focus-and-active-manage-ui-states">How CSS Hover,
+Focus, and Active Manage UI States</h1>
+<p>CSS pseudo-classes like <code>:hover</code>, <code>:focus</code>, and
+<code>:active</code> provide a declarative way to update the appearance
+of interface elements based on user interaction. By hooking directly
+into browser events without JavaScript, these dynamic pseudo-classes
+inform users of interactive possibilities, confirm input actions, and
+ensure accessibility. This article breaks down how each pseudo-class
+operates, how they interact with different input methods, and the
+structural rules necessary to implement them effectively.</p>
+<h2 id="the-mechanics-of-interactive-pseudo-classes">The Mechanics of
+Interactive Pseudo-Classes</h2>
+<p>Interactive pseudo-classes monitor the state of an HTML element
+relative to user input devices, such as a mouse, keyboard, or touch
+screen. When the user initiates an action, the browser automatically
+applies the corresponding CSS rules and removes them as soon as the
+state ends.</p>
+<h3 id="the-hover-pseudo-class">The <code>:hover</code>
+Pseudo-Class</h3>
+<p>The <code>:hover</code> pseudo-class triggers when a user positions a
+pointing device (like a mouse cursor) over an element without
+necessarily activating it.</p>
+<ul>
+<li><strong>Primary Purpose:</strong> It signals affordance, reassuring
+the user that an element is interactive before they commit to an
+action.</li>
+<li><strong>Common Uses:</strong> Subtle background color transitions on
+buttons, underlining navigation links, or revealing contextual
+tooltips.</li>
+<li><strong>Touch Considerations:</strong> Touchscreen devices do not
+have a persistent cursor. Tapping an element on a mobile device may
+trigger a "sticky" hover state that persists until the user taps
+elsewhere. To address this, developers use the
+<code>@media (hover: hover)</code> media query to apply hover styles
+only to devices that support a true hover state.</li>
+</ul>
+<h3 id="the-focus-pseudo-class">The <code>:focus</code>
+Pseudo-Class</h3>
+<p>The <code>:focus</code> pseudo-class applies when an element becomes
+the active target for keyboard input or navigation. This occurs when a
+user tabs to a link or button, or clicks inside an <code>input</code>,
+<code>textarea</code>, or <code>select</code> element.</p>
+<ul>
+<li><strong>Primary Purpose:</strong> It provides essential visual
+orientation for users navigating via keyboards, screen readers, or other
+assistive technology.</li>
+<li><strong>Common Uses:</strong> Distinct outlines, high-contrast
+borders, or glowing rings around form controls and action elements.</li>
+<li><strong>Modern Alternative (<code>:focus-visible</code>):</strong>
+Standard <code>:focus</code> can sometimes distract mouse users by
+outlining buttons after a click. The <code>:focus-visible</code>
+pseudo-class solves this by applying styles only when the browser
+determines heuristic need—such as when navigating via keyboard rather
+than mouse.</li>
+<li><strong>Rule:</strong> Never set <code>outline: none</code> without
+providing an alternative, high-contrast focus indicator, as doing so
+breaks keyboard accessibility.</li>
+</ul>
+<h3 id="the-active-pseudo-class">The <code>:active</code>
+Pseudo-Class</h3>
+<p>The <code>:active</code> pseudo-class represents the exact moment an
+element is being engaged or activated.</p>
+<ul>
+<li><strong>Primary Purpose:</strong> It offers immediate tactile
+feedback, letting the user know their click, tap, or keypress has
+registered.</li>
+<li><strong>Common Uses:</strong> Creating a "pressed" effect on buttons
+by slightly reducing scale, shifting the element downward by one or two
+pixels, or darkening the background color.</li>
+<li><strong>Timing:</strong> For a mouse user, <code>:active</code>
+applies between the <code>mousedown</code> and <code>mouseup</code>
+events. For keyboard users, it typically applies while the
+<code>Space</code> or <code>Enter</code> key is held down on a focused
+control.</li>
+</ul>
+<h2 id="the-lvha-ordering-rule">The LVHA Ordering Rule</h2>
+<p>Because an element can exist in multiple states simultaneously—for
+example, a link can be both focused and active, or hovered and
+active—CSS cascading rules determine which styles take precedence. If
+selectors have the same specificity, the rule defined last in the
+stylesheet wins.</p>
+<p>To ensure all states render correctly, interactive styles should
+follow the standard order:</p>
+<ol type="1">
+<li><strong><code>:link</code></strong> – Unvisited links.</li>
+<li><strong><code>:visited</code></strong> – Visited links.</li>
+<li><strong><code>:focus</code></strong> – Focused elements (can also be
+placed before hover, depending on whether hover should override focus
+styles).</li>
+<li><strong><code>:hover</code></strong> – Elements hovered by a
+pointer.</li>
+<li><strong><code>:active</code></strong> – Elements currently being
+activated.</li>
+</ol>
+<p>If <code>:hover</code> is placed after <code>:active</code>, the
+hover styles will override the active styles during a click, preventing
+the pressed-down visual feedback from displaying.</p>
+<h2 id="combining-states-for-robust-interfaces">Combining States for
+Robust Interfaces</h2>
+<p>Managing complex components often requires combining these states
+with element attributes. For example, disabling a button should
+explicitly suppress interactive states:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>button<span class="in">:hover:not(:disabled)</span> {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">background-color</span><span class="ch">:</span> <span class="cn">#0056b3</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>button<span class="in">:active:not(:disabled)</span> {</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">transform</span><span class="ch">:</span> <span class="fu">scale(</span><span class="dv">0.98</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>By systematically defining <code>:hover</code> for discovery,
+<code>:focus</code> for navigation, and <code>:active</code> for
+confirmation, developers establish a responsive and accessible interface
+purely within CSS.</p></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/how-css-hover-focus-and-active-manage-ui-states';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

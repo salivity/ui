@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Line Height Affects UI Scanning Speed - ui</title>
+    <meta name="description" content="Line height, historically known as leading, directly dictates how efficiently users scan and comprehend text within a user interface. When vertical spacing between lines is calibrated correctly, users can quickly parse paragraphs, accurately track from th">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/how-line-height-affects-ui-scanning-speed">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How Line Height Affects UI Scanning Speed - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/how-line-height-affects-ui-scanning-speed" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Line height, historically known as leading, directly dictates how efficiently users scan and comprehend text within a user interface. When vertical spacing between lines is calibrated correctly, users can quickly parse paragraphs, accurately track from th" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="how-line-height-affects-ui-scanning-speed">How Line Height
+Affects UI Scanning Speed</h1>
+<p>Line height, historically known as leading, directly dictates how
+efficiently users scan and comprehend text within a user interface. When
+vertical spacing between lines is calibrated correctly, users can
+quickly parse paragraphs, accurately track from the end of one line to
+the beginning of the next, and absorb critical information with minimal
+cognitive friction. Poorly configured line height creates visual
+barriers that significantly degrade reading speed and usability.</p>
+<h3 id="the-mechanics-of-eye-tracking-and-saccades">The Mechanics of Eye
+Tracking and Saccades</h3>
+<p>When users scan a UI, their eyes move in rapid, jerky movements
+called saccades, punctuated by brief pauses called fixations. Scanning
+speed depends on how smoothly the eye can execute return sweeps—the
+movement from the end of one line to the start of the next.</p>
+<p>If line height is too tight (typically below 120% of the font size),
+the text lines visually merge. The eye struggles to isolate individual
+horizontal paths, leading to "double-taking" or accidentally re-reading
+the same line. This friction breaks the scanning rhythm, increases
+cognitive load, and slows down interaction.</p>
+<h3 id="the-cost-of-excessive-spacing">The Cost of Excessive
+Spacing</h3>
+<p>Increasing line height generally improves readability, but only up to
+a threshold. When line height is too loose (exceeding 180% to 200% for
+standard body text), the visual cohesion of the paragraph breaks
+down.</p>
+<p>Instead of perceiving a unified block of related information, the
+human eye interprets widely spaced lines as isolated elements. Users
+must exert extra effort to locate the next line during a return sweep,
+disrupting vertical flow and slowing down overall scanning speed. In
+extreme cases, excessive leading causes users to mistake line breaks for
+separate paragraphs.</p>
+<h3 id="the-optimal-ratios-for-ui-scanning">The Optimal Ratios for UI
+Scanning</h3>
+<p>To optimize UI scanning speed, designers should tailor line height to
+font size, line length, and element hierarchy:</p>
+<ul>
+<li><strong>Body Copy:</strong> Maintain a line height between 140% and
+160% (a unitless value of <code>1.4</code> to <code>1.6</code>). This
+provides sufficient breathing room for descending and ascending
+characters while keeping the block unified.</li>
+<li><strong>Headings and Titles:</strong> Use tighter line heights,
+typically between 110% and 125% (<code>1.1</code> to <code>1.25</code>).
+Because larger fonts naturally have larger absolute space between lines,
+tighter leading prevents titles from looking disjointed.</li>
+<li><strong>Line Length Correlation:</strong> Longer lines of text
+require greater line height to help the eye navigate back across wide
+horizontal distances. Conversely, shorter lines (such as text in
+sidebars or cards) require tighter line heights to maintain rapid
+vertical scanning.</li>
+</ul>
+<h3 id="impact-on-pattern-scanning">Impact on Pattern Scanning</h3>
+<p>Most digital users do not read every word; they scan interfaces using
+F-shaped or Z-shaped patterns, searching for anchor words and visual
+cues. Adequate line height creates the negative space required for
+typographic contrast, allowing headers, bullet points, and keywords to
+stand out. When spacing is optimized, users can effortlessly sweep down
+the text block, pinpoint target information, and complete tasks
+faster.</p></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/how-line-height-affects-ui-scanning-speed';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

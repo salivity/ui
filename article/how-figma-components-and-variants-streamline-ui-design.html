@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Figma Components and Variants Streamline UI Design - ui</title>
+    <meta name="description" content="This article explores how Figma components and variants optimize design system workflows by creating a centralized, scalable foundation for user interface design. By eliminating redundant assets, standardizing UI states, and aligning design structures wit">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/how-figma-components-and-variants-streamline-ui-design">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How Figma Components and Variants Streamline UI Design - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/how-figma-components-and-variants-streamline-ui-design" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="This article explores how Figma components and variants optimize design system workflows by creating a centralized, scalable foundation for user interface design. By eliminating redundant assets, standardizing UI states, and aligning design structures wit" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="how-figma-components-and-variants-streamline-ui-design">How
+Figma Components and Variants Streamline UI Design</h1>
+<p>This article explores how Figma components and variants optimize
+design system workflows by creating a centralized, scalable foundation
+for user interface design. By eliminating redundant assets,
+standardizing UI states, and aligning design structures with front-end
+code, teams can build cohesive digital products faster and maintain
+consistency across large-scale projects without visual friction.</p>
+<h3
+id="centralizing-assets-with-main-components-and-instances">Centralizing
+Assets with Main Components and Instances</h3>
+<p>At the core of an efficient design system is the reusable component.
+In Figma, creating a main component allows designers to generate
+instances across an entire project. When modifications are made to the
+main component—such as updating a border radius, font style, or
+color—every instance updates instantly.</p>
+<p>This single source of truth eliminates the need to update individual
+screens manually, drastically reducing human error and visual
+inconsistencies across extensive UI flows. Designers retain the
+flexibility to customize local text or iconography via component
+overrides without breaking the underlying structural connection to the
+system.</p>
+<h3 id="reducing-complexity-with-component-variants">Reducing Complexity
+with Component Variants</h3>
+<p>Before variants, managing different states and configurations
+required maintaining dozens of distinct components for a single element
+like a button (e.g., Primary-Hover, Primary-Active, Secondary-Default).
+Variants solve this explosion of assets by grouping related components
+into a single container.</p>
+<p>Variants organize states, sizes, and hierarchies under customizable
+properties:</p>
+<ul>
+<li><strong>States:</strong> Default, hover, pressed, focused,
+disabled.</li>
+<li><strong>Hierarchy:</strong> Primary, secondary, tertiary,
+ghost.</li>
+<li><strong>Size:</strong> Small, medium, large.</li>
+</ul>
+<p>By grouping these attributes into a single component set, design
+asset libraries remain uncluttered, and designers can switch between
+configurations using simple dropdown menus and toggles in the inspection
+panel.</p>
+<h3 id="simplifying-the-matrix-with-component-properties">Simplifying
+the Matrix with Component Properties</h3>
+<p>To prevent variant sets from becoming too massive and
+memory-intensive, Figma incorporates component properties: boolean
+properties, text properties, and instance swap properties.</p>
+<ul>
+<li><strong>Boolean Properties:</strong> Control the visibility of
+specific layers (e.g., toggling an icon on or off) without creating
+duplicate variants.</li>
+<li><strong>Text Properties:</strong> Allow designers to edit label
+content directly in the design panel without deep-clicking through
+nested frames.</li>
+<li><strong>Instance Swap Properties:</strong> Make swapping nested
+components, such as icons or status badges, fast and predictable by
+predefining approved libraries.</li>
+</ul>
+<p>Using these properties dramatically minimizes the total number of
+variants required in a component set, keeping file sizes manageable and
+rendering performance smooth.</p>
+<h3 id="bridging-design-and-code-for-faster-handoff">Bridging Design and
+Code for Faster Handoff</h3>
+<p>Variants mirror the component-driven architecture found in modern
+front-end frameworks like React, Vue, and SwiftUI. A variant set in
+Figma maps directly to a coded component, where properties correspond to
+component props.</p>
+<p>When developers inspect an element built with variants and
+properties, the nomenclature and logic reflect the code structure they
+will write. This shared mental model minimizes miscommunication during
+developer handoffs, accelerates production speed, and ensures that the
+final coded product matches the intended design specifications
+accurately.</p></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/how-figma-components-and-variants-streamline-ui-design';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

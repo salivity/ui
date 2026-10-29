@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Deprecate UI Components Without Breaking Apps - ui</title>
+    <meta name="description" content="Deprecating user interface components in an active design system requires a balance between continuous evolution and system stability. This article outlines the essential strategies for phasing out legacy UI elements without disrupting existing production">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/how-to-deprecate-ui-components-without-breaking-apps">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How to Deprecate UI Components Without Breaking Apps - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/how-to-deprecate-ui-components-without-breaking-apps" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Deprecating user interface components in an active design system requires a balance between continuous evolution and system stability. This article outlines the essential strategies for phasing out legacy UI elements without disrupting existing production" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="how-to-deprecate-ui-components-without-breaking-apps">How to
+Deprecate UI Components Without Breaking Apps</h1>
+<p>Deprecating user interface components in an active design system
+requires a balance between continuous evolution and system stability.
+This article outlines the essential strategies for phasing out legacy UI
+elements without disrupting existing production applications, focusing
+on automated tooling, structured versioning, backward compatibility, and
+proactive developer communication.</p>
+<h2 id="establish-a-phased-deprecation-lifecycle">Establish a Phased
+Deprecation Lifecycle</h2>
+<p>Never remove a component abruptly. Introduce a formalized lifecycle
+with distinct phases: <em>Active</em>, <em>Deprecated</em>,
+<em>Maintenance</em>, and <em>Removed</em>. Define clear expectations
+for what each stage entails, including a guaranteed support window
+(e.g., three to six months) during which deprecated components receive
+security and critical bug fixes, but no new features. This
+predictability gives consuming teams adequate time to schedule
+refactoring work.</p>
+<h2 id="leverage-semantic-versioning-and-breaking-changes">Leverage
+Semantic Versioning and Breaking Changes</h2>
+<p>Adhere strictly to Semantic Versioning (SemVer). Marking a component
+as deprecated should occur in a minor release, alongside the
+introduction of its replacement. The actual deletion of the old
+component must be reserved strictly for a major release. This guarantees
+that projects running automated dependency updates will not experience
+broken builds unexpectedly.</p>
+<h2 id="use-wrapper-components-and-the-adapter-pattern">Use Wrapper
+Components and the Adapter Pattern</h2>
+<p>Maintain backward compatibility during transitions by refactoring the
+old component into a wrapper around the new one. The deprecated
+component should map its legacy props to the API of the new component
+underneath. This ensures immediate adoption of the new underlying code
+and styling without forcing immediate prop rewrites across consuming
+codebases.</p>
+<h2 id="implement-compile-time-warnings-and-linters">Implement
+Compile-Time Warnings and Linters</h2>
+<p>Alert engineers to deprecated usage within their native workflow.</p>
+<ul>
+<li><strong>Static Analysis:</strong> Use <code>@deprecated</code> JSDoc
+annotations so that modern IDEs visually strike through outdated
+component names and provide contextual tooltips recommending the
+replacement.</li>
+<li><strong>Linters:</strong> Write custom ESLint rules or use plugins
+that flag deprecated components as warnings. Set these warnings to
+escalate to errors after an agreed-upon deadline.</li>
+</ul>
+<h2 id="provide-automated-codemods">Provide Automated Codemods</h2>
+<p>Manual refactoring is error-prone and time-consuming, particularly in
+large repositories. Providing Abstract Syntax Tree (AST) migration
+scripts—using tools such as <code>jscodeshift</code>—allows consuming
+developers to run a single command that automatically updates import
+paths, renames components, and transforms old prop schemas to the new
+format.</p>
+<h2 id="track-deprecation-telemetry">Track Deprecation Telemetry</h2>
+<p>Do not delete code based on assumptions. Implement build-time or
+runtime logging to track where and how often deprecated components are
+still being rendered. Dashboarding this telemetry highlights which teams
+or services still rely on legacy components, allowing platform teams to
+provide targeted assistance rather than guessing when it is safe to
+issue a major release that purges the code entirely.</p></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/how-to-deprecate-ui-components-without-breaking-apps';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card vs Table View Toggle: UI Best Practices - ui</title>
+    <meta name="description" content="Allowing users to switch between card and table views empowers them to tailor data presentation to their immediate goals, whether that involves scanning visual assets or conducting dense, comparative analysis. Implementing this pattern effectively require">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/card-vs-table-view-toggle-ui-best-practices">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Card vs Table View Toggle: UI Best Practices - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/card-vs-table-view-toggle-ui-best-practices" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Allowing users to switch between card and table views empowers them to tailor data presentation to their immediate goals, whether that involves scanning visual assets or conducting dense, comparative analysis. Implementing this pattern effectively require" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="card-vs-table-view-toggle-ui-best-practices">Card vs Table View
+Toggle: UI Best Practices</h1>
+<p>Allowing users to switch between card and table views empowers them
+to tailor data presentation to their immediate goals, whether that
+involves scanning visual assets or conducting dense, comparative
+analysis. Implementing this pattern effectively requires careful
+consideration of screen size, interaction consistency, data hierarchy,
+and accessibility. This guide details the essential best practices for
+creating seamless, responsive card-versus-table view toggles in modern
+user interfaces.</p>
+<h3 id="choose-the-right-toggle-placement-and-iconography">Choose the
+Right Toggle Placement and Iconography</h3>
+<p>Place the toggle control near the top of the interface, typically
+aligned with other data-manipulation tools such as search bars, filters,
+and sorting controls. Use widely recognized iconography—such as a grid
+icon for card view and a list/table icon for tabular view. Ensure the
+active state is visually distinct using contrasting background fills or
+borders, and include descriptive tooltips or labels (e.g., "Switch to
+table view") to eliminate ambiguity.</p>
+<h3 id="define-clear-purpose-for-each-view">Define Clear Purpose for
+Each View</h3>
+<p>Each view should serve a specific analytical or browsing intent
+rather than simply repackaging the identical HTML:</p>
+<ul>
+<li><strong>Table View:</strong> Ideal for data density, scannability,
+rapid sorting, multi-column comparison, and bulk actions. Keep rows
+compact and maintain fixed headers on scroll.</li>
+<li><strong>Card View:</strong> Ideal for visual scanning, media-heavy
+items (like images or charts), and qualitative overviews. Emphasize
+metadata through clear visual hierarchy and whitespace.</li>
+</ul>
+<h3 id="maintain-functional-parity">Maintain Functional Parity</h3>
+<p>Users should not lose core functionality when switching view modes.
+Features such as sorting, multi-select checkboxes, filtering,
+pagination, and action menus (edit, delete, share) must exist in both
+views. If an action is visible on hover in a table row, ensure it is
+readily accessible on a card via a dedicated action menu or visible
+button.</p>
+<h3 id="manage-information-density-responsively">Manage Information
+Density Responsively</h3>
+<p>Tables naturally fail on narrow screens due to horizontal
+constraints. Implement responsive logic that handles view transitions
+dynamically:</p>
+<ul>
+<li><strong>Large Screens:</strong> Provide the user with explicit
+control to toggle freely between cards and tables.</li>
+<li><strong>Small Screens (Mobile):</strong> Automatically default to
+the card or stacked-list view. If a table must be kept on mobile,
+implement horizontal scrolling with pinned key columns, or disable the
+toggle switch entirely if the table layout degrades user
+experience.</li>
+</ul>
+<h3 id="persist-user-preferences">Persist User Preferences</h3>
+<p>Users usually favor one viewing mode based on their workflow. Persist
+their selection using <code>localStorage</code> or user profile settings
+so the chosen view remains active across sessions and page reloads.
+Additionally, reflect the current view state in the URL (e.g.,
+<code>?view=table</code>) to ensure that shared links and bookmarked
+pages render the expected layout.</p>
+<h3 id="prioritize-accessibility-and-keyboard-navigation">Prioritize
+Accessibility and Keyboard Navigation</h3>
+<p>A toggle view must be fully accessible to screen readers and keyboard
+users:</p>
+<ul>
+<li>Implement the toggle using semantic <code>&lt;button&gt;</code>
+elements wrapped in an accessible container, such as a group or
+toolbar.</li>
+<li>Use <code>aria-pressed="true|false"</code> to convey toggle states
+to assistive technologies.</li>
+<li>Ensure both views support logical focus order. While tables benefit
+from standard grid keyboard navigation (arrow keys or tab stops), cards
+should follow an intuitive DOM reading order from top-left to
+bottom-right.</li>
+<li>Avoid jarring layout shifts when the toggle is pressed by preserving
+the scroll position relative to the currently active or selected
+item.</li>
+</ul></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/card-vs-table-view-toggle-ui-best-practices';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integrating CSV Export and Print in Data Grid Toolbars - ui</title>
+    <meta name="description" content="Modern data grids rely on UI toolbars to provide contextual actions that enhance data management without cluttering the main interface. Integrating &quot;Export to CSV&quot; and &quot;Print&quot; action buttons into these toolbars allows users to extract, report, and share d">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/integrating-csv-export-and-print-in-data-grid-toolbars">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Integrating CSV Export and Print in Data Grid Toolbars - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/integrating-csv-export-and-print-in-data-grid-toolbars" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Modern data grids rely on UI toolbars to provide contextual actions that enhance data management without cluttering the main interface. Integrating &quot;Export to CSV&quot; and &quot;Print&quot; action buttons into these toolbars allows users to extract, report, and share d" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1
+id="integrating-csv-export-and-print-in-data-grid-toolbars">Integrating
+CSV Export and Print in Data Grid Toolbars</h1>
+<p>Modern data grids rely on UI toolbars to provide contextual actions
+that enhance data management without cluttering the main interface.
+Integrating "Export to CSV" and "Print" action buttons into these
+toolbars allows users to extract, report, and share data seamlessly.
+This article outlines the architectural patterns, UX best practices, and
+technical considerations required to connect CSV generation and print
+utilities directly to a data grid's toolbar.</p>
+<h3 id="toolbar-placement-and-ux-hierarchy">Toolbar Placement and UX
+Hierarchy</h3>
+<p>In standard UI/UX layouts, toolbars sit directly above the data grid
+headers. Export and print actions are typically positioned on the far
+right of the toolbar to separate global grid controls (such as search
+inputs, bulk selection, and view switchers) from output utilities.</p>
+<p>When screen space is constrained, these actions can be grouped into
+an "Actions" or "Export" dropdown menu alongside formats like Excel or
+PDF. Standard iconography—such as a tray with an arrow for export and a
+printer icon for printing—should accompany short, descriptive labels or
+accessible tooltips (<code>aria-label</code>) to ensure clarity across
+device sizes.</p>
+<h3 id="integrating-the-export-to-csv-action">Integrating the "Export to
+CSV" Action</h3>
+<p>The CSV export button functions by converting the grid's tabular
+dataset into a comma-delimited string and triggering a browser download.
+Depending on the dataset size, this is handled through one of two
+workflows:</p>
+<ol type="1">
+<li><strong>Client-Side Generation:</strong> For smaller datasets
+already loaded in browser memory, clicking the button invokes an
+internal parser. The parser loops through the visible columns and rows,
+escapes special characters (commas, quotes, line breaks), wraps strings
+in double quotes, and creates a <code>Blob</code> object with a MIME
+type of <code>text/csv</code>. A temporary anchor element
+(<code>&lt;a&gt;</code>) with a <code>download</code> attribute is then
+generated and clicked programmatically to save the file.</li>
+<li><strong>Server-Side Generation:</strong> For large or paginated
+enterprise datasets, the toolbar button sends an API request to the
+backend with the current query parameters. The server generates the CSV
+stream asynchronously, returning a downloadable URL or direct file
+stream to prevent the browser UI thread from freezing.</li>
+</ol>
+<h3 id="integrating-the-print-action">Integrating the "Print"
+Action</h3>
+<p>A grid print action must produce a clean, document-friendly layout
+rather than a raw capture of the web page. Integration involves
+triggering the browser’s print dialog via JavaScript
+(<code>window.print()</code>) while applying custom print styling.</p>
+<ol type="1">
+<li><strong>Print Stylesheets (<code>@media print</code>):</strong>
+Clicking print activates media-specific CSS rules that hide
+non-essential elements such as the toolbar itself, sidebars, navigation
+menus, pagination controls, and action buttons.</li>
+<li><strong>Layout Normalization:</strong> The grid container must
+expand horizontally to fit printable page dimensions (often defaulting
+to landscape mode). Fixed heights, scrollbars, and virtualized scrolling
+viewports should be temporarily disabled or reset to
+<code>visible</code> so all targeted data rows are rendered on the
+physical page.</li>
+</ol>
+<h3 id="preserving-grid-state">Preserving Grid State</h3>
+<p>Both CSV export and print mechanisms must respect the real-time state
+of the data grid to meet user expectations:</p>
+<ul>
+<li><strong>Filters and Search:</strong> Output should reflect currently
+applied filters rather than the raw, unfiltered source data.</li>
+<li><strong>Sorting:</strong> The sequence of rows in the export or
+print view must match the active sort order defined by the user.</li>
+<li><strong>Column Visibility:</strong> Hidden or pinned columns must be
+handled intentionally. By default, hidden columns should be excluded
+from both CSV and print views, ensuring the output mirrors what the user
+currently sees on the screen.</li>
+<li><strong>Selection Scoping:</strong> If a user selects specific rows,
+the toolbar buttons should dynamically update (e.g., changing from
+"Export All" to "Export Selected") to provide granular control over data
+extraction.</li>
+</ul></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/integrating-csv-export-and-print-in-data-grid-toolbars';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

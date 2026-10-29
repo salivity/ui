@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Figma Component Properties for Nested Instances - ui</title>
+    <meta name="description" content="Figma component properties fundamentally streamline nested instance customization by surfacing editable attributes of child components directly to the top-level parent component. Instead of requiring designers to repeatedly double-click through deep layer">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/figma-component-properties-for-nested-instances">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Figma Component Properties for Nested Instances - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/figma-component-properties-for-nested-instances" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Figma component properties fundamentally streamline nested instance customization by surfacing editable attributes of child components directly to the top-level parent component. Instead of requiring designers to repeatedly double-click through deep layer" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="figma-component-properties-for-nested-instances">Figma Component
+Properties for Nested Instances</h1>
+<p>Figma component properties fundamentally streamline nested instance
+customization by surfacing editable attributes of child components
+directly to the top-level parent component. Instead of requiring
+designers to repeatedly double-click through deep layer hierarchies to
+modify elements, component properties consolidate text, visibility
+toggles, and instance swaps into a single design panel. This article
+explores how exposing nested instances and leveraging component
+properties minimizes variant bloat, prevents accidental layout breakage,
+and accelerates UI design workflows.</p>
+<h3 id="the-problem-with-deep-layer-customization">The Problem with Deep
+Layer Customization</h3>
+<p>Before component properties, editing a complex component—such as an
+application header, modal, or data table cell—required "deep diving."
+Designers had to click multiple times through nested Auto Layout frames
+and grouped layers to find a specific text node or nested icon.</p>
+<p>This traditional approach caused several workflow bottlenecks:</p>
+<ul>
+<li><strong>Accidental Detachment or Breakage:</strong> Clicking blindly
+into deep layers often led to unintended position shifts, broken Auto
+Layout constraints, or accidental detachment from the main
+component.</li>
+<li><strong>Variant Explosion:</strong> Creating every possible
+combination of a component (e.g., button with left icon, button with
+right icon, button without icon) required creating dozens of distinct
+variants, making component sets massive and difficult to maintain.</li>
+<li><strong>Slow Workflows:</strong> Hunting through complex layer trees
+significantly slowed down day-to-day screen assembly.</li>
+</ul>
+<h3 id="how-component-properties-solve-the-problem">How Component
+Properties Solve the Problem</h3>
+<p>Figma provides four primary property types that can be attached to
+elements inside a component: <strong>Text</strong>,
+<strong>Boolean</strong>, <strong>Instance Swap</strong>, and
+<strong>Variant</strong> properties. When these are applied to nested
+instances, customization shifts entirely to the top-level design inspect
+panel.</p>
+<h4 id="1-exposing-nested-instances">1. Exposing Nested Instances</h4>
+<p>The "Expose nested instances" feature allows parent components to
+display the properties of their children. When creating a parent
+component (like a Modal containing a nested Button component), you can
+expose that Button's properties. When an instance of the Modal is placed
+on the canvas, its selection panel displays the Button's variant
+pickers, text properties, and state controls immediately, without
+requiring the user to select the Button directly.</p>
+<h4 id="2-surface-level-text-editing">2. Surface-Level Text Editing</h4>
+<p>Instead of navigating down to an individual text layer inside a
+nested instance, designers can bind a Text Property to that layer. The
+editable string then appears as a simple text input field on the
+top-level parent. This allows rapid copy updates while preserving
+typography styles and Auto Layout rules.</p>
+<h4 id="3-simplified-visibility-with-boolean-properties">3. Simplified
+Visibility with Boolean Properties</h4>
+<p>Boolean properties link the visibility of a nested element or nested
+component to a simple toggle switch. This allows designers to turn
+elements like badges, helper text, or icons on and off directly from the
+parent component menu. It eliminates the need to create separate
+variants just to represent presence or absence.</p>
+<h4 id="4-clean-instance-swapping">4. Clean Instance Swapping</h4>
+<p>Instance Swap properties allow designers to define a specific nested
+component (such as an icon or avatar) as swappable, while restricting
+the available replacements to a curated set of components or a specific
+library folder. This keeps the icon choice relevant and prevents users
+from swapping inappropriate components into strict design system
+slots.</p>
+<h3 id="key-benefits-for-design-systems">Key Benefits for Design
+Systems</h3>
+<ul>
+<li><strong>Single Source of Control:</strong> All editable fields are
+surfaced in the right-hand properties sidebar, standardizing how
+designers interact with components.</li>
+<li><strong>Smaller File Sizes:</strong> Eliminating the need to
+generate hundreds of variant combinations keeps UI kits lightweight and
+performant.</li>
+<li><strong>Consistency and Governance:</strong> Design system
+maintainers can explicitly define what can and cannot be customized,
+protecting core styles from being inadvertently modified.</li>
+</ul></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/figma-component-properties-for-nested-instances';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

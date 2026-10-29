@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ideal Line Length for Optimal UI Readability - ui</title>
+    <meta name="description" content="The ideal line length for optimal readability in text-heavy user interfaces spans between 50 and 75 characters per line, including spaces. This article examines the typography standards behind this range, explains the cognitive science of why shorter or l">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/ideal-line-length-for-optimal-ui-readability">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ideal Line Length for Optimal UI Readability - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/ideal-line-length-for-optimal-ui-readability" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="The ideal line length for optimal readability in text-heavy user interfaces spans between 50 and 75 characters per line, including spaces. This article examines the typography standards behind this range, explains the cognitive science of why shorter or l" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="ideal-line-length-for-optimal-ui-readability">Ideal Line Length
+for Optimal UI Readability</h1>
+<p>The ideal line length for optimal readability in text-heavy user
+interfaces spans between 50 and 75 characters per line, including
+spaces. This article examines the typography standards behind this
+range, explains the cognitive science of why shorter or longer lines
+impair reading comprehension, and outlines practical CSS strategies to
+implement responsive text measures effectively across devices.</p>
+<h3 id="the-recommended-line-measure">The Recommended Line Measure</h3>
+<p>Typography experts, starting with Robert Bringhurst in <em>The
+Elements of Typographic Style</em>, identify 66 characters per line
+(CPL) as the benchmark for optimal legibility in Western text. For
+digital interfaces, this translates into an acceptable working
+range:</p>
+<ul>
+<li><strong>Desktop environments:</strong> 50 to 75 characters per
+line.</li>
+<li><strong>Compact / Mobile viewports:</strong> 35 to 45 characters per
+line.</li>
+<li><strong>Fast-scanning environments (e.g., sidebars,
+dashboards):</strong> 40 to 50 characters per line.</li>
+</ul>
+<h3 id="the-problem-with-lines-that-are-too-long">The Problem with Lines
+That Are Too Long</h3>
+<p>When a line of text exceeds 80 to 90 characters, the reader's eye
+struggles to transition smoothly from the end of one line to the
+beginning of the next. This issue, known as "subconscious tracking
+difficulty," causes readers to frequently re-read the same line or skip
+lines entirely. Wide text blocks also trigger cognitive fatigue, causing
+users to abandon long-form content or skim aggressively rather than
+absorb details.</p>
+<h3 id="the-problem-with-lines-that-are-too-short">The Problem with
+Lines That Are Too Short</h3>
+<p>When a line contains fewer than 40 characters, the reading rhythm is
+disrupted. The eye must constantly jump to the next line, creating an
+erratic scanning pattern. Extremely short measures also produce
+disjointed hyphenation, severe ragged edges in left-aligned text, or
+awkward spacing rivers in justified text, all of which degrade
+comprehension speed.</p>
+<h3 id="adjusting-line-height-with-measure">Adjusting Line Height with
+Measure</h3>
+<p>Line length should never be adjusted in isolation; it correlates
+directly with <code>line-height</code> (leading):</p>
+<ul>
+<li><strong>Wider lines require more line height:</strong> If a line
+stretches toward 75 characters, increase the line-height (e.g.,
+<code>1.5</code> to <code>1.7</code>) to give the eye a clearer
+horizontal path back to the left margin.</li>
+<li><strong>Narrower lines require tighter line height:</strong> For
+narrower columns (around 45 characters), a tighter line-height (e.g.,
+<code>1.3</code> to <code>1.45</code>) keeps the block visually coherent
+and prevents paragraphs from looking fragmented.</li>
+</ul>
+<h3 id="technical-implementation-in-css">Technical Implementation in
+CSS</h3>
+<p>Modern web UI design handles line measures reliably using the
+<code>ch</code> unit, which equates to the width of the <code>0</code>
+(zero) glyph in the chosen font.</p>
+<ul>
+<li><p><strong>Constrain text width:</strong> Set a maximum width on the
+text container rather than relying on grid columns:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.article-body</span> {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">max-width</span><span class="ch">:</span> <span class="dv">65</span><span class="dt">ch</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div></li>
+<li><p><strong>Fluid layouts:</strong> Combine the <code>ch</code> unit
+with viewport-relative units to maintain safe boundaries across screen
+sizes:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.article-body</span> {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">width</span><span class="ch">:</span> <span class="dv">100</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">max-width</span><span class="ch">:</span> <span class="fu">min(</span><span class="dv">65</span><span class="dt">ch</span><span class="op">,</span> <span class="dv">100</span><span class="dt">%</span> <span class="dv">- 2</span><span class="dt">rem</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div></li>
+</ul>
+<p>Limiting the measure to approximately 65 characters ensures users
+read efficiently, maintain focus, and navigate information-dense user
+interfaces without cognitive strain.</p></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/ideal-line-length-for-optimal-ui-readability';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

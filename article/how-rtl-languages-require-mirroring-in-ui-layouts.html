@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How RTL Languages Require Mirroring in UI Layouts - ui</title>
+    <meta name="description" content="Right-to-left (RTL) languages like Arabic, Hebrew, Persian, and Urdu require more than simple text translation; they demand an architectural transformation of the user interface known as mirroring. Because a user&#39;s reading direction dictates how they visu">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/how-rtl-languages-require-mirroring-in-ui-layouts">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How RTL Languages Require Mirroring in UI Layouts - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/how-rtl-languages-require-mirroring-in-ui-layouts" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Right-to-left (RTL) languages like Arabic, Hebrew, Persian, and Urdu require more than simple text translation; they demand an architectural transformation of the user interface known as mirroring. Because a user&#39;s reading direction dictates how they visu" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="how-rtl-languages-require-mirroring-in-ui-layouts">How RTL
+Languages Require Mirroring in UI Layouts</h1>
+<p>Right-to-left (RTL) languages like Arabic, Hebrew, Persian, and Urdu
+require more than simple text translation; they demand an architectural
+transformation of the user interface known as mirroring. Because a
+user's reading direction dictates how they visually scan and navigate
+digital interfaces, global layouts must adapt spatially to maintain
+intuitive usability. This article explains the mechanics of RTL
+mirroring, highlighting which elements flip, which remain unchanged, and
+how to implement bidirectional layouts effectively.</p>
+<h3 id="the-mechanics-of-rtl-reading-patterns">The Mechanics of RTL
+Reading Patterns</h3>
+<p>Users intuitively process interfaces according to their natural
+reading direction. In left-to-right (LTR) scripts, the eye starts at the
+top-left corner, scanning horizontally before descending. In RTL
+scripts, this scanning behavior is reversed, starting at the
+top-right.</p>
+<p>To accommodate this mental model, UI hierarchies must flip
+horizontally. What was once the "start" of the interface on the left
+becomes the right, altering everything from primary visual focal points
+to secondary utility placements.</p>
+<h3 id="components-that-require-mirroring">Components That Require
+Mirroring</h3>
+<p>Effective RTL localization involves systematically identifying
+directional components and inverting their positions:</p>
+<ul>
+<li><strong>Page Layout and Grids:</strong> Multi-column layouts must
+reverse order. The primary content area swaps positions with
+complementary sidebars, placing the primary visual anchor on the
+right.</li>
+<li><strong>Navigation Structures:</strong> Navigation drawers, back
+buttons, and breadcrumbs must reflect the opposite flow. Breadcrumbs
+advance from right to left, and deep-navigation "back" arrows point
+right instead of left.</li>
+<li><strong>Form Inputs and Controls:</strong> Labels align to the
+right, placeholder text starts on the right, and input fields fill
+right-to-left. Checkboxes and radio buttons shift to sit to the right of
+their accompanying text.</li>
+<li><strong>Progress Indicators:</strong> Linear progress bars,
+onboarding wizards, and timeline steps advance from right to left,
+matching the chronological reading flow.</li>
+<li><strong>Directional Icons:</strong> Visual indicators that denote
+direction, such as arrows, carousels, and chevron navigation, must be
+flipped horizontally to preserve their semantic meaning.</li>
+</ul>
+<h3 id="elements-that-must-remain-static">Elements That Must Remain
+Static</h3>
+<p>A common pitfall in RTL design is over-mirroring. Several interface
+components must remain identical across both LTR and RTL interfaces:</p>
+<ul>
+<li><strong>Numbers and Phone Numbers:</strong> Most RTL scripts read
+numerical values from left to right. Phone numbers, credit card fields,
+and mathematical formulas retain their standard LTR sequence.</li>
+<li><strong>Media Playback Controls:</strong> Media players do not
+mirror. Play, pause, scrubbers, and timeline sliders consistently move
+left to right globally, representing the universal passage of tape or
+film reels.</li>
+<li><strong>Logos and Brand Marks:</strong> Brand identities and logos
+remain unchanged to maintain trademark consistency.</li>
+<li><strong>Universal Non-Directional Icons:</strong> Icons representing
+real-world objects without inherent directionality—such as cameras,
+search magnifying glasses, shopping carts, and download icons—do not
+mirror.</li>
+</ul>
+<h3 id="technical-implementation-via-css-logical-properties">Technical
+Implementation via CSS Logical Properties</h3>
+<p>Modern web development eliminates the need to maintain separate
+stylesheets for LTR and RTL layouts through CSS Logical Properties. By
+anchoring styles to the flow of text rather than physical screen
+coordinates, layouts mirror automatically based on the document's
+direction attribute (<code>dir="rtl"</code>).</p>
+<p>Instead of using physical directional properties:</p>
+<ul>
+<li>Replace <code>margin-left</code> and <code>margin-right</code> with
+<code>margin-inline-start</code> and
+<code>margin-inline-end</code>.</li>
+<li>Replace <code>padding-left</code> and <code>padding-right</code>
+with <code>padding-inline-start</code> and
+<code>padding-inline-end</code>.</li>
+<li>Replace <code>left</code> and <code>right</code> positioning with
+<code>inset-inline-start</code> and <code>inset-inline-end</code>.</li>
+<li>Replace <code>text-align: left</code> with
+<code>text-align: start</code>.</li>
+</ul>
+<p>Applying these standard logical rules ensures that global software
+delivers an intuitive, natural, and culturally coherent user experience
+across every language market.</p></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/how-rtl-languages-require-mirroring-in-ui-layouts';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

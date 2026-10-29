@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Make Icon-Only Buttons Accessible with ARIA - ui</title>
+    <meta name="description" content="Icon-only buttons are a staple of modern user interface design, offering clean visual aesthetics and saving screen real estate, but they often present significant barriers for users relying on assistive technologies. Without a text node inside the element">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/how-to-make-icon-only-buttons-accessible-with-aria">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How to Make Icon-Only Buttons Accessible with ARIA - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/how-to-make-icon-only-buttons-accessible-with-aria" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Icon-only buttons are a staple of modern user interface design, offering clean visual aesthetics and saving screen real estate, but they often present significant barriers for users relying on assistive technologies. Without a text node inside the element" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="how-to-make-icon-only-buttons-accessible-with-aria">How to Make
+Icon-Only Buttons Accessible with ARIA</h1>
+<p>Icon-only buttons are a staple of modern user interface design,
+offering clean visual aesthetics and saving screen real estate, but they
+often present significant barriers for users relying on assistive
+technologies. Without a text node inside the element, screen readers
+cannot determine the purpose of the control. This guide outlines the
+core techniques to make icon-only buttons accessible using ARIA labels,
+semantic markup, and best practices to meet Web Content Accessibility
+Guidelines (WCAG).</p>
+<h2 id="the-core-accessibility-problem">The Core Accessibility
+Problem</h2>
+<p>When a screen reader encounters an HTML <code>&lt;button&gt;</code>
+element containing only an <code>&lt;img&gt;</code>,
+<code>&lt;svg&gt;</code>, or icon font, it attempts to read the
+accessible name of the button. If that icon lacks textual context, the
+screen reader may announce nothing, announce only the word "button," or
+read aloud internal SVG path data or image filenames. Every interactive
+control must have an accessible name that conveys its purpose.</p>
+<h2 id="method-1-using-the-aria-label-attribute">Method 1: Using the
+<code>aria-label</code> Attribute</h2>
+<p>The most direct way to provide an accessible name for an icon-only
+button is the <code>aria-label</code> attribute. Placed directly on the
+<code>&lt;button&gt;</code> element, it overrides any child elements to
+provide a clear, invisible text label for assistive devices.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode html"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> type</span><span class="op">=</span><span class="st">&quot;button&quot;</span><span class="ot"> aria-label</span><span class="op">=</span><span class="st">&quot;Close modal&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">svg</span><span class="ot"> aria-hidden</span><span class="op">=</span><span class="st">&quot;true&quot;</span><span class="ot"> focusable</span><span class="op">=</span><span class="st">&quot;false&quot;</span><span class="ot"> width</span><span class="op">=</span><span class="st">&quot;16&quot;</span><span class="ot"> height</span><span class="op">=</span><span class="st">&quot;16&quot;</span><span class="ot"> viewBox</span><span class="op">=</span><span class="st">&quot;0 0 24 24&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">path</span><span class="ot"> d</span><span class="op">=</span><span class="st">&quot;M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z&quot;</span><span class="dt">/&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">svg</span><span class="dt">&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span></code></pre></div>
+<h3 id="key-considerations">Key Considerations:</h3>
+<ul>
+<li><strong>Hide the icon:</strong> Always add
+<code>aria-hidden="true"</code> to the inner SVG or icon element so
+screen readers ignore the graphic itself.</li>
+<li><strong>Remove focusability:</strong> On SVGs, include
+<code>focusable="false"</code> to prevent older browsers (like Internet
+Explorer) from adding redundant tab stops.</li>
+</ul>
+<h2 id="method-2-using-visually-hidden-text">Method 2: Using Visually
+Hidden Text</h2>
+<p>An alternative to <code>aria-label</code> is including real HTML text
+wrapped in a CSS class that hides the text visually while leaving it
+accessible to the DOM tree and screen readers (often named
+<code>.sr-only</code> or <code>.visually-hidden</code>).</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode html"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> type</span><span class="op">=</span><span class="st">&quot;button&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">svg</span><span class="ot"> aria-hidden</span><span class="op">=</span><span class="st">&quot;true&quot;</span><span class="ot"> focusable</span><span class="op">=</span><span class="st">&quot;false&quot;</span><span class="ot"> width</span><span class="op">=</span><span class="st">&quot;16&quot;</span><span class="ot"> height</span><span class="op">=</span><span class="st">&quot;16&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">&lt;!-- Icon path --&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">svg</span><span class="dt">&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;sr-only&quot;</span><span class="dt">&gt;</span>Search catalog<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.sr-only</span> {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">position</span><span class="ch">:</span> <span class="dv">absolute</span><span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">width</span><span class="ch">:</span> <span class="dv">1</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">height</span><span class="ch">:</span> <span class="dv">1</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">padding</span><span class="ch">:</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">margin</span><span class="ch">:</span> <span class="dv">-1</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">overflow</span><span class="ch">:</span> <span class="dv">hidden</span><span class="op">;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  clip<span class="ch">:</span> rect<span class="fu">(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">white-space</span><span class="ch">:</span> <span class="dv">nowrap</span><span class="op">;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">border</span><span class="ch">:</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>This method is often preferred in internationalized applications
+because standard in-page translation tools (such as Google Translate)
+handle visible DOM text nodes more reliably than attributes like
+<code>aria-label</code>.</p>
+<h2 id="method-3-using-aria-labelledby">Method 3: Using
+<code>aria-labelledby</code></h2>
+<p>When visible text that describes the button’s action already exists
+elsewhere on the page, you can use <code>aria-labelledby</code> to
+associate the button with that text's unique ID.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode html"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">h2</span><span class="ot"> id</span><span class="op">=</span><span class="st">&quot;settings-heading&quot;</span><span class="dt">&gt;</span>Account Settings<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> type</span><span class="op">=</span><span class="st">&quot;button&quot;</span><span class="ot"> aria-labelledby</span><span class="op">=</span><span class="st">&quot;settings-heading&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">svg</span><span class="ot"> aria-hidden</span><span class="op">=</span><span class="st">&quot;true&quot;</span><span class="ot"> focusable</span><span class="op">=</span><span class="st">&quot;false&quot;</span><span class="dt">&gt;</span><span class="co">&lt;!-- Gear Icon --&gt;</span><span class="dt">&lt;/</span><span class="kw">svg</span><span class="dt">&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span></code></pre></div>
+<p>In this scenario, a screen reader will read the button as "Account
+Settings, button."</p>
+<h2 id="best-practices-for-icon-only-button-labels">Best Practices for
+Icon-Only Button Labels</h2>
+<ul>
+<li><strong>Label actions, not visuals:</strong> Never describe the icon
+itself. Use action-oriented labels like "Delete item" instead of "Trash
+can," or "Close dialog" instead of "X mark."</li>
+<li><strong>Keep labels concise:</strong> Avoid redundant words like
+"button" or "click here." Screen readers automatically identify the role
+of the element.</li>
+<li><strong>Handle toggle states dynamically:</strong> For buttons that
+change state (e.g., mute/unmute, play/pause, bookmark/unbookmark),
+ensure the <code>aria-label</code> or <code>aria-pressed</code>
+attribute updates dynamically via JavaScript as the state changes.</li>
+<li><strong>Include visible tooltips:</strong> Users without screen
+readers, including those with cognitive disabilities, may also struggle
+to decipher unfamiliar icons. Pair icon-only buttons with hover and
+focus tooltips that match the accessible label.</li>
+</ul></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/how-to-make-icon-only-buttons-accessible-with-aria';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

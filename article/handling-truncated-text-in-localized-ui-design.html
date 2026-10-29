@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handling Truncated Text in Localized UI Design - ui</title>
+    <meta name="description" content="When adapting digital products for global audiences, translated text often expands significantly compared to the source language, causing UI containers to clip or truncate vital information. This article outlines practical design patterns, front-end engin">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/handling-truncated-text-in-localized-ui-design">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Handling Truncated Text in Localized UI Design - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/handling-truncated-text-in-localized-ui-design" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="When adapting digital products for global audiences, translated text often expands significantly compared to the source language, causing UI containers to clip or truncate vital information. This article outlines practical design patterns, front-end engin" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="handling-truncated-text-in-localized-ui-design">Handling
+Truncated Text in Localized UI Design</h1>
+<p>When adapting digital products for global audiences, translated text
+often expands significantly compared to the source language, causing UI
+containers to clip or truncate vital information. This article outlines
+practical design patterns, front-end engineering techniques, and
+localization workflows to resolve text truncation, maintain aesthetic
+integrity, and preserve usability across diverse languages.</p>
+<h3 id="design-flexible-layouts">Design Flexible Layouts</h3>
+<p>Fixed-width and fixed-height containers are the primary cause of
+localized text truncation. Modern interfaces should rely on flexible
+layout engines, such as CSS Flexbox, CSS Grid, or mobile auto-layout
+systems. Designing components to expand vertically or horizontally
+accommodates text expansion, which can reach up to 40% to 50% when
+translating short English strings into languages like German, French, or
+Finnish.</p>
+<h3 id="allow-text-wrapping">Allow Text Wrapping</h3>
+<p>Single-line constraints often force truncation where it is not
+strictly necessary. Whenever vertical screen real estate permits,
+configure text containers to allow multi-line wrapping instead of
+enforcing a single line. Pair this with minimum and maximum bounds to
+ensure the layout remains visually balanced while adapting to varied
+string lengths.</p>
+<h3 id="implement-adaptive-font-scaling">Implement Adaptive Font
+Scaling</h3>
+<p>For components with strict physical boundaries—such as buttons,
+navigation tabs, or dashboard widgets—adaptive typography can prevent
+truncation. Platforms often provide native solutions, such as
+<code>adjustsFontSizeToFitWidth</code> in iOS or
+<code>autoSizeTextType</code> in Android. In web environments, dynamic
+font sizing via CSS container queries or JavaScript can scale text down
+to fit. Define a strict minimum readable font size (typically no lower
+than 10px–12px) to prevent text from becoming illegible.</p>
+<h3 id="use-graceful-truncation-with-tooltips">Use Graceful Truncation
+with Tooltips</h3>
+<p>When space is fundamentally limited and text must be cut short, use
+an ellipsis (<code>text-overflow: ellipsis</code>) rather than a hard
+visual clip. To maintain accessibility and usability, always ensure the
+complete string is accessible. On desktop interfaces, display the full
+text inside an accessible tooltip on hover or focus. On touch devices,
+provide an expandable toggle, a modal preview, or a bottom sheet that
+reveals the complete message upon interaction.</p>
+<h3 id="enforce-string-limits-during-translation">Enforce String Limits
+During Translation</h3>
+<p>Prevention within the localization pipeline minimizes code-level
+workarounds. Provide translators with character or pixel limits directly
+in the Computer-Assisted Translation (CAT) tool or Translation
+Management System (TMS). Giving translators UI context, screenshots, and
+character maximums empowers them to choose shorter synonyms,
+abbreviations, or rephrased content that fits the visual space
+naturally.</p>
+<h3 id="integrate-pseudo-localization-in-development">Integrate
+Pseudo-Localization in Development</h3>
+<p>Discovering truncation late in the release cycle is costly.
+Pseudo-localization automates the testing of layout resilience by
+transforming source strings into padded, accented versions (e.g.,
+converting "Edit" to "[!!! Éééédíííjt !!!]") that simulate typical 30%
+to 50% length expansion. Running automated visual regression tests
+against pseudo-localized builds highlights overflowing containers before
+code reaches production.</p></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/handling-truncated-text-in-localized-ui-design';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

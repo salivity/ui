@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Implementing Dynamic Type in Cross-Platform UI - ui</title>
+    <meta name="description" content="Dynamic Type enables users to adjust the size of text displayed across their operating system, making applications significantly more accessible to individuals with visual impairments or specific reading preferences. Implementing Dynamic Type in a cross-p">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/implementing-dynamic-type-in-cross-platform-ui">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Implementing Dynamic Type in Cross-Platform UI - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/implementing-dynamic-type-in-cross-platform-ui" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Dynamic Type enables users to adjust the size of text displayed across their operating system, making applications significantly more accessible to individuals with visual impairments or specific reading preferences. Implementing Dynamic Type in a cross-p" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="implementing-dynamic-type-in-cross-platform-ui">Implementing
+Dynamic Type in Cross-Platform UI</h1>
+<p>Dynamic Type enables users to adjust the size of text displayed
+across their operating system, making applications significantly more
+accessible to individuals with visual impairments or specific reading
+preferences. Implementing Dynamic Type in a cross-platform user
+interface requires bridging platform-specific accessibility APIs,
+replacing static measurements with scalable units, designing adaptable
+layouts that prevent text truncation, and establishing sensible scaling
+boundaries. This guide explains how to effectively implement and
+maintain Dynamic Type support across modern cross-platform frameworks
+such as React Native, Flutter, and .NET MAUI.</p>
+<h2 id="leverage-platform-text-scaling-apis">Leverage Platform Text
+Scaling APIs</h2>
+<p>iOS and Android handle font scaling through different mechanisms. iOS
+relies on Dynamic Type text styles mapped through
+<code>UIFontMetrics</code>, while Android utilizes Scale-independent
+Pixels (<code>sp</code>) adjusted via system-level font scale factors.
+Cross-platform frameworks provide built-in abstractions to bridge these
+native systems:</p>
+<ul>
+<li><strong>React Native:</strong> Text components support font scaling
+by default through the <code>allowFontScaling</code> prop.
+Framework-level text styles read directly from the user's accessibility
+settings on both platforms.</li>
+<li><strong>Flutter:</strong> Flutter handles accessibility scaling
+through <code>MediaQuery.textScalerOf(context)</code>. The
+<code>Text</code> widget natively respects the device's system font
+settings unless explicitly overridden.</li>
+<li><strong>NET MAUI:</strong> Dynamic Type is managed via the
+<code>FontAutoScalingEnabled</code> property on controls like
+<code>Label</code>, <code>Button</code>, and <code>Entry</code>, which
+defaults to <code>true</code> to match the operating system's
+configuration.</li>
+</ul>
+<h2 id="use-scalable-layout-units">Use Scalable Layout Units</h2>
+<p>Hardcoded dimensions are the primary cause of UI breakage when text
+scales up. To preserve layout integrity:</p>
+<ul>
+<li><strong>Eliminate fixed heights on text containers:</strong> Avoid
+setting fixed <code>height</code> properties on containers that house
+text. Allow container heights to be determined automatically by the
+intrinsic size of their content.</li>
+<li><strong>Use relative and flexible units:</strong> Employ flexbox,
+responsive grids, and percentage-based sizing rather than absolute pixel
+values for structural containers.</li>
+<li><strong>Enable multi-line wrapping:</strong> Ensure all
+text-rendering elements allow wrapping by default (e.g., setting
+<code>numberOfLines={0}</code> or avoiding single-line restrictions
+unless combined with horizontal scrolling).</li>
+</ul>
+<h2 id="design-for-layout-reflow">Design for Layout Reflow</h2>
+<p>Larger text sizes frequently demand structural shifts in the user
+interface to maintain readability:</p>
+<ul>
+<li><strong>Switch from row to column layouts:</strong> Side-by-side
+items (such as a label next to an input field, or adjacent action
+buttons) should dynamically reflow into vertical stacks when the font
+scale exceeds standard thresholds.</li>
+<li><strong>Implement scrollable wrappers:</strong> Embed views
+containing substantial text inside vertical scroll views. Even
+non-scrollable dashboards should fall back to scrolling when large
+accessibility text sizes are active to prevent clipping.</li>
+<li><strong>Preserve icon-to-text alignment:</strong> Center-align icons
+relative to the first line of text rather than the entire multi-line
+bounding box using platform baseline alignment tools.</li>
+</ul>
+<h2 id="define-scale-bounds-and-graceful-degradation">Define Scale
+Bounds and Graceful Degradation</h2>
+<p>Unrestricted font scaling can occasionally disrupt mission-critical
+layouts, such as navigation bars, tab bars, or tabular data. While
+accessibility guidelines recommend supporting large text sizes,
+boundaries can be introduced where layout constraints make extreme
+scaling impossible:</p>
+<ul>
+<li><strong>Cap maximum scaling:</strong> In React Native, apply
+<code>maxFontSizeMultiplier</code> to set a ceiling on how large
+specific text elements can grow. In Flutter, wrap widgets with a
+modified <code>MediaQuery</code> that clamps the <code>TextScaler</code>
+using <code>TextScaler.linear(scaleFactor).clamp(...)</code>.</li>
+<li><strong>Conditionally hide non-essential elements:</strong> When
+text scales beyond standard accessibility sizes, hide decorative
+elements or secondary visual cues to prioritize screen real estate for
+essential content.</li>
+</ul>
+<h2 id="testing-and-verification">Testing and Verification</h2>
+<p>Ensure your implementation behaves correctly by testing across
+multiple configuration points:</p>
+<ul>
+<li><strong>iOS Accessibility Settings:</strong> Test using the Larger
+Accessibility Sizes toggle located in <strong>Settings &gt;
+Accessibility &gt; Display &amp; Text Size &gt; Larger
+Text</strong>.</li>
+<li><strong>Android Display Settings:</strong> Test across the full
+range of the <strong>Font size</strong> and <strong>Display
+size</strong> sliders in system settings.</li>
+<li><strong>Automated Accessibility Audits:</strong> Run automated UI
+tests using tools like Android Accessibility Scanner and Xcode
+Accessibility Inspector to detect clipped labels, overlapping
+components, and contrast failures caused by scaled text.</li>
+</ul></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/implementing-dynamic-type-in-cross-platform-ui';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

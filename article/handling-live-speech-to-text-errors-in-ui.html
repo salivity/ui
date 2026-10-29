@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handling Live Speech-to-Text Errors in UI - ui</title>
+    <meta name="description" content="Live speech-to-text (STT) systems inevitably encounter acoustic noise, overlapping voices, and vocabulary limitations that result in transcription mistakes. When implementing real-time transcription into digital products, the interface must set appropriat">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/handling-live-speech-to-text-errors-in-ui">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Handling Live Speech-to-Text Errors in UI - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/handling-live-speech-to-text-errors-in-ui" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Live speech-to-text (STT) systems inevitably encounter acoustic noise, overlapping voices, and vocabulary limitations that result in transcription mistakes. When implementing real-time transcription into digital products, the interface must set appropriat" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="handling-live-speech-to-text-errors-in-ui">Handling Live
+Speech-to-Text Errors in UI</h1>
+<p>Live speech-to-text (STT) systems inevitably encounter acoustic
+noise, overlapping voices, and vocabulary limitations that result in
+transcription mistakes. When implementing real-time transcription into
+digital products, the interface must set appropriate user expectations,
+communicate system confidence, and provide frictionless paths for
+correction. This article outlines practical UI patterns to gracefully
+mitigate live transcription errors, focusing on visual confidence
+states, non-disruptive text stabilization, seamless manual editing, and
+clear audio feedback mechanisms.</p>
+<h3 id="distinguish-interim-results-from-finalized-text">Distinguish
+Interim Results from Finalized Text</h3>
+<p>Real-time engines generate dynamic hypotheses before confirming
+words. Interfaces must clearly distinguish between words still being
+evaluated and words finalized by the model.</p>
+<ul>
+<li><strong>Visual Styling:</strong> Render provisional words with a
+lower opacity, lighter font weight, or subtle italicization. Shift to a
+standard, high-contrast text style only when the engine marks the phrase
+as final.</li>
+<li><strong>Anchor Points:</strong> Avoid jarring layout shifts. Reserve
+vertical line height and horizontal spacing dynamically so that when
+provisional text is replaced with a longer or shorter finalized string,
+surrounding UI components do not jump erratically.</li>
+</ul>
+<h3 id="surface-confidence-levels-subtly">Surface Confidence Levels
+Subtly</h3>
+<p>Exposing the system's certainty helps users identify potential errors
+without having to read every single word in detail.</p>
+<ul>
+<li><strong>Highlighting Uncertain Words:</strong> Apply a subtle dotted
+underline or an amber tint to words falling below a set confidence
+threshold (e.g., 70%).</li>
+<li><strong>Contextual Suggestions:</strong> When a user taps or hovers
+over a low-confidence word, show a popover with the top 2–3 alternate
+phonetic matches returned by the speech model's alternative hypothesis
+list.</li>
+</ul>
+<h3 id="provide-frictionless-inline-editing">Provide Frictionless Inline
+Editing</h3>
+<p>Users must be able to rectify misheard terms quickly, especially
+critical elements like names, dates, or technical jargon.</p>
+<ul>
+<li><strong>One-Click Corrections:</strong> Make individual words
+interactive. Clicking any word should pause or bypass transcription
+focus and present an inline input field, preventing the user from
+needing to navigate back through long paragraphs.</li>
+<li><strong>Voice-Driven Editing:</strong> Support quick verbal commands
+for hands-free environments, such as "undo that," "delete last
+sentence," or "replace [Word A] with [Word B]."</li>
+<li><strong>Keyboard Fallback:</strong> Always preserve a standard text
+input field adjacent to or integrated with the transcription output,
+enabling rapid manual touch-ups without restarting the audio
+stream.</li>
+</ul>
+<h3 id="communicate-audio-and-network-health">Communicate Audio and
+Network Health</h3>
+<p>Often, transcription degradation stems from physical environment
+issues rather than engine flaws. Proactive system messaging helps users
+self-correct their setup.</p>
+<ul>
+<li><strong>Ambient Volume Indicators:</strong> Include an animated
+waveform or visual VU meter near the microphone icon. If the user is
+speaking too quietly, too loudly, or clipping the input, notify them
+immediately.</li>
+<li><strong>Acoustic Warning Banners:</strong> Trigger non-modal toast
+notifications for persistent issues, such as "High background noise
+detected" or "Multiple speakers overlapping."</li>
+<li><strong>Latency &amp; Disconnection States:</strong> If network lag
+delays streaming transcription, show a pulsing typing indicator rather
+than freezing the screen, and visually preserve the point in time where
+the stream was interrupted.</li>
+</ul>
+<h3 id="preserve-original-audio-and-history">Preserve Original Audio and
+History</h3>
+<p>Providing a safety net ensures that errors do not cause permanent
+data loss.</p>
+<ul>
+<li><strong>Synchronized Playback:</strong> Bind the recorded audio
+timestamps to the generated text spans. Allowing users to click a
+confusing sentence and listen to the exact three-second audio snippet
+eliminates ambiguity instantly.</li>
+<li><strong>Undo History:</strong> Maintain a granular undo/redo stack
+that tracks both system-generated textual replacements and manual user
+edits, ensuring mistakes made by late-arriving transcription packets can
+be reverted.</li>
+</ul></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/handling-live-speech-to-text-errors-in-ui';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

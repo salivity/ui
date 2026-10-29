@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pitfalls of Over-Engineering a UI Component Library - ui</title>
+    <meta name="description" content="Building an in-house UI component library is a standard milestone for growing engineering teams, yet these tools frequently collapse under the weight of excessive complexity. This article examines the most common pitfalls of over-engineering a UI componen">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/pitfalls-of-over-engineering-a-ui-component-library">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Pitfalls of Over-Engineering a UI Component Library - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/pitfalls-of-over-engineering-a-ui-component-library" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Building an in-house UI component library is a standard milestone for growing engineering teams, yet these tools frequently collapse under the weight of excessive complexity. This article examines the most common pitfalls of over-engineering a UI componen" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="pitfalls-of-over-engineering-a-ui-component-library">Pitfalls of
+Over-Engineering a UI Component Library</h1>
+<p>Building an in-house UI component library is a standard milestone for
+growing engineering teams, yet these tools frequently collapse under the
+weight of excessive complexity. This article examines the most common
+pitfalls of over-engineering a UI component library, detailing how
+premature abstractions, bloated APIs, rigid design systems, and
+unnecessary custom tooling turn a productivity booster into an expensive
+maintenance bottleneck.</p>
+<h2 id="1-premature-abstraction">1. Premature Abstraction</h2>
+<p>The most frequent error in component library design is building for
+hypothetical future requirements instead of current, concrete needs.
+Developers often attempt to design a universally configurable
+component—such as a single <code>&lt;Card /&gt;</code> or
+<code>&lt;Button /&gt;</code> intended to handle every possible layout,
+state, and interaction variant imaginable across multiple products.</p>
+<p>This leads to the "rule of three" being ignored. Abstracting patterns
+before they have organically appeared three times in production code
+results in brittle foundations. When real-world edge cases finally
+arrive, the abstract architecture inevitably resists them, requiring
+messy workarounds or constant breaking changes.</p>
+<h2 id="2-prop-bloat-and-god-components">2. Prop Bloat and "God
+Components"</h2>
+<p>When teams try to make components infinitely flexible through
+configuration rather than composition, component interfaces rapidly
+deteriorate. A simple <code>&lt;Table /&gt;</code> or
+<code>&lt;Modal /&gt;</code> component can easily balloon to accept 40
+or 50 distinct props covering margin tweaks, conditional sub-elements,
+and bespoke hover behaviors.</p>
+<p>This approach creates significant issues:</p>
+<ul>
+<li><strong>Cognitive Overhead:</strong> Developers spend more time
+reading internal documentation to find the right prop combinations than
+they would writing native markup.</li>
+<li><strong>Fragile Internals:</strong> Internal code becomes a tangle
+of conditional statements
+(<code>if (props.isCompact &amp;&amp; !props.hideBorder)</code>) that
+make bugs hard to trace and isolate.</li>
+<li><strong>Component Bloat:</strong> Every edge-case feature is bundled
+into the component, forcing all consumers to download code they never
+use.</li>
+</ul>
+<p>Adopting compound component patterns or primitive slots is far more
+sustainable than controlling layout through boolean props.</p>
+<h2 id="3-reinventing-native-behaviors-and-accessibility">3. Reinventing
+Native Behaviors and Accessibility</h2>
+<p>Over-engineering often manifests as rebuilding complex elements—such
+as dropdowns, selects, date pickers, or tooltips—from scratch using
+generic <code>&lt;div&gt;</code> tags and heavy JavaScript event
+listeners.</p>
+<p>Recreating native HTML behaviors requires an immense amount of work
+to handle keyboard navigation, focus trapping, screen-reader
+compatibility (ARIA), and mobile touch events correctly. Teams that
+build these primitives internally often deliver inaccessible, bug-ridden
+alternatives to standard elements. Utilizing headless, battle-tested UI
+primitives (such as Radix UI, React Aria, or Headless UI) prevents teams
+from spending hundreds of hours reinventing foundational web
+accessibility.</p>
+<h2 id="4-hyper-complex-theming-engines">4. Hyper-Complex Theming
+Engines</h2>
+<p>Dynamic theming is a valuable feature, but engineering teams
+frequently overcomplicate its implementation. Creating proprietary
+CSS-in-JS runtimes, deeply nested design token structures, or
+multi-layered style-resolution pipelines introduces severe performance
+and maintenance costs.</p>
+<p>Excessive tokenization—such as having distinct tokens like
+<code>$button-primary-border-color-hover-active</code> instead of a
+shared semantic token like
+<code>$color-interactive-active</code>—paralyzes developers who struggle
+to select the correct variable. Modern styling solutions, such as
+standard CSS variables (custom properties) paired with utility classes
+or lightweight zero-runtime CSS tools, solve the majority of theming
+requirements without the overhead of complex custom engines.</p>
+<h2 id="5-maintenance-paralysis-and-slow-velocity">5. Maintenance
+Paralysis and Slow Velocity</h2>
+<p>As a component library becomes increasingly complex, publishing even
+a minor update turns into an intimidating chore. Over-engineered
+libraries often feature:</p>
+<ul>
+<li>Convoluted monorepo setups with brittle build pipelines.</li>
+<li>Excessive internal dependencies where updating a single primitive
+breaks three downstream packages.</li>
+<li>Test suites that mock too much internal logic rather than testing
+realistic user behavior.</li>
+</ul>
+<p>When the friction of contributing to the shared library becomes too
+high, product teams stop contributing altogether. Instead, they begin
+duplicating code or creating local overrides within their own
+applications, which completely defeats the purpose of having a
+centralized design system.</p>
+<h2 id="6-prioritizing-purity-over-pragmatism">6. Prioritizing Purity
+Over Pragmatism</h2>
+<p>A component library should serve the product teams that consume it,
+not exist as an isolated architectural showcase. When library
+maintainers enforce strict dogmatism—such as disallowing any inline
+styles, refusing to expose raw HTML attributes, or strictly blocking
+non-standard layouts—they force application developers to fight the
+library rather than leverage it.</p>
+<p>The most effective component libraries provide sensible defaults
+while preserving escape hatches. By focusing on composable primitives,
+maintaining standard web semantics, and abstracting only what has proven
+necessary, teams can maintain a lightweight system that accelerates
+development rather than slowing it down.</p></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/pitfalls-of-over-engineering-a-ui-component-library';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

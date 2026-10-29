@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Logical Properties for RTL UI Layouts - ui</title>
+    <meta name="description" content="CSS logical properties provide a modern, adaptable approach to internationalization by replacing physical directions (left, right, top, bottom) with flow-relative directions (inline, block). When building interfaces for right-to-left (RTL) languages such">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/css-logical-properties-for-rtl-ui-layouts">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="CSS Logical Properties for RTL UI Layouts - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/css-logical-properties-for-rtl-ui-layouts" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="CSS logical properties provide a modern, adaptable approach to internationalization by replacing physical directions (left, right, top, bottom) with flow-relative directions (inline, block). When building interfaces for right-to-left (RTL) languages such" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="css-logical-properties-for-rtl-ui-layouts">CSS Logical
+Properties for RTL UI Layouts</h1>
+<p>CSS logical properties provide a modern, adaptable approach to
+internationalization by replacing physical directions (left, right, top,
+bottom) with flow-relative directions (inline, block). When building
+interfaces for right-to-left (RTL) languages such as Arabic, Hebrew, or
+Persian, logical properties automatically adjust layout spacing,
+alignments, and boundaries based on the document's writing mode and
+direction. This eliminates the need for separate RTL stylesheets or
+repetitive override rules, streamlining cross-language user interface
+development into a single, maintainable codebase.</p>
+<h3 id="physical-vs-logical-dimensions">Physical vs. Logical
+Dimensions</h3>
+<p>Traditional CSS relies on physical coordinates tied directly to the
+screen:</p>
+<ul>
+<li><strong>Top and Bottom:</strong> The vertical axis.</li>
+<li><strong>Left and Right:</strong> The horizontal axis.</li>
+</ul>
+<p>CSS logical properties map these axes relative to the flow of
+content:</p>
+<ul>
+<li><strong>Block Axis:</strong> The direction in which blocks of
+content stack. In standard horizontal writing modes, this runs
+vertically from top to bottom (<code>block-start</code> to
+<code>block-end</code>).</li>
+<li><strong>Inline Axis:</strong> The direction in which text flows
+within a line. In a left-to-right (LTR) layout, it runs left to right.
+In an RTL layout, it automatically flips to run right to left
+(<code>inline-start</code> to <code>inline-end</code>).</li>
+</ul>
+<h3 id="spacing-margin-and-padding">Spacing: Margin and Padding</h3>
+<p>In traditional layouts, adding space to the beginning of a sentence
+requires explicit physical rules:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* Traditional LTR and RTL approach */</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">.element</span> {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">margin-left</span><span class="ch">:</span> <span class="dv">1.5</span><span class="dt">rem</span><span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">[</span><span class="ss">dir</span><span class="op">=</span><span class="st">&quot;rtl&quot;</span><span class="ex">]</span> <span class="fu">.element</span> {</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">margin-left</span><span class="ch">:</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">margin-right</span><span class="ch">:</span> <span class="dv">1.5</span><span class="dt">rem</span><span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Using logical properties, this behavior is handled automatically
+without overrides:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* Logical approach */</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">.element</span> {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">margin-inline-start</span><span class="ch">:</span> <span class="dv">1.5</span><span class="dt">rem</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>When an element or its ancestor has <code>dir="rtl"</code>,
+<code>margin-inline-start</code> automatically computes to
+<code>margin-right</code>. The same logic applies to
+<code>padding-inline-start</code>, <code>padding-inline-end</code>, and
+block dimensions (<code>margin-block-start</code>,
+<code>margin-block-end</code>).</p>
+<h3 id="borders-and-border-radius">Borders and Border Radius</h3>
+<p>Borders frequently indicate separators, active states, or directional
+cues. Logical properties handle borders identically to margins and
+padding:</p>
+<ul>
+<li><code>border-inline-start</code>: Sets the border at the start of
+the inline text flow (left in LTR, right in RTL).</li>
+<li><code>border-inline-end</code>: Sets the border at the end of the
+inline text flow (right in LTR, left in RTL).</li>
+</ul>
+<p>Logical border-radius properties also adapt dynamically:</p>
+<ul>
+<li><code>border-start-start-radius</code>: Top-left in LTR, top-right
+in RTL.</li>
+<li><code>border-start-end-radius</code>: Top-right in LTR, top-left in
+RTL.</li>
+<li><code>border-end-start-radius</code>: Bottom-left in LTR,
+bottom-right in RTL.</li>
+<li><code>border-end-end-radius</code>: Bottom-right in LTR, bottom-left
+in RTL.</li>
+</ul>
+<h3 id="sizing-and-positioning">Sizing and Positioning</h3>
+<p>Logical properties replace absolute sizing and positioning
+directives:</p>
+<ul>
+<li><strong>Sizing:</strong> Instead of <code>width</code> and
+<code>height</code>, logical properties use <code>inline-size</code>
+(horizontal size in standard writing modes) and <code>block-size</code>
+(vertical size).</li>
+<li><strong>Positioning:</strong> Instead of using <code>top</code>,
+<code>right</code>, <code>bottom</code>, and <code>left</code> for
+positioned elements, use the <code>inset</code> family:
+<ul>
+<li><code>inset-inline-start</code> replaces <code>left</code> in LTR
+and <code>right</code> in RTL.</li>
+<li><code>inset-inline-end</code> replaces <code>right</code> in LTR and
+<code>left</code> in RTL.</li>
+<li><code>inset-block-start</code> replaces <code>top</code>.</li>
+<li><code>inset-block-end</code> replaces <code>bottom</code>.</li>
+</ul></li>
+</ul>
+<h3 id="text-alignment">Text Alignment</h3>
+<p>Using <code>text-align: left</code> forces text to the left side of
+the container regardless of language direction, causing broken alignment
+in RTL interfaces. Using flow-relative alignment solves this:</p>
+<ul>
+<li><code>text-align: start</code>: Aligns text to the left in LTR and
+to the right in RTL.</li>
+<li><code>text-align: end</code>: Aligns text to the right in LTR and to
+the left in RTL.</li>
+</ul>
+<h3 id="core-benefits-for-internationalization">Core Benefits for
+Internationalization</h3>
+<ul>
+<li><strong>Single Codebase:</strong> Eliminates the necessity for CSS
+preprocessing tools, CSS-in-JS transformations, or separate
+<code>rtl.css</code> files.</li>
+<li><strong>Automatic Adaptation:</strong> Toggling between LTR and RTL
+simply requires updating the HTML attribute (<code>dir="rtl"</code> or
+<code>dir="ltr"</code>), and the layout immediately adjusts.</li>
+<li><strong>Reduced Specificity Conflicts:</strong> Because manual
+overrides are no longer required to flip margins and alignments, style
+sheets remain flat and free from specificity wars.</li>
+</ul></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/css-logical-properties-for-rtl-ui-layouts';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

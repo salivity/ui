@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tesler&#39;s Law in Enterprise UI Design - ui</title>
+    <meta name="description" content="Tesler’s Law of Conservation of Complexity states that every system contains an inherent amount of complexity that cannot be eliminated, only shifted. In enterprise UI design, this principle dictates the critical trade-off between engineering effort and u">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/tesler-s-law-in-enterprise-ui-design">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Tesler&#39;s Law in Enterprise UI Design - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/tesler-s-law-in-enterprise-ui-design" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Tesler’s Law of Conservation of Complexity states that every system contains an inherent amount of complexity that cannot be eliminated, only shifted. In enterprise UI design, this principle dictates the critical trade-off between engineering effort and u" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="teslers-law-in-enterprise-ui-design">Tesler's Law in Enterprise
+UI Design</h1>
+<p>Tesler’s Law of Conservation of Complexity states that every system
+contains an inherent amount of complexity that cannot be eliminated,
+only shifted. In enterprise UI design, this principle dictates the
+critical trade-off between engineering effort and user effort. Because
+enterprise workflows involve intricate business logic, regulatory
+constraints, and vast datasets, application designers cannot make
+processes fundamentally simpler; instead, they must decide whether the
+complexity is absorbed by the software architecture or offloaded onto
+the enterprise user.</p>
+<h3 id="understanding-inherent-vs-accidental-complexity">Understanding
+Inherent vs. Accidental Complexity</h3>
+<p>To apply Tesler’s Law effectively, enterprise designers must
+distinguish between two forms of complexity:</p>
+<ul>
+<li><strong>Inherent Complexity:</strong> The unavoidable logic tied
+directly to the business domain, such as tax compliance rules, supply
+chain dependencies, or access control permissions. This cannot be
+deleted without breaking the core utility of the software.</li>
+<li><strong>Accidental Complexity:</strong> Friction introduced by poor
+design, inefficient data presentation, legacy architecture, or redundant
+navigation.</li>
+</ul>
+<p>Tesler’s Law focuses on inherent complexity. When designing
+enterprise interfaces, the goal is not to eliminate business logic, but
+to transfer the cognitive burden of managing that logic from the human
+operator to the system.</p>
+<h3 id="shifting-the-burden-system-vs-user">Shifting the Burden: System
+vs. User</h3>
+<p>In consumer-facing software, product teams aggressively absorb
+complexity into the backend to keep interfaces minimal. In contrast,
+enterprise tools have historically offloaded inherent complexity onto
+the user, resulting in cluttered dashboards, dense forms with dozens of
+unvalidated fields, and lengthy employee training programs.</p>
+<p>Applying Tesler's Law in an enterprise setting requires shifting this
+burden back to the application through several targeted techniques:</p>
+<h4 id="1-sensible-defaults-and-contextual-intelligence">1. Sensible
+Defaults and Contextual Intelligence</h4>
+<p>Rather than requiring users to manually configure every variable in a
+transaction, the interface should leverage system intelligence to
+pre-populate fields. Using contextual data—such as user role, geographic
+location, historical actions, and organizational policy—the system
+predicts and selects the standard configuration while still allowing
+manual overrides.</p>
+<h4 id="2-progressive-disclosure">2. Progressive Disclosure</h4>
+<p>Enterprise users frequently need access to advanced settings, but
+rarely all at once. Progressive disclosure surfaces only the essential
+inputs required for the primary workflow, hiding secondary and edge-case
+parameters behind contextual interactions (such as accordions, side
+drawers, or advanced tabs). This reduces immediate cognitive load
+without reducing functional capability.</p>
+<h4 id="3-automated-error-prevention-and-validation">3. Automated Error
+Prevention and Validation</h4>
+<p>Offloading complexity means building validation rules directly into
+the input cycle. Instead of allowing an end-user to submit a batch
+record and encounter a generic failure message, the UI should provide
+real-time, inline validation, dependency checks, and clear guidance on
+how to resolve conflicts before submission.</p>
+<h3 id="the-pitfall-of-over-simplification-in-enterprise-ui">The Pitfall
+of Over-Simplification in Enterprise UI</h3>
+<p>While consumer applications prioritize radical simplicity, enterprise
+UI requires a nuanced interpretation of Tesler's Law. Attempting to make
+an enterprise tool look like a consumer app often results in "false
+simplicity"—where complexity is hidden so aggressively that expert users
+can no longer perform high-velocity tasks.</p>
+<p>Enterprise workers rely on data density, keyboard shortcuts,
+multi-window workflows, and batch operations to maintain productivity.
+If an interface hides vital fields beneath multi-step navigation paths,
+the system increases the user’s physical interaction cost (clicks and
+page loads) even as it decreases visual complexity.</p>
+<p>The goal of applying Tesler’s Law to enterprise software is not the
+complete eradication of surface-level complexity. Rather, it is the
+deliberate placement of complexity: leaving functional density intact
+for power users while ensuring the software, not the user, manages the
+heavy lifting of state management, calculations, and domain logic.</p></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/tesler-s-law-in-enterprise-ui-design';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

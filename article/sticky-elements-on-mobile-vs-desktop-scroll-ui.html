@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sticky Elements on Mobile vs Desktop Scroll UI - ui</title>
+    <meta name="description" content="Sticky elements rely on CSS positioning (position: sticky) to toggle between relative and fixed positioning based on the user&#39;s scroll position. While the underlying code functions identically across devices, user experience and rendering behaviors diverg">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/sticky-elements-on-mobile-vs-desktop-scroll-ui">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Sticky Elements on Mobile vs Desktop Scroll UI - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/sticky-elements-on-mobile-vs-desktop-scroll-ui" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Sticky elements rely on CSS positioning (position: sticky) to toggle between relative and fixed positioning based on the user&#39;s scroll position. While the underlying code functions identically across devices, user experience and rendering behaviors diverg" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="sticky-elements-on-mobile-vs-desktop-scroll-ui">Sticky Elements
+on Mobile vs Desktop Scroll UI</h1>
+<p>Sticky elements rely on CSS positioning
+(<code>position: sticky</code>) to toggle between relative and fixed
+positioning based on the user's scroll position. While the underlying
+code functions identically across devices, user experience and rendering
+behaviors diverge sharply between desktop and mobile environments.
+Differences in screen real estate, dynamic browser chrome, virtual
+keyboards, and touch-based momentum scrolling fundamentally alter how
+sticky navigation, headers, and call-to-action bars perform on mobile
+viewports compared to stable desktop displays.</p>
+<h2 id="dynamic-viewports-and-browser-chrome">Dynamic Viewports and
+Browser Chrome</h2>
+<p>Desktop browsers feature fixed viewports where toolbars, tabs, and
+address bars remain static. A sticky element anchored at
+<code>top: 0</code> will adhere reliably to the top edge of the monitor
+window without shifting.</p>
+<p>Mobile browsers, such as Safari on iOS and Chrome on Android, employ
+dynamic viewports. As a user scrolls down, the browser's URL bar shrinks
+or disappears to maximize screen space; scrolling up reveals it again.
+This dynamic resizing constantly updates the layout viewport. If a
+sticky element is anchored to the bottom (<code>bottom: 0</code>), it
+may jump, lag, or temporarily hide beneath the expanding browser
+interface during scroll direction changes.</p>
+<h2 id="momentum-and-inertial-scrolling">Momentum and Inertial
+Scrolling</h2>
+<p>Desktop scrolling is typically discrete, controlled by mouse wheels,
+trackpads, or scrollbar drags that provide predictable, frame-by-frame
+updates.</p>
+<p>Mobile devices use touch-based inertial (momentum) scrolling. When a
+user flicks the screen, the page continues moving with simulated
+physics. On systems like iOS, this includes "rubber-banding" or
+overscroll bouncing at page boundaries. During an overscroll bounce:</p>
+<ul>
+<li>Mobile sticky elements can detach from the viewport edge and reveal
+background space.</li>
+<li>Paint synchronization issues can cause the sticky element to stutter
+or flicker as the GPU struggles to reconcile the touch gesture with the
+sticky bounding box.</li>
+</ul>
+<h2 id="screen-real-estate-and-usability">Screen Real Estate and
+Usability</h2>
+<p>Desktop screens offer abundant vertical and horizontal space. Sticky
+sidebars, headers, and utility panels can persist indefinitely without
+compromising the readability of the main content.</p>
+<p>On mobile, vertical space is extremely constrained. A sticky header
+that takes up 60 pixels might occupy 5% of a desktop screen, but up to
+15% to 20% of an older or smaller mobile screen. Stacking multiple
+sticky elements (such as a header and an accept-cookies banner) can
+obscure half the readable area, frustrating users and increasing
+accidental taps.</p>
+<h2 id="the-virtual-keyboard-interaction">The Virtual Keyboard
+Interaction</h2>
+<p>Desktop inputs do not alter the window size when focused.</p>
+<p>On mobile devices, tapping an input field triggers an on-screen
+virtual keyboard. This keyboard compresses the visual viewport by
+roughly 40% to 50%. Sticky elements—particularly sticky footers or
+bottom navigation bars—are pushed directly above the virtual keyboard.
+This often blocks the input field the user is trying to type into,
+creates severe visual clutter, or triggers erratic layout jumps when the
+keyboard opens and closes.</p>
+<h2 id="touch-gestures-and-pinch-to-zoom">Touch Gestures and
+Pinch-to-Zoom</h2>
+<p>Desktop users rarely zoom into a layout unless using accessibility
+magnification software. Mobile users routinely pinch-to-zoom to read
+small text or view images.</p>
+<p>When a mobile page is zoomed in:</p>
+<ul>
+<li>The visual viewport detaches from the layout viewport.</li>
+<li>Sticky elements often stay pegged to the layout viewport, causing
+them to float awkwardly in the middle of the screen or disappear outside
+the user's current visual field.</li>
+<li>On desktop, sticky elements naturally scale within the window
+without breaking their adherence to the chosen edge.</li>
+</ul></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/sticky-elements-on-mobile-vs-desktop-scroll-ui';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

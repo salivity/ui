@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Split Buttons: Multiple Actions in One UI Element - ui</title>
+    <meta name="description" content="Split buttons are hybrid user interface components that combine an immediate primary action with a dropdown list of related secondary alternatives into a single, cohesive control. By partitioning a single visual button into two distinct, clickable zones,">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/split-buttons-multiple-actions-in-one-ui-element">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Split Buttons: Multiple Actions in One UI Element - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/split-buttons-multiple-actions-in-one-ui-element" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Split buttons are hybrid user interface components that combine an immediate primary action with a dropdown list of related secondary alternatives into a single, cohesive control. By partitioning a single visual button into two distinct, clickable zones," />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="split-buttons-multiple-actions-in-one-ui-element">Split Buttons:
+Multiple Actions in One UI Element</h1>
+<p>Split buttons are hybrid user interface components that combine an
+immediate primary action with a dropdown list of related secondary
+alternatives into a single, cohesive control. By partitioning a single
+visual button into two distinct, clickable zones, this design pattern
+maximizes screen real estate, reduces visual clutter, and streamlines
+user workflows. This article explains the anatomy of split buttons, how
+they manage interaction hierarchies, their behavioral mechanics, and the
+practical usability benefits they provide in modern interface
+design.</p>
+<h3 id="anatomy-and-mechanics-of-a-split-button">Anatomy and Mechanics
+of a Split Button</h3>
+<p>A split button consists of two clearly defined segments separated by
+a subtle visual divider:</p>
+<ol type="1">
+<li><strong>The Primary Action Area:</strong> The larger segment of the
+button, containing a text label or icon. Clicking this section executes
+the default, most common, or most recently used action immediately.</li>
+<li><strong>The Dropdown Trigger:</strong> A smaller, adjacent segment
+typically marked with a downward-facing arrow or caret icon. Clicking
+this section does not trigger the primary action; instead, it opens a
+contextual menu displaying alternative, related actions.</li>
+</ol>
+<p>By physically decoupling the execution of the primary task from the
+selection of alternatives, split buttons eliminate unnecessary
+navigation steps for high-frequency commands while keeping secondary
+options accessible.</p>
+<h3 id="managing-action-hierarchy-and-context">Managing Action Hierarchy
+and Context</h3>
+<p>Split buttons function by establishing a strict priority hierarchy
+among related tasks. In many applications, actions come in
+variations—such as "Save," "Save and Continue," or "Save as Draft."
+Placing separate buttons for each variation would clutter the interface
+and force users to evaluate multiple options before acting.</p>
+<p>The split button solves this by making the most logical or standard
+option immediately available with a single click. The secondary options
+housed within the dropdown share direct semantic context with the main
+action, ensuring the user understands that these are variations or
+extensions of the core task rather than unrelated functions.</p>
+<h3 id="interaction-models-static-vs-dynamic-defaults">Interaction
+Models: Static vs. Dynamic Defaults</h3>
+<p>Split buttons typically employ one of two functional models:</p>
+<ul>
+<li><strong>Static Primary Action:</strong> The default action never
+changes, regardless of what the user selects from the dropdown. For
+example, a "Send" button might always send an email, while the dropdown
+reliably offers "Send Later" or "Schedule Send." This approach preserves
+predictability.</li>
+<li><strong>Dynamic (Stateful) Primary Action:</strong> Selecting an
+option from the dropdown menu executes that action and promotes it to
+become the new primary button label. For instance, in an export tool,
+switching from "Export as PDF" to "Export as CSV" makes "Export as CSV"
+the one-click default for subsequent interactions. This model reduces
+repetitive clicks in workflow-heavy software.</li>
+</ul>
+<h3 id="key-usability-benefits">Key Usability Benefits</h3>
+<ul>
+<li><strong>Conservation of Space:</strong> By consolidating three to
+five related actions into the footprint of a single standard button,
+split buttons preserve clean layouts on compact screens and dense
+toolbars.</li>
+<li><strong>Reduced Cognitive Load:</strong> Users can act
+instantaneously on the default action without reading through a list of
+possibilities, speeding up routine tasks.</li>
+<li><strong>Error Prevention:</strong> Clear physical separation between
+the primary trigger and the dropdown caret prevents accidental menu
+activations when a user simply intends to execute the standard
+command.</li>
+</ul></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/split-buttons-multiple-actions-in-one-ui-element';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

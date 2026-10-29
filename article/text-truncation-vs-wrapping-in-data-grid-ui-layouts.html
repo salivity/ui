@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Truncation vs Wrapping in Data Grid UI Layouts - ui</title>
+    <meta name="description" content="Choosing between text truncation and text wrapping directly determines the visual stability, scannability, and rendering performance of a UI data grid. While truncation enforces uniform row heights and ensures predictable layouts at the cost of hidden dat">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/text-truncation-vs-wrapping-in-data-grid-ui-layouts">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Text Truncation vs Wrapping in Data Grid UI Layouts - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/text-truncation-vs-wrapping-in-data-grid-ui-layouts" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Choosing between text truncation and text wrapping directly determines the visual stability, scannability, and rendering performance of a UI data grid. While truncation enforces uniform row heights and ensures predictable layouts at the cost of hidden dat" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="text-truncation-vs-wrapping-in-data-grid-ui-layouts">Text
+Truncation vs Wrapping in Data Grid UI Layouts</h1>
+<p>Choosing between text truncation and text wrapping directly
+determines the visual stability, scannability, and rendering performance
+of a UI data grid. While truncation enforces uniform row heights and
+ensures predictable layouts at the cost of hidden data, text wrapping
+prioritizes immediate data visibility while introducing variable row
+heights that can degrade scrolling performance and visual rhythm.
+Understanding how these two approaches interact with layout engines,
+user scanning patterns, and virtual scrolling is critical for designing
+scalable enterprise interfaces.</p>
+<h3 id="row-height-consistency-and-layout-stability">Row Height
+Consistency and Layout Stability</h3>
+<p>Data grids achieve maximum visual stability when row dimensions
+remain predictable. Text truncation (typically via
+<code>overflow: hidden</code>, <code>text-overflow: ellipsis</code>, and
+<code>white-space: nowrap</code>) forces all content into a single line.
+This guarantees identical row heights across the entire dataset,
+creating a rigid vertical grid rhythm. The layout engine does not need
+to recalculate row geometries dynamically, preventing layout shifts
+during data loading or sorting.</p>
+<p>Conversely, text wrapping allows container cells to expand vertically
+to accommodate long strings. This introduces variable row heights within
+the same table. An entry with a short title might occupy 40 pixels,
+while an adjacent row with an extended description expands to 120
+pixels. This variation causes layout instability, pushes subsequent rows
+down dynamically as content streams in, and creates visual noise that
+disrupts the user's eye path.</p>
+<h3 id="impact-on-virtual-scrolling-and-rendering-performance">Impact on
+Virtual Scrolling and Rendering Performance</h3>
+<p>Modern web applications rely on virtualization (rendering only the
+rows currently visible in the DOM) to handle large datasets smoothly.
+Text truncation provides an immense performance advantage in virtualized
+grids because row heights are fixed and constant. The virtualization
+engine can compute scrollbar thumb positions, total scroll height, and
+row offsets using simple arithmetic:</p>
+<p><span class="math display">\[\text{Offset} = \text{Row Index} \times
+\text{Fixed Row Height}\]</span></p>
+<p>When text wrapping is enabled, row heights become variable and
+unpredictable until the DOM node is rendered and measured. This forces
+the virtualization engine to:</p>
+<ol type="1">
+<li>Render hidden elements off-screen to measure their heights (dynamic
+measurement).</li>
+<li>Cache row heights and recompute scroll trajectories
+dynamically.</li>
+<li>Handle scroll-jumping or visual stutter (jank) as newly scrolled
+rows with unexpected heights enter the viewport and displace surrounding
+content.</li>
+</ol>
+<h3 id="visual-scannability-and-information-density">Visual Scannability
+and Information Density</h3>
+<p>Data grids are primarily analytical tools designed for comparison and
+rapid scanning. Truncated layouts facilitate high information density.
+Because horizontal baselines remain uniform, users can quickly scan down
+a specific column without readjusting their vertical eye tracking. The
+primary trade-off is that truncated text requires secondary
+interactions—such as tooltips, modal views, or hover expansions—to
+expose hidden content.</p>
+<p>Text wrapping eliminates the need for secondary interactions by
+displaying all content up front. However, it significantly reduces
+information density. Tall, wrapped rows consume excessive viewport
+space, decreasing the number of data points visible at a single glance.
+In dense, multi-column tables, uneven rows force the eye to jump
+erratically between varying line baselines, increasing cognitive load
+and slowing down row-by-row comparisons.</p>
+<h3 id="design-recommendations-for-grid-layouts">Design Recommendations
+for Grid Layouts</h3>
+<ul>
+<li><strong>Default to Truncation for Tabular Scanning:</strong> For
+enterprise tables, logs, analytics, and primary identifier columns, use
+truncation with an ellipsis. Pair this with native browser tooltips
+(<code>title</code> attribute) or custom accessible popovers so users
+can inspect truncated values on demand.</li>
+<li><strong>Define Max-Widths on Truncated Columns:</strong> Ensure
+columns have explicit or proportional maximum widths; otherwise, flex or
+grid layouts may allow one expanding cell to crush adjacent columns out
+of the viewport.</li>
+<li><strong>Cap Wrapped Content:</strong> If wrapping is non-negotiable
+for critical text fields, apply line clamping (e.g.,
+<code>-webkit-line-clamp: 2</code> or <code>3</code>). This compromises
+between visibility and layout stability by capping the maximum possible
+vertical expansion of a row.</li>
+<li><strong>Provide User-Level Controls:</strong> In dense desktop
+applications, consider offering user toggles for row density (e.g.,
+"Compact" with truncation versus "Expanded" with wrapping) or
+column-specific auto-fit toggles, allowing users to choose between
+layout speed and full text visibility based on their task.</li>
+</ul></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/text-truncation-vs-wrapping-in-data-grid-ui-layouts';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

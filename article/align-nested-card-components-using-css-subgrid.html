@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Align Nested Card Components Using CSS Subgrid - ui</title>
+    <meta name="description" content="CSS subgrid resolves a longstanding web design challenge by allowing nested elements within separate grid items to participate directly in the sizing tracks of a shared parent grid. In traditional card-based user interfaces, cards with varying text length">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/align-nested-card-components-using-css-subgrid">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Align Nested Card Components Using CSS Subgrid - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/align-nested-card-components-using-css-subgrid" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="CSS subgrid resolves a longstanding web design challenge by allowing nested elements within separate grid items to participate directly in the sizing tracks of a shared parent grid. In traditional card-based user interfaces, cards with varying text length" />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="align-nested-card-components-using-css-subgrid">Align Nested
+Card Components Using CSS Subgrid</h1>
+<p>CSS subgrid resolves a longstanding web design challenge by allowing
+nested elements within separate grid items to participate directly in
+the sizing tracks of a shared parent grid. In traditional card-based
+user interfaces, cards with varying text lengths often suffer from
+misaligned elements, such as action buttons, metadata, or headers. By
+applying <code>grid-template-rows: subgrid</code> to card containers,
+internal elements automatically snap to the same horizontal tracks
+across all columns, creating perfectly aligned, adaptable card
+interfaces without relying on rigid height hacks or complex
+JavaScript.</p>
+<h3 id="the-limitation-of-traditional-grid-in-card-layouts">The
+Limitation of Traditional Grid in Card Layouts</h3>
+<p>Standard CSS Grid establishes a formatting context exclusively
+between a parent container and its direct children. When building a
+multi-column card layout, each card acts as a direct child of the main
+grid, but the contents inside the card—such as an image, title, excerpt,
+and footer—belong to an isolated context.</p>
+<p>If one card has a three-line title while an adjacent card has a
+single-line title, their respective excerpt and footer elements fall out
+of horizontal alignment. Previously, developers mitigated this issue
+using Flexbox with <code>margin-top: auto</code> or by enforcing
+artificial fixed heights via <code>min-height</code> or line-clamping.
+While these workarounds push footers to the bottom, they fail to align
+intermediate elements like headers, subtitles, or tags across sibling
+cards.</p>
+<h3 id="how-css-subgrid-solves-the-alignment-problem">How CSS Subgrid
+Solves the Alignment Problem</h3>
+<p>CSS subgrid removes this isolation. When an item inside a grid is
+also defined as a grid, it can inherit the track definitions of its
+parent rather than establishing independent tracks.</p>
+<p>To implement subgrid for vertical alignment across cards:</p>
+<ol type="1">
+<li><strong>Define the Parent Grid Tracks:</strong> The parent container
+sets up the column structure and allows row tracks to be sized
+dynamically using values like <code>auto</code> or
+<code>minmax()</code>.</li>
+<li><strong>Span Multiple Tracks:</strong> Each card is instructed to
+span the number of tracks corresponding to its internal elements (for
+instance, spanning three rows for a header, body, and footer).</li>
+<li><strong>Declare the Subgrid:</strong> The card applies
+<code>display: grid</code> alongside
+<code>grid-template-rows: subgrid</code>.</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.card-container</span> {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">display</span><span class="ch">:</span> <span class="dv">grid</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">grid-template-columns</span><span class="ch">:</span> <span class="fu">repeat(</span><span class="dv">auto-fit</span><span class="op">,</span> <span class="fu">minmax(</span><span class="dv">280</span><span class="dt">px</span><span class="op">,</span> <span class="dv">1</span><span class="dt">fr</span><span class="fu">))</span><span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">grid-auto-rows</span><span class="ch">:</span> <span class="bu">auto</span><span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">gap</span><span class="ch">:</span> <span class="dv">1.5</span><span class="dt">rem</span><span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">.card</span> {</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">display</span><span class="ch">:</span> <span class="dv">grid</span><span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">grid-row</span><span class="ch">:</span> <span class="dv">span 3</span><span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">grid-template-rows</span><span class="ch">:</span> <span class="dv">subgrid</span><span class="op">;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>In this structure, the first child of every card shares Row 1 of that
+section, the second child shares Row 2, and the third child shares Row
+3. If a card's title expands to three lines, that specific row track
+expands universally across all cards in that row, keeping the adjacent
+bodies and footers locked into identical horizontal planes.</p>
+<h3 id="key-advantages-in-complex-ui-design">Key Advantages in Complex
+UI Design</h3>
+<ul>
+<li><strong>Dynamic Adaptation:</strong> Designers do not need to
+predict the exact character count of user-generated or localized
+content. The grid tracks automatically adjust based on the tallest
+element within any given row.</li>
+<li><strong>Markup Simplicity:</strong> Complex visual alignments no
+longer require flattening semantic HTML or introducing non-semantic
+wrapper divisions solely to achieve row alignment.</li>
+<li><strong>Responsive Fluidity:</strong> Because subgrid relies on
+native grid tracks, media queries only need to update the parent grid's
+definitions. When cards collapse from a three-column layout to a single
+column on mobile viewports, the subgrid rules adapt naturally or can be
+disabled with standard overrides.</li>
+</ul>
+<p>CSS subgrid transforms card design from a collection of visually
+disconnected containers into a unified, mathematically consistent layout
+system that handles variable content with precision.</p></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/align-nested-card-components-using-css-subgrid';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

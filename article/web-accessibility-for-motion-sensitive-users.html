@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Accessibility for Motion-Sensitive Users - ui</title>
+    <meta name="description" content="Designing interfaces with motion accessibility in mind is critical for users with vestibular disorders, motion sickness, or cognitive sensitivities, for whom excessive or unexpected animations can trigger nausea, dizziness, headaches, and disorientation.">
+    <link rel="canonical" href="https://salivity.github.io/ui/article/web-accessibility-for-motion-sensitive-users">
+    <link rel="search" type="application/opensearchdescription+xml" title="ui" href="/ui/opensearch.xml">
+    <link rel="icon" href="/ui/favicon.ico">
+    <link rel="stylesheet" href="/ui/css/style.css">
+    <link media="print" rel="stylesheet" href="/ui/css/print.css">
+    <script src="/ui/js/fuse.min.js"></script>
+    <script src="/ui/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Web Accessibility for Motion-Sensitive Users - ui" />
+    <meta property="og:url" content="https://salivity.github.io/ui/article/web-accessibility-for-motion-sensitive-users" />
+    <meta property="og:image" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/ui/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Designing interfaces with motion accessibility in mind is critical for users with vestibular disorders, motion sickness, or cognitive sensitivities, for whom excessive or unexpected animations can trigger nausea, dizziness, headaches, and disorientation." />
+    <link rel="manifest" href="/ui/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/ui/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>ui</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/ui/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="web-accessibility-for-motion-sensitive-users">Web Accessibility
+for Motion-Sensitive Users</h1>
+<p>Designing interfaces with motion accessibility in mind is critical
+for users with vestibular disorders, motion sickness, or cognitive
+sensitivities, for whom excessive or unexpected animations can trigger
+nausea, dizziness, headaches, and disorientation. This guide outlines
+the physiological impact of user interface animations, highlights the
+most common motion-related triggers, and details practical
+implementation strategies—including code standards and UI controls—to
+ensure digital experiences are safe, comfortable, and accessible for
+everyone.</p>
+<h2 id="understanding-vestibular-disorders-and-ui-motion">Understanding
+Vestibular Disorders and UI Motion</h2>
+<p>The vestibular system, located in the inner ear, controls balance and
+spatial orientation. When on-screen movement conflicts with a user's
+physical stillness, the brain receives mismatched sensory signals. For
+individuals with vestibular conditions like labyrinthitis, Ménière's
+disease, or general motion hypersensitivity, dynamic screen elements can
+induce physical symptoms within seconds. Common triggers include:</p>
+<ul>
+<li><strong>Parallax Scrolling:</strong> Background and foreground
+elements moving at different speeds create an artificial depth
+perception that confuses balance.</li>
+<li><strong>Rapid Zooming or Scaling:</strong> Sudden magnification
+changes simulate physical forward or backward motion.</li>
+<li><strong>Automatic Panning and Large-Scale Transitions:</strong>
+Moving significant portions of the viewport forces the eye to track
+large surface areas unexpectedly.</li>
+<li><strong>Uncontrollable Autoplay:</strong> Moving backgrounds,
+auto-advancing carousels, and looping animated GIFs demand visual
+processing that users cannot interrupt immediately.</li>
+</ul>
+<h2
+id="implementing-the-prefers-reduced-motion-media-query">Implementing
+the <code>prefers-reduced-motion</code> Media Query</h2>
+<p>The foundational technical standard for motion accessibility is the
+CSS <code>@media (prefers-reduced-motion)</code> query. Operating
+systems—including Windows, macOS, iOS, and Android—allow users to enable
+a system-level setting to minimize non-essential animations. Modern
+interfaces must respect this signal.</p>
+<p>When reduced motion is requested, developers should not necessarily
+eliminate all motion, but rather replace disorienting visual
+displacement with subtle alternatives:</p>
+<ul>
+<li>Replace sliding transitions with simple cross-fades or instant state
+changes.</li>
+<li>Disable continuous looping animations and animated background
+illustrations.</li>
+<li>Neutralize multi-directional scrolling effects.</li>
+<li>Retain brief, non-moving opacity changes (fade-in, fade-out) that
+signal functional updates without suggesting physical displacement.</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* Example implementation */</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">@media</span> <span class="fu">(</span><span class="kw">prefers-reduced-motion</span><span class="ch">:</span> <span class="dv">reduce</span><span class="fu">)</span> {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">*,</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">*</span><span class="in">::before</span><span class="op">,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">*</span><span class="in">::after</span> {</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">animation-duration</span><span class="ch">:</span> <span class="dv">0.01</span><span class="dt">ms</span> <span class="at">!important</span><span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">animation-iteration-count</span><span class="ch">:</span> <span class="dv">1</span> <span class="at">!important</span><span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">transition-duration</span><span class="ch">:</span> <span class="dv">0.01</span><span class="dt">ms</span> <span class="at">!important</span><span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">scroll-behavior</span><span class="ch">:</span> <span class="bu">auto</span> <span class="at">!important</span><span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h2 id="essential-ui-design-considerations">Essential UI Design
+Considerations</h2>
+<p>Beyond media queries, interfaces must provide direct controls and
+adhere to established accessibility guidelines, notably WCAG 2.1 Success
+Criteria 2.2.2 (Pause, Stop, Hide) and 2.3.3 (Animation from
+Interactions).</p>
+<h3 id="1-in-app-motion-toggles">1. In-App Motion Toggles</h3>
+<p>System settings do not cover every user context. Providing an
+explicit, easily accessible toggle within an application’s settings menu
+allows users to disable animations without reconfiguring their entire
+operating system.</p>
+<h3 id="2-manual-controls-for-continuous-motion">2. Manual Controls for
+Continuous Motion</h3>
+<p>Any animation that starts automatically, lasts longer than five
+seconds, and runs in parallel with other content must have a prominent
+mechanism for users to pause, stop, or hide it. This applies directly
+to:</p>
+<ul>
+<li>Hero video backgrounds</li>
+<li>Rotating image carousels</li>
+<li>Scrolling ticker tapes</li>
+<li>Animated infographics</li>
+</ul>
+<h3 id="3-restricting-motion-scope">3. Restricting Motion Scope</h3>
+<p>Limit motion to smaller interface components rather than
+full-viewport disruptions. Moving a small dropdown arrow communicates
+status effectively, whereas sliding the entire page across the screen
+introduces disorientation.</p>
+<h3 id="4-eliminating-seizure-and-vestibular-hazards">4. Eliminating
+Seizure and Vestibular Hazards</h3>
+<p>Avoid flashing or strobing content. Web content must not contain
+anything that flashes more than three times in any one-second period, as
+this poses severe risks for photosensitive epilepsy and intense
+vestibular distress.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Accessible motion design does not require eliminating creative
+animation entirely; it requires providing choice and restraint. By
+designing subtle animations by default, providing manual controls, and
+respecting user preferences through standard media queries, applications
+remain engaging without compromising the physical comfort and safety of
+their audience.</p></article>
+        <div id='disqus_thread'></div>
+        <script>
+
+            var disqus_config = function () {
+                this.page.url =         'https://salivity.github.io/ui/article/web-accessibility-for-motion-sensitive-users';  
+                //this.page.identifier =  PAGE_IDENTIFIER; 
+            };
+            
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://salivity-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="https://smvc.dev/contact">Contact</a></li>
+                <li><a href="/ui/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/ui/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>
